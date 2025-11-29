@@ -1,74 +1,106 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { IconDatabase, IconSparkles, IconBrain, IconSchool, IconMicroscope, IconUsers } from "@tabler/icons-react";
+import {
+  IconDatabase,
+  IconSparkles,
+  IconBrain,
+  IconSchool,
+  IconMicroscope,
+  IconUsers,
+} from "@tabler/icons-react";
 
 const services = [
   {
     title: "Single-Cell RNA-seq Analysis",
     description:
-      "QC, filtering, clustering, markers, DE analysis, pathway enrichment, batch correction and integration.",
-    icon: <IconMicroscope size={40} className="text-teal-300" />,
+      "QC, filtering, clustering, markers, DE analysis, batch correction and integration.",
+    icon: <IconMicroscope size={50} className="text-teal-300 drop-shadow-[0_0_10px_#00f5ff]" />,
   },
   {
     title: "scATAC-seq & Chromatin Analysis",
     description:
-      "Peak calling, motif analysis, TF activity, cisTopic, ChromVAR, ArchR pipelines and regulatory networks.",
-    icon: <IconDatabase size={40} className="text-blue-300" />,
+      "Peak calling, motif analysis, TF activity, cisTopic, ChromVAR, ArchR pipelines.",
+    icon: <IconDatabase size={50} className="text-blue-400 drop-shadow-[0_0_10px_#009dff]" />,
   },
   {
-    title: "Multiome (RNA+ATAC) Integration",
+    title: "Multiome (RNA+ATAC)",
     description:
-      "Gene activity, WNN, cis-regulatory networks, co-accessibility, peak-to-gene links, SCENIC+.",
-    icon: <IconSparkles size={40} className="text-purple-300" />,
+      "WNN, gene activity, peak-gene links, regulatory networks, chromatin accessibility.",
+    icon: <IconSparkles size={50} className="text-purple-300 drop-shadow-[0_0_10px_#b57fff]" />,
   },
   {
-    title: "AI / Machine Learning for Biology",
+    title: "AI for Biology",
     description:
-      "Feature selection, predictive modeling, scVI, deep learning, embeddings and biological ML workflows.",
-    icon: <IconBrain size={40} className="text-pink-300" />,
+      "Deep learning, embeddings, dimensionality reduction, predictive modeling, scVI & ML workflows.",
+    icon: <IconBrain size={50} className="text-pink-300 drop-shadow-[0_0_10px_#ff4fd8]" />,
   },
   {
-    title: "1:1 Consultation & Mentoring",
+    title: "Mentoring & 1:1 Consulting",
     description:
-      "Project guidance, code review, grant support, figure preparation and complete analysis pipelines.",
-    icon: <IconUsers size={40} className="text-yellow-300" />,
+      "Project strategy, code review, grant support, figure preparation & workflow design.",
+    icon: <IconUsers size={50} className="text-yellow-300 drop-shadow-[0_0_10px_#ffd500]" />,
   },
   {
     title: "Courses & Tutorials",
     description:
-      "Step-by-step scRNA-seq, scATAC-seq & multiome tutorials for beginners and advanced users.",
-    icon: <IconSchool size={40} className="text-green-300" />,
+      "Full pipeline training for scRNA-seq, scATAC-seq, multiome, AI, ML and computational biology.",
+    icon: <IconSchool size={50} className="text-green-300 drop-shadow-[0_0_10px_#00ff88]" />,
   },
 ];
 
 export default function Services() {
   return (
-    <section className="w-full py-24 bg-gradient-to-b from-black to-gray-950 text-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="relative w-full py-24 bg-black text-white overflow-hidden">
 
-        {/* Section Title */}
-        <h2 className="text-center text-4xl md:text-5xl font-bold mb-16 drop-shadow-[0_0_20px_rgba(0,255,255,0.35)]">
+      {/* Liquid morph background */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.2 }}
+        transition={{ duration: 2 }}
+        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(0,255,255,0.15),transparent_70%)] blur-3xl"
+      />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+        {/* Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="text-center text-4xl md:text-5xl font-bold mb-16 drop-shadow-[0_0_25px_rgba(0,255,255,0.45)]"
+        >
           What We Offer
-        </h2>
+        </motion.h2>
 
-        {/* Card Grid */}
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
           {services.map((service, index) => (
             <motion.div
               key={index}
-              whileHover={{ y: -10, scale: 1.03 }}
-              className="glass-card p-8 rounded-2xl border border-white/10 shadow-xl
-                         bg-white/5 backdrop-blur-xl transition-all"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: index * 0.15 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05, rotateX: 8, rotateY: 8 }}
+              className="relative p-8 rounded-2xl border border-cyan-400/20 
+                         bg-black/40 backdrop-blur-xl shadow-[0_0_20px_rgba(0,255,255,0.15)]
+                         hover:shadow-[0_0_35px_rgba(0,255,255,0.45)]
+                         transition-all duration-300"
             >
-              <div className="mb-6">{service.icon}</div>
+              {/* Neon glowing ring */}
+              <div className="absolute inset-0 rounded-2xl border border-cyan-300/30 opacity-30 blur-xl"></div>
 
-              <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+              {/* Icon */}
+              <div className="mb-6 flex justify-center">{service.icon}</div>
 
-              <p className="text-white/80 leading-relaxed">
-                {service.description}
-              </p>
+              <h3 className="text-xl font-semibold text-center mb-2">
+                {service.title}
+              </h3>
+
+              <p className="text-white/70 text-center">{service.description}</p>
             </motion.div>
           ))}
 
@@ -77,4 +109,3 @@ export default function Services() {
     </section>
   );
 }
-
