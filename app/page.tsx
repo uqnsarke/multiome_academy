@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 export default function Home() {
-export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-100 flex flex-col items-center justify-center p-8 text-center">
       <div className="max-w-3xl bg-white rounded-2xl shadow-xl p-10">
