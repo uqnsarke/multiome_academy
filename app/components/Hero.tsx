@@ -21,7 +21,7 @@ export default function Hero() {
         className="absolute inset-0"
       >
         <Image
-          src="/hero-multiome.jpeg"
+          src="/multiome.png"
           alt="Multiome DNA Background"
           fill
           priority
