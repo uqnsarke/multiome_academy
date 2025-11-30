@@ -1,7 +1,42 @@
+/* ---------------------------------------------
+   🌟 GLOBAL RESET + TAILWIND SETUP
+--------------------------------------------- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------
+   🌟 Global Styles
+--------------------------------------------- */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  background-color: #000;
+  color: white;
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+/* Hide scrollbars for a cleaner cinematic look */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* ---------------------------------------------
+   🌟 Glass Effect Card (needed for Services.tsx)
+--------------------------------------------- */
 .glass-card {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(16px);
   border-radius: 16px;
   transition: 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-6px);
 }
