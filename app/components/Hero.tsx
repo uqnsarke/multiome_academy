@@ -1,29 +1,23 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  // Parallax effect
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const dnaParallax = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-
   return (
-    <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black">
-
-      {/* --- Layer 1: Cinematic Background (slow zoom) --- */}
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2, ease: "easeOut" }}
+      className="relative w-full h-screen overflow-hidden bg-black"
+    >
+      {/* Background with cinematic slow zoom */}
       <motion.div
-        initial={{ scale: 1.1 }}
+        initial={{ scale: 1.15 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 18, ease: "easeOut" }}
+        transition={{ duration: 20, ease: "linear" }}
         className="absolute inset-0"
       >
         <Image
@@ -35,49 +29,49 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* --- Layer 2: Parallax DNA layer --- */}
-      <motion.div
-        style={{ y: dnaParallax }}
-        className="absolute inset-0 pointer-events-none mix-blend-screen opacity-70"
-      >
-        <Image
-          src="/hero-dna-overlay.png" // OPTIONAL secondary DNA layer
-          alt="DNA Overlay"
-          fill
-          className="object-cover"
-        />
-      </motion.div>
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-teal-900/10 to-black/60"></div>
 
-      {/* --- Layer 3: Shimmer Glow Overlay --- */}
-      <motion.div
-        style={{ opacity: glowOpacity }}
-        className="absolute inset-0 bg-gradient-to-b from-teal-300/10 via-cyan-200/5 to-transparent blur-sm"
-      />
-
-      {/* --- Floating Molecular Particles --- */}
+      {/* Floating particles */}
       <Particles />
 
-      {/* --- Cinematic Text Reveal --- */}
+      {/* Liquid Morph Glow */}
       <motion.div
-        initial={{ opacity: 0, y: 50, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
+        className="absolute top-1/3 left-1/2 w-[600px] h-[600px] 
+                   bg-teal-400/20 blur-[100px] rounded-full pointer-events-none"
+        animate={{
+          borderRadius: [
+            "40% 60% 60% 40%",
+            "55% 45% 70% 30%",
+            "30% 70% 40% 60%",
+            "40% 60% 60% 40%",
+          ],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Cinematic Title */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.8, ease: "easeOut" }}
         className="absolute inset-0 flex items-center justify-center"
       >
-        <motion.h1
-          initial={{ textShadow: "0px 0px 0px rgba(0,255,255,0.0)" }}
-          animate={{ textShadow: "0px 0px 25px rgba(0,255,255,0.8)" }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          className="text-white text-4xl md:text-7xl font-extrabold text-center drop-shadow-lg tracking-wide"
+        <h1
+          className="text-white text-4xl md:text-6xl font-extrabold text-center
+                     drop-shadow-[0_0_35px_rgba(0,255,255,0.7)]
+                     animate-pulse-slow px-4"
         >
           Let's learn multiome analysis from scratch!
-        </motion.h1>
+        </h1>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
 
-/* --- Particle System: Floating molecular dust --- */
+/* --------------------------------------------------
+   PARTICLE SYSTEM
+-------------------------------------------------- */
 function Particles() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -86,26 +80,25 @@ function Particles() {
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d")!;
-    const particles = Array.from({ length: 70 }, () => ({
+    const particles = Array.from({ length: 55 }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
       r: Math.random() * 2 + 1,
-      dx: (Math.random() - 0.5) * 0.25,
-      dy: (Math.random() - 0.5) * 0.25,
-      flicker: Math.random() * 0.5 + 0.5,
+      dx: (Math.random() - 0.5) * 0.3,
+      dy: (Math.random() - 0.5) * 0.3,
     }));
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
       particles.forEach((p) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${0.35 * p.flicker})`;
+        ctx.fillStyle = "rgba(255,255,255,0.35)";
         ctx.fill();
 
         p.x += p.dx;
         p.y += p.dy;
-        p.flicker = 0.5 + Math.random() * 0.5;
 
         if (p.x < 0) p.x = canvas.width;
         if (p.x > canvas.width) p.x = 0;
@@ -118,13 +111,14 @@ function Particles() {
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
     draw();
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none opacity-60"
+      className="absolute inset-0 pointer-events-none opacity-50"
     ></canvas>
   );
 }
