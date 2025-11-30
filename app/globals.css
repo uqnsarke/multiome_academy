@@ -18,25 +18,25 @@ body {
   font-family: var(--font-geist-sans), sans-serif;
 }
 
-/* Hide scrollbars for a cleaner cinematic look */
+/* Hide scrollbars for cinematic effect */
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
 
 /* ---------------------------------------------
-   🌟 Glass Effect Card (needed for Services.tsx)
+   🌟 Glass Card for Services grid
 --------------------------------------------- */
 .glass-card {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
   border-radius: 16px;
   transition: 0.3s ease;
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-6px);
 }
