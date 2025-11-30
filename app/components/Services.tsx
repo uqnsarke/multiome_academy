@@ -1,14 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  IconDatabase,
-  IconSparkles,
-  IconBrain,
-  IconSchool,
-  IconMicroscope,
-  IconUsers,
-} from "@tabler/icons-react";
+import { IconDatabase, IconSparkles, IconBrain, IconSchool, IconMicroscope, IconUsers } from "@tabler/icons-react";
 
 const services = [
   {
@@ -53,38 +46,23 @@ export default function Services() {
   return (
     <section className="w-full py-24 bg-gradient-to-b from-black to-gray-950 text-white">
       <div className="max-w-7xl mx-auto px-6">
+
+        {/* Section Title */}
         <h2 className="text-center text-4xl md:text-5xl font-bold mb-16 drop-shadow-[0_0_20px_rgba(0,255,255,0.35)]">
           What We Offer
         </h2>
 
+        {/* Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.15 }}
-              whileHover={{
-                scale: 1.06,
-                rotateX: 6,
-                rotateY: -6,
-                boxShadow: "0 15px 45px rgba(0,255,255,0.25)",
-              }}
-              className="glass-card glow-border p-8 rounded-2xl"
+              whileHover={{ y: -10, scale: 1.03 }}
+              className="glass-card p-8 rounded-2xl border border-white/10 shadow-xl
+                         bg-white/5 backdrop-blur-xl transition-all"
             >
-              {/* Floating hologram icon */}
-              <motion.div
-                className="mb-6"
-                animate={{ y: [0, -6, 0] }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                {service.icon}
-              </motion.div>
+              <div className="mb-6">{service.icon}</div>
 
               <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
 
@@ -93,6 +71,7 @@ export default function Services() {
               </p>
             </motion.div>
           ))}
+
         </div>
       </div>
     </section>
