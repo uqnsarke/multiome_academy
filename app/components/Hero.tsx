@@ -11,34 +11,35 @@ export default function Hero() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 1.2, ease: "easeOut" }}
-      className="relative w-full h-screen overflow-hidden bg-black"
+      className="relative w-full h-screen overflow-hidden"
     >
-      {/* Background with cinematic slow zoom */}
+      {/* ---------------- BACKGROUND IMAGE ---------------- */}
       <motion.div
         initial={{ scale: 1.15 }}
         animate={{ scale: 1 }}
         transition={{ duration: 20, ease: "linear" }}
-        className="absolute inset-0"
+        className="absolute inset-0 -z-20"
       >
         <Image
           src="/multiome.png"
           alt="Multiome DNA Background"
           fill
           priority
-          className="object-cover opacity-90"
+          className="object-cover"
         />
       </motion.div>
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-teal-900/10 to-black/60"></div>
+      {/* ---------------- LIGHT CINEMATIC OVERLAY ---------------- */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b
+                      from-black/30 via-black/10 to-black/40" />
 
-      {/* Floating particles */}
+      {/* ---------------- PARTICLES ---------------- */}
       <Particles />
 
-      {/* Liquid Morph Glow */}
+      {/* ---------------- LIQUID MORPH GLOW ---------------- */}
       <motion.div
-        className="absolute top-1/3 left-1/2 w-[600px] h-[600px] 
-                   bg-teal-400/20 blur-[100px] rounded-full pointer-events-none"
+        className="absolute top-1/3 left-1/2 w-[600px] h-[600px]
+                   bg-teal-400/15 blur-[120px] rounded-full pointer-events-none -z-5"
         animate={{
           borderRadius: [
             "40% 60% 60% 40%",
@@ -50,17 +51,17 @@ export default function Hero() {
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Cinematic Title */}
+      {/* ---------------- TITLE ---------------- */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.8, ease: "easeOut" }}
-        className="absolute inset-0 flex items-center justify-center"
+        className="absolute inset-0 flex items-center justify-center z-10"
       >
         <h1
           className="text-white text-4xl md:text-6xl font-extrabold text-center
                      drop-shadow-[0_0_35px_rgba(0,255,255,0.7)]
-                     animate-pulse-slow px-4"
+                     px-4"
         >
           Let's learn multiome analysis from scratch!
         </h1>
@@ -94,7 +95,7 @@ function Particles() {
       particles.forEach((p) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255,255,255,0.35)";
+        ctx.fillStyle = "rgba(255,255,255,0.45)";
         ctx.fill();
 
         p.x += p.dx;
@@ -118,7 +119,7 @@ function Particles() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none opacity-50"
-    ></canvas>
+      className="absolute inset-0 pointer-events-none opacity-50 -z-5"
+    />
   );
 }
