@@ -1,6 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
+
 import {
   IconBrandGithub,
   IconBrandYoutube,
@@ -8,11 +14,57 @@ import {
   IconSchool,
 } from "@tabler/icons-react";
 
+/* -------------------------------------------------------
+   TILT CARD COMPONENT (Apple-style 3D hover)
+--------------------------------------------------------*/
+function TiltCard({ children }: { children: React.ReactNode }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // tilt limits: -8° to +8°
+  const rotateX = useTransform(y, [-100, 100], [8, -8]);
+  const rotateY = useTransform(x, [-100, 100], [-8, 8]);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (!cardRef.current) return;
+
+    const rect = cardRef.current.getBoundingClientRect();
+    const offsetX = e.clientX - (rect.left + rect.width / 2);
+    const offsetY = e.clientY - (rect.top + rect.height / 2);
+
+    x.set(offsetX);
+    y.set(offsetY);
+  }
+
+  function resetTilt() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <motion.div
+      ref={cardRef}
+      style={{ rotateX, rotateY }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={resetTilt}
+      transition={{ type: "spring", stiffness: 150, damping: 15 }}
+      className="transform-gpu"
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* -------------------------------------------------------
+   SERVICE SECTIONS
+--------------------------------------------------------*/
 const sections = [
   {
     title: "GitHub Code Hub",
     description:
-      "Explore all of my single-cell and multiome analysis pipelines, notebooks, reproducible workflows, and utility scripts. Updated frequently with new methods and best practices.",
+      "Explore my single-cell and multiome pipelines, notebooks, and reproducible workflows. All code used in tutorials and research is available.",
     icon: IconBrandGithub,
     bg: "from-gray-100 to-gray-50",
     button: "View GitHub →",
@@ -22,7 +74,7 @@ const sections = [
   {
     title: "Video Tutorials",
     description:
-      "Learn scRNA-seq, scATAC-seq, multiome, QC, WNN, SCENIC+, and ML for biology — through clear and beautifully structured YouTube lessons.",
+      "Learn scRNA-seq, scATAC, multiome, QC, WNN, SCENIC+, and machine learning through structured YouTube lessons.",
     icon: IconBrandYoutube,
     bg: "from-rose-100 to-red-50",
     button: "Watch on YouTube →",
@@ -32,7 +84,7 @@ const sections = [
   {
     title: "Expert Consultation",
     description:
-      "Custom pipeline development, figure creation, manuscript writing, grant support, troubleshooting, and premium 1-on-1 bioinformatics assistance.",
+      "Custom pipeline development, figure creation, manuscript support, grant writing, troubleshooting, and professional analysis.",
     icon: IconUsers,
     bg: "from-teal-100 to-emerald-50",
     button: "Book Consultation →",
@@ -42,7 +94,7 @@ const sections = [
   {
     title: "Teaching & Mentorship",
     description:
-      "One-on-one and group lessons covering scRNA-seq, scATAC-seq, multiome analysis, Python/R coding, visualization, reproducible workflows, and more.",
+      "1-on-1 and group lessons covering scRNA-seq, scATAC-seq, multiome, QC, Python/R coding, visualization, and workflow design.",
     icon: IconSchool,
     bg: "from-blue-100 to-sky-50",
     button: "Start Learning →",
@@ -51,16 +103,9 @@ const sections = [
   },
 ];
 
-// 3D tilt effect
-const tilt = {
-  initial: { rotateX: 0, rotateY: 0 },
-  hover: (dir: number) => ({
-    rotateX: dir * 3,
-    rotateY: dir * 3,
-    transition: { type: "spring", stiffness: 150, damping: 12 },
-  }),
-};
-
+/* -------------------------------------------------------
+   MAIN COMPONENT
+--------------------------------------------------------*/
 export default function Services() {
   return (
     <section className="relative py-32 bg-white overflow-hidden">
@@ -77,16 +122,16 @@ export default function Services() {
         className="absolute bottom-20 right-20 w-96 h-96 bg-purple-200/30 blur-[90px] rounded-full"
       />
 
-      <div className="max-w-7xl mx-auto px-6 space-y-32">
+      <div className="max-w-7xl mx-auto px-6 space-y-32 relative z-20">
 
-        {/* Page Title */}
-        <h2 className="text-6xl font-bold text-center text-gray-900 mb-10">
+        {/* HEADER */}
+        <h2 className="text-6xl font-bold text-center text-gray-900 mb-20">
           My Services
         </h2>
 
+        {/* SECTION LOOP */}
         {sections.map((sec, i) => {
           const Icon = sec.icon;
-
           const isLeft = sec.imageSide === "left";
 
           return (
@@ -96,35 +141,32 @@ export default function Services() {
                 isLeft ? "" : "lg:flex-row-reverse"
               }`}
             >
-              {/* ICON AREA with 3D Tilt, Pastel BG, Glow, Glass */}
-              <motion.div
-                custom={isLeft ? 1 : -1}
-                initial="initial"
-                whileHover="hover"
-                variants={tilt}
-                className="relative w-full lg:w-1/2"
-              >
-                {/* Animated gradient border aura */}
-                <div
-                  className="
-                  absolute -inset-2 rounded-3xl blur-2xl opacity-50
-                  bg-gradient-to-r from-teal-300 via-blue-400 to-purple-400
-                "
-                />
+              {/* LEFT / RIGHT VISUAL SIDE */}
+              <TiltCard>
+                <div className="relative w-full lg:w-1/2">
 
-                {/* Glassmorphism card */}
-                <div
-                  className={`
-                    relative h-72 flex items-center justify-center rounded-3xl
-                    backdrop-blur-2xl bg-white/30 border border-white/40 shadow-xl
-                    bg-gradient-to-br ${sec.bg}
-                  `}
-                >
-                  <Icon size={140} className="text-gray-900 opacity-80" />
+                  {/* Animated aura glow */}
+                  <div
+                    className="
+                      absolute -inset-3 rounded-3xl blur-2xl opacity-50
+                      bg-gradient-to-r from-teal-300 via-blue-400 to-purple-400
+                    "
+                  />
+
+                  {/* Glass + pastel card */}
+                  <div
+                    className={`
+                      relative h-72 flex items-center justify-center rounded-3xl
+                      backdrop-blur-2xl bg-white/30 border border-white/40 shadow-xl
+                      bg-gradient-to-br ${sec.bg}
+                    `}
+                  >
+                    <Icon size={140} className="text-gray-900 opacity-80" />
+                  </div>
                 </div>
-              </motion.div>
+              </TiltCard>
 
-              {/* TEXT + BUTTON */}
+              {/* TEXT SIDE */}
               <div className="w-full lg:w-1/2 space-y-6">
                 <h3 className="text-4xl font-semibold text-gray-900">
                   {sec.title}
