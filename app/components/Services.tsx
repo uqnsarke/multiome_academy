@@ -123,9 +123,7 @@ export default function Services() {
         >
           
             href="#contact"
-            className="inline-block px-10 py-5 bg-teal-500 text-white text-lg font-semibold 
-                       rounded-xl shadow-lg hover:bg-teal-600 hover:shadow-xl 
-                       transform hover:scale-105 transition-all duration-300"
+            className="inline-block px-10 py-5 bg-teal-500 text-white text-lg font-semibold rounded-xl shadow-lg hover:bg-teal-600 hover:shadow-xl transform hover:scale-105 transition-all duration-300"
           >
             Start Learning Today
           </a>
