@@ -14,7 +14,7 @@ export default function Hero() {
         className="absolute inset-0 z-0"
       >
         <Image
-          src="/hero-multiome.jpeg"
+          src="/hero-multiome.png"
           alt="Multiome Analysis - Cells and DNA"
           fill
           priority
