@@ -2,109 +2,151 @@
 
 import { motion } from "framer-motion";
 import {
-  IconDatabase,
-  IconSparkles,
-  IconBrain,
-  IconSchool,
-  IconMicroscope,
+  IconBrandGithub,
+  IconBrandYoutube,
   IconUsers,
+  IconSchool,
 } from "@tabler/icons-react";
 
-const services = [
+const sections = [
   {
-    title: "Single-Cell RNA-seq Analysis",
+    title: "GitHub Code Hub",
     description:
-      "Master QC, filtering, clustering, marker identification, DE analysis, and pathway enrichment.",
-    icon: IconMicroscope,
-    bg: "from-rose-50 to-pink-100",
+      "Explore all of my single-cell and multiome analysis pipelines, notebooks, reproducible workflows, and utility scripts. Updated frequently with new methods and best practices.",
+    icon: IconBrandGithub,
+    bg: "from-gray-100 to-gray-50",
+    button: "View GitHub →",
+    link: "https://github.com/",
+    imageSide: "left",
   },
   {
-    title: "scATAC-seq & Chromatin Analysis",
+    title: "Video Tutorials",
     description:
-      "Learn peak calling, motif analysis, TF activity, cisTopic, ChromVAR, and ArchR workflows.",
-    icon: IconDatabase,
-    bg: "from-blue-50 to-sky-100",
-  },
-  {
-    title: "Multiome Integration",
-    description:
-      "Integrate RNA+ATAC with WNN, cis-regulation, gene activity, and SCENIC+ workflows.",
-    icon: IconSparkles,
-    bg: "from-purple-50 to-indigo-100",
-  },
-  {
-    title: "Machine Learning for Biology",
-    description:
-      "Apply ML for scVI, deep learning, feature selection, and predictive modeling.",
-    icon: IconBrain,
-    bg: "from-amber-50 to-yellow-100",
+      "Learn scRNA-seq, scATAC-seq, multiome, QC, WNN, SCENIC+, and ML for biology — through clear and beautifully structured YouTube lessons.",
+    icon: IconBrandYoutube,
+    bg: "from-rose-100 to-red-50",
+    button: "Watch on YouTube →",
+    link: "https://youtube.com/",
+    imageSide: "right",
   },
   {
     title: "Expert Consultation",
     description:
-      "Custom pipeline development, code review, figure creation, grants, manuscripts.",
+      "Custom pipeline development, figure creation, manuscript writing, grant support, troubleshooting, and premium 1-on-1 bioinformatics assistance.",
     icon: IconUsers,
-    bg: "from-teal-50 to-emerald-100",
+    bg: "from-teal-100 to-emerald-50",
+    button: "Book Consultation →",
+    link: "#contact",
+    imageSide: "left",
   },
   {
-    title: "Video Tutorials & Courses",
+    title: "Teaching & Mentorship",
     description:
-      "Step-by-step tutorials for scRNA-seq, ATAC-seq, Multiome, WNN, and SCENIC+.",
+      "One-on-one and group lessons covering scRNA-seq, scATAC-seq, multiome analysis, Python/R coding, visualization, reproducible workflows, and more.",
     icon: IconSchool,
-    bg: "from-green-50 to-lime-100",
+    bg: "from-blue-100 to-sky-50",
+    button: "Start Learning →",
+    link: "#contact",
+    imageSide: "right",
   },
 ];
 
+// 3D tilt effect
+const tilt = {
+  initial: { rotateX: 0, rotateY: 0 },
+  hover: (dir: number) => ({
+    rotateX: dir * 3,
+    rotateY: dir * 3,
+    transition: { type: "spring", stiffness: 150, damping: 12 },
+  }),
+};
+
 export default function Services() {
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="relative py-32 bg-white overflow-hidden">
 
-        {/* Header */}
-        <h2 className="text-5xl font-bold text-gray-900 mb-16 text-center">
-          What You'll Learn
+      {/* Apple Vision Pro Floating Orbs */}
+      <motion.div
+        animate={{ opacity: [0.15, 0.3, 0.15], scale: [1, 1.1, 1] }}
+        transition={{ duration: 10, repeat: Infinity }}
+        className="absolute top-40 left-20 w-72 h-72 bg-teal-200/40 blur-3xl rounded-full"
+      />
+      <motion.div
+        animate={{ opacity: [0.15, 0.35, 0.15], scale: [1.2, 1, 1.2] }}
+        transition={{ duration: 10, repeat: Infinity, delay: 2 }}
+        className="absolute bottom-20 right-20 w-96 h-96 bg-purple-200/30 blur-[90px] rounded-full"
+      />
+
+      <div className="max-w-7xl mx-auto px-6 space-y-32">
+
+        {/* Page Title */}
+        <h2 className="text-6xl font-bold text-center text-gray-900 mb-10">
+          My Services
         </h2>
 
-        {/* CARD GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {services.map((service, index) => {
-            const Icon = service.icon;
+        {sections.map((sec, i) => {
+          const Icon = sec.icon;
 
-            return (
+          const isLeft = sec.imageSide === "left";
+
+          return (
+            <div
+              key={i}
+              className={`flex flex-col lg:flex-row items-center gap-16 ${
+                isLeft ? "" : "lg:flex-row-reverse"
+              }`}
+            >
+              {/* ICON AREA with 3D Tilt, Pastel BG, Glow, Glass */}
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                whileHover={{ scale: 1.05 }}
-                className="
-                  rounded-3xl shadow-xl overflow-hidden
-                  bg-gradient-to-br cursor-pointer
-                  hover:shadow-2xl transition-all duration-300
-                "
+                custom={isLeft ? 1 : -1}
+                initial="initial"
+                whileHover="hover"
+                variants={tilt}
+                className="relative w-full lg:w-1/2"
               >
-                {/* Icon Background */}
+                {/* Animated gradient border aura */}
                 <div
-                  className={`h-48 flex items-center justify-center bg-gradient-to-br ${service.bg}`}
-                >
-                  <Icon size={80} className="text-gray-800 opacity-90" />
-                </div>
+                  className="
+                  absolute -inset-2 rounded-3xl blur-2xl opacity-50
+                  bg-gradient-to-r from-teal-300 via-blue-400 to-purple-400
+                "
+                />
 
-                {/* Text */}
-                <div className="p-8 text-center">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    {service.description}
-                  </p>
+                {/* Glassmorphism card */}
+                <div
+                  className={`
+                    relative h-72 flex items-center justify-center rounded-3xl
+                    backdrop-blur-2xl bg-white/30 border border-white/40 shadow-xl
+                    bg-gradient-to-br ${sec.bg}
+                  `}
+                >
+                  <Icon size={140} className="text-gray-900 opacity-80" />
                 </div>
               </motion.div>
-            );
-          })}
-        </div>
 
+              {/* TEXT + BUTTON */}
+              <div className="w-full lg:w-1/2 space-y-6">
+                <h3 className="text-4xl font-semibold text-gray-900">
+                  {sec.title}
+                </h3>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  {sec.description}
+                </p>
+
+                <a
+                  href={sec.link}
+                  className="
+                    inline-block px-10 py-4 bg-black text-white rounded-2xl
+                    text-lg font-medium shadow-lg hover:shadow-2xl
+                    transition-all duration-300
+                  "
+                >
+                  {sec.button}
+                </a>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
