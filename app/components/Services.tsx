@@ -1,4 +1,5 @@
 "use client";
+
 import { motion } from "framer-motion";
 import { 
   IconDatabase, 
@@ -37,64 +38,111 @@ const services = [
   },
   {
     title: "Video Tutorials & Courses",
-    description: "Follow comprehensive step-by-step tutorials for scRNA-seq, scATAC-seq, and multiome analysis at any skill level.",
+    description: "Follow step-by-step tutorials for scRNA-seq, scATAC-seq, and multiome analysis at any skill level.",
     icon: <IconSchool size={48} className="text-green-400" />,
   },
 ];
 
 export default function Services() {
   return (
-    <section id="start" className="w-full min-h-screen py-20 bg-white">
+    <section id="start" className="w-full min-h-screen py-24 bg-gradient-to-b from-white to-gray-100">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
+
+        {/* ---- Header ---- */}
+        <div className="text-center mb-20">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight mb-5"
+          >
             What You'll Learn
           </motion.h2>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Comprehensive training in single-cell multiome analysis, from beginner fundamentals to advanced techniques
+            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+          >
+            Master single-cell and multiome bioinformatics with an Apple-quality
+            learning experience — clean, intuitive, and beautifully designed.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* ---- Services Grid ---- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+
           {services.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl border border-gray-100 transition-all duration-300 group cursor-pointer">
-              <div className="mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                {service.icon}
+              transition={{ duration: 0.6, delay: index * 0.12 }}
+              whileHover={{ y: -10 }}
+              className="relative group"
+            >
+
+              {/* Apple-style neon aura */}
+              <div
+                className="
+                  absolute -inset-0.5 
+                  bg-gradient-to-r from-teal-300 via-blue-400 to-purple-400 
+                  rounded-3xl blur-xl opacity-30 
+                  group-hover:opacity-60 
+                  transition-all duration-700
+                "
+              ></div>
+
+              {/* Glassmorphism inner card */}
+              <div
+                className="
+                  relative bg-white/60 backdrop-blur-xl
+                  rounded-3xl p-10 border border-white/40
+                  shadow-[0_8px_30px_rgb(0,0,0,0.06)]
+                  group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)]
+                  transition-all duration-500
+                "
+              >
+                <div className="mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  {service.icon}
+                </div>
+
+                <h3 className="text-2xl font-semibold text-gray-900 mb-4 tracking-tight">
+                  {service.title}
+                </h3>
+
+                <p className="text-gray-700 leading-relaxed text-lg">
+                  {service.description}
+                </p>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {service.description}
-              </p>
+
             </motion.div>
           ))}
         </div>
 
+        {/* ---- CTA ---- */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-20 text-center">
-          <a href="#contact" className="inline-block px-10 py-5 bg-teal-500 text-white text-lg font-semibold rounded-xl shadow-lg hover:bg-teal-600 hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-24 text-center"
+        >
+          <a
+            href="#contact"
+            className="
+              inline-block px-12 py-5 
+              bg-black text-white 
+              text-lg font-semibold rounded-2xl
+              shadow-xl hover:shadow-2xl 
+              hover:bg-gray-900 transform hover:scale-105
+              transition-all duration-300
+            "
+          >
             Start Learning Today
           </a>
         </motion.div>
