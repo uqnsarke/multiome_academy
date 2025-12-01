@@ -1,13 +1,12 @@
 "use client";
-
 import { motion } from "framer-motion";
-import Image from "next/image";
+// import Image from "next/image"; // Comment out temporarily
 
 export default function Hero() {
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black">
+    <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-black to-teal-900">
       
-      {/* Background Image with slow zoom */}
+      {/* Background Image with slow zoom - COMMENTED OUT FOR TESTING
       <motion.div
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
@@ -22,12 +21,13 @@ export default function Hero() {
           className="object-cover opacity-95"
         />
       </motion.div>
-
+      */}
+      
       {/* Cinematic Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b 
                       from-black/20 via-black/40 to-black/85 
                       pointer-events-none z-10" />
-
+      
       {/* Centered Text */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-20 px-6">
         
@@ -39,7 +39,7 @@ export default function Hero() {
         >
           Learn Multiome Analysis From Scratch
         </motion.h1>
-
+        
         <motion.p
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -48,7 +48,7 @@ export default function Hero() {
         >
           Single-cell RNA, ATAC, WNN, SCENIC+, multi-omics QC, and more — explained step-by-step.
         </motion.p>
-
+        
         <motion.a
           href="#start"
           initial={{ opacity: 0, y: 40 }}
@@ -60,7 +60,6 @@ export default function Hero() {
         >
           Start Learning →
         </motion.a>
-
       </div>
     </div>
   );
