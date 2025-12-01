@@ -98,9 +98,7 @@ export default function Hero() {
           transition={{ duration: 1.4, ease: "easeOut", delay: 0.6 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}>
-          
-            href="#start"
-            className="mt-12 inline-block px-12 py-6 bg-gradient-to-r from-teal-500 to-blue-500 text-white text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-teal-500/50 transition-all duration-300 backdrop-blur-sm border border-white/20">
+          <a href="#start" className="mt-12 inline-block px-12 py-6 bg-gradient-to-r from-teal-500 to-blue-500 text-white text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-teal-500/50 transition-all duration-300 backdrop-blur-sm border border-white/20">
             Start Learning →
           </a>
         </motion.div>
