@@ -6,22 +6,27 @@ export default function Hero() {
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
       
+      {/* Fallback gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-teal-900 via-black to-blue-900 z-0" />
+      
       {/* Background Image with slow zoom animation */}
-      <motion.div
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 18, ease: "linear" }}
-        className="absolute inset-0 z-0"
-      >
-        <Image
-          src="/hero-multiome.png"
-          alt="Multiome Analysis - Cells and DNA"
-          fill
-          priority
-          className="object-cover"
-          quality={100}
-        />
-      </motion.div>
+      <div className="absolute inset-0 z-5">
+        <motion.div
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 18, ease: "linear" }}
+          className="relative w-full h-full"
+        >
+          <Image
+            src="/hero-multiome.png"
+            alt="Multiome Analysis - Cells and DNA"
+            fill
+            priority
+            unoptimized
+            className="object-cover"
+          />
+        </motion.div>
+      </div>
       
       {/* Dark Overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/80 pointer-events-none z-10" />
