@@ -1,12 +1,30 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-black to-teal-900">
+    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
       
-      {/* Cinematic Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/85 pointer-events-none z-10" />
+      {/* Background Image with slow zoom animation */}
+      <motion.div
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 18, ease: "linear" }}
+        className="absolute inset-0 z-0"
+      >
+        <Image
+          src="/hero-multiome.jpeg"
+          alt="Multiome Analysis - Cells and DNA"
+          fill
+          priority
+          className="object-cover"
+          quality={100}
+        />
+      </motion.div>
+      
+      {/* Dark Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/80 pointer-events-none z-10" />
       
       {/* Centered Content */}
       <div className="relative z-20 flex flex-col items-center justify-center text-center px-6 max-w-5xl">
@@ -24,7 +42,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-          className="text-gray-200 mt-6 text-xl md:text-2xl max-w-3xl drop-shadow-lg"
+          className="text-gray-100 mt-6 text-xl md:text-2xl max-w-3xl drop-shadow-lg"
         >
           Single-cell RNA, ATAC, WNN, SCENIC+, multi-omics QC, and more — explained step-by-step.
         </motion.p>
