@@ -15,7 +15,7 @@ import {
 } from "@tabler/icons-react";
 
 /* -------------------------------------------------------
-   3D Tilt Card (Apple style)
+   3D Tilt Card
 --------------------------------------------------------*/
 function TiltCard({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -54,7 +54,7 @@ function TiltCard({ children }: { children: React.ReactNode }) {
 }
 
 /* -------------------------------------------------------
-   HYBRID SERVICE SECTIONS
+   HYBRID SERVICE DATA
 --------------------------------------------------------*/
 const sections = [
   {
@@ -63,7 +63,7 @@ const sections = [
       "Explore pipelines, notebooks, SCENIC+, LIANA, WNN, and reproducible multiome codes.",
     icon: IconBrandGithub,
     gradient: "from-gray-100 to-gray-50",
-    aura: "from-gray-300 via-gray-400 to-gray-500",
+    aura: "from-gray-300 via-gray-500 to-gray-700",
     link: "https://github.com/",
     button: "View GitHub →",
     imageSide: "left",
@@ -108,26 +108,33 @@ const sections = [
 --------------------------------------------------------*/
 export default function Services() {
   return (
-    <section className="relative py-32 mt-32 bg-white overflow-hidden">
-
-      {/* Vision Pro background orbs */}
+    <section
+      className="relative py-32 mt-32 overflow-hidden"
+      style={{
+        backgroundColor: "white", // FIX: force white background
+        zIndex: 10,
+      }}
+    >
+      {/* Vision Pro orbs */}
       <motion.div
-        animate={{ opacity: [0.15, 0.3, 0.15], scale: [1, 1.1, 1] }}
-        transition={{ duration: 10, repeat: Infinity }}
-        className="absolute top-32 left-20 w-72 h-72 bg-teal-200/40 blur-3xl rounded-full"
+        animate={{ opacity: [0.1, 0.25, 0.1], scale: [1, 1.1, 1] }}
+        transition={{ duration: 12, repeat: Infinity }}
+        className="absolute top-20 left-10 w-72 h-72 bg-teal-300/40 blur-3xl rounded-full"
       />
+
       <motion.div
-        animate={{ opacity: [0.15, 0.35, 0.15], scale: [1.2, 1, 1.2] }}
-        transition={{ duration: 12, repeat: Infinity, delay: 2 }}
-        className="absolute bottom-40 right-20 w-96 h-96 bg-purple-200/40 blur-[100px] rounded-full"
+        animate={{ opacity: [0.15, 0.35, 0.15], scale: [1.1, 1, 1.1] }}
+        transition={{ duration: 14, repeat: Infinity }}
+        className="absolute bottom-32 right-10 w-96 h-96 bg-purple-300/40 blur-[100px] rounded-full"
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 space-y-32 z-10">
-
-        <h2 className="text-6xl font-bold text-center text-gray-900 mb-10">
+      <div className="relative max-w-7xl mx-auto px-6 space-y-32 z-20 text-gray-900">
+        {/* Header */}
+        <h2 className="text-6xl font-bold text-center mb-12">
           My Services
         </h2>
 
+        {/* Sections */}
         {sections.map((sec, i) => {
           const Icon = sec.icon;
           const isLeft = sec.imageSide === "left";
@@ -139,37 +146,28 @@ export default function Services() {
                 isLeft ? "" : "lg:flex-row-reverse"
               }`}
             >
-
               {/* VISUAL SIDE */}
               <TiltCard>
                 <div className="relative w-full lg:w-1/2">
 
-                  {/* aura */}
+                  {/* Glow Aura */}
                   <div
-                    className={`
-                      absolute -inset-3 rounded-3xl opacity-50 blur-2xl
-                      bg-gradient-to-r ${sec.aura}
-                    `}
+                    className={`absolute -inset-4 rounded-3xl opacity-50 blur-xl bg-gradient-to-r ${sec.aura}`}
                   />
 
-                  {/* glass card */}
+                  {/* Glass Gradient Card */}
                   <div
-                    className={`
-                      relative h-72 flex items-center justify-center rounded-3xl
-                      backdrop-blur-2xl border border-white/40 shadow-xl
-                      bg-gradient-to-br ${sec.gradient}
-                    `}
+                    className={`relative h-72 flex items-center justify-center rounded-3xl shadow-xl
+                      backdrop-blur-2xl border border-white/40 bg-gradient-to-br ${sec.gradient}`}
                   >
-                    <Icon size={140} className="text-gray-900 opacity-80" />
+                    <Icon size={140} className="text-gray-800 opacity-75" />
                   </div>
                 </div>
               </TiltCard>
 
               {/* TEXT SIDE */}
               <div className="w-full lg:w-1/2 space-y-6">
-                <h3 className="text-4xl font-semibold text-gray-900">
-                  {sec.title}
-                </h3>
+                <h3 className="text-4xl font-semibold">{sec.title}</h3>
 
                 <p className="text-gray-700 text-lg leading-relaxed">
                   {sec.description}
@@ -179,8 +177,7 @@ export default function Services() {
                   href={sec.link}
                   className="
                     inline-block px-10 py-4 bg-black text-white rounded-2xl
-                    text-lg font-medium shadow-lg hover:shadow-2xl
-                    transition-all duration-300
+                    text-lg font-semibold shadow-lg hover:shadow-2xl transition-all
                   "
                 >
                   {sec.button}
