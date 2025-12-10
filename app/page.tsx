@@ -1,13 +1,13 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Services from "./components/Services";
+import ServicesSection from "./components/ServicesSection";
 
 export default function Home() {
   return (
     <main>
       <Navbar />
       <Hero />
-      <Services />
+      <ServicesSection />
     </main>
   );
 }
