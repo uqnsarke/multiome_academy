@@ -25,7 +25,7 @@ body {
 }
 
 /* ---------------------------------------------
-   🌟 Glass Card for Services grid
+   🌟 Glass Card Style
 --------------------------------------------- */
 .glass-card {
   background: rgba(255, 255, 255, 0.07);
@@ -33,4 +33,23 @@ body {
   backdrop-filter: blur(12px);
   border-radius: 16px;
   transition: 0.3s ease;
+}
+
+/* ---------------------------------------------
+   🌟 3D Card Flip Classes
+--------------------------------------------- */
+.perspective {
+  perspective: 1200px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }
