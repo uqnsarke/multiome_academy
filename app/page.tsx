@@ -1,12 +1,11 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import ServicesSection from "./components/ServicesSection";
+import Hero from "@/components/hero/Hero";
+import ServicesSection from "@/components/services/ServicesSection";
 
 export default function Home() {
   return (
     <main>
-      <Navbar />
       <Hero />
+      <div className="mt-32" />
       <ServicesSection />
     </main>
   );
