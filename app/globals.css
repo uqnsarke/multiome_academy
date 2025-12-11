@@ -2,41 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
-  background-color: #000;
+/* Smooth dark UI */
+html, body {
+  background: black;
   color: white;
   font-family: var(--font-geist-sans), sans-serif;
 }
 
+/* Prevent scrollbars */
 ::-webkit-scrollbar {
   width: 0;
-  height: 0;
+  background: transparent;
 }
 
-.glass-card {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  transition: 0.3s ease;
-}
-
-.perspective {
-  perspective: 1200px;
-}
-
-.transform-style-preserve-3d {
-  transform-style: preserve-3d;
-}
-
-.backface-hidden {
-  backface-visibility: hidden;
-}
-
-.rotate-y-180 {
-  transform: rotateY(180deg);
-}
+/* Flip utilities */
+.perspective { perspective: 1200px; }
+.transform-style-preserve-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; }
+.rotate-y-180 { transform: rotateY(180deg); }
