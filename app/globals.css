@@ -1,13 +1,7 @@
-/* ---------------------------------------------
-   🌟 GLOBAL RESET + TAILWIND SETUP
---------------------------------------------- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ---------------------------------------------
-   🌟 Global Styles
---------------------------------------------- */
 html,
 body {
   margin: 0;
@@ -18,15 +12,11 @@ body {
   font-family: var(--font-geist-sans), sans-serif;
 }
 
-/* Hide scrollbars for cinematic effect */
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
 
-/* ---------------------------------------------
-   🌟 Glass Card Style
---------------------------------------------- */
 .glass-card {
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -35,9 +25,6 @@ body {
   transition: 0.3s ease;
 }
 
-/* ---------------------------------------------
-   🌟 3D Card Flip Classes
---------------------------------------------- */
 .perspective {
   perspective: 1200px;
 }
