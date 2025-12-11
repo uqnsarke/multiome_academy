@@ -1,0 +1,1 @@
+export default function Downloads(){return(<section className='text-white p-10'><h1>Downloads Center</h1></section>);}

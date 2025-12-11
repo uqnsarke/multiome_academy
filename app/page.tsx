@@ -1,0 +1,1 @@
+export default function Home(){return(<main><h1 className='text-white text-4xl'>Cinematic Hero Placeholder</h1></main>);}
