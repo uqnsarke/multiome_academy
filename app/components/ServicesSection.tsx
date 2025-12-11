@@ -45,7 +45,7 @@ const services: Service[] = [
   {
     title: "Scientific Consulting",
     icon: <UserCheck className="h-10 w-10 text-green-300" />,
-    desc: "1:1 expert support, study design guidance, pipeline setup, manuscript help, and figure creation.",
+    desc: "1:1 expert support for study design, analysis pipelines, manuscript help, and figure creation.",
     price: "$99/hr",
   },
   {
@@ -66,7 +66,7 @@ export default function ServicesSection() {
   return (
     <section className="relative py-24 text-white min-h-screen">
 
-      {/* FIXED BACKGROUND – now non-blocking */}
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0f1f] to-black opacity-90 pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(0,255,255,0.12),transparent_60%)] pointer-events-none" />
 
@@ -74,7 +74,7 @@ export default function ServicesSection() {
 
         <h2 className="text-4xl font-semibold text-center mb-16">Services</h2>
 
-        {/* FIXED GRID */}
+        {/* 2-column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {services.map((service, i) => (
             <div
@@ -82,19 +82,19 @@ export default function ServicesSection() {
               className="relative h-72 cursor-pointer perspective"
               onClick={() => handleFlip(i)}
             >
-              {/* CARD WRAPPER */}
+              {/* FULL CARD (with transform + transition FIXED) */}
               <div
-                className={`relative w-full h-full duration-700 transform-style-preserve-3d ${
+                className={`relative w-full h-full transform transition-transform duration-700 transform-style-preserve-3d ${
                   flipped === i ? "rotate-y-180" : ""
                 }`}
               >
-                {/* FRONT SIDE */}
+                {/* Front Side */}
                 <div className="absolute inset-0 bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl flex flex-col items-center justify-center gap-4 p-6 backface-hidden">
                   {service.icon}
                   <h3 className="text-xl text-center">{service.title}</h3>
                 </div>
 
-                {/* BACK SIDE */}
+                {/* Back Side */}
                 <div className="absolute inset-0 bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-6 flex flex-col justify-center transform rotate-y-180 backface-hidden">
                   <p className="text-gray-200 mb-4">{service.desc}</p>
                   <p className="text-cyan-300 font-semibold mb-4">{service.price}</p>
@@ -107,6 +107,7 @@ export default function ServicesSection() {
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
