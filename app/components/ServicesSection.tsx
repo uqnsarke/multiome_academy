@@ -51,23 +51,22 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section className="relative py-24 text-white min-h-screen overflow-hidden">
-
-      {/* Background */}
+    <section className="relative py-24 text-white min-h-screen overflow-hidden bg-black">
+      
+      {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0f1f] to-black opacity-90 pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto px-6">
-
         <h2 className="text-4xl font-semibold text-center mb-16">Services</h2>
 
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {services.map((service, i) => (
+          {services.map((service) => (
             <div
-              key={i}
+              key={service.title}
               className="group w-full h-72 [perspective:1000px]"
             >
-              {/* Card */}
+              {/* Card Container */}
               <div
                 className="
                   relative w-full h-full transition-transform duration-700 
@@ -75,8 +74,7 @@ export default function ServicesSection() {
                   group-hover:[transform:rotateY(180deg)]
                 "
               >
-
-                {/* FRONT */}
+                {/* FRONT FACE */}
                 <div
                   className="
                     absolute inset-0 flex flex-col items-center justify-center
@@ -88,27 +86,27 @@ export default function ServicesSection() {
                   <h3 className="text-xl font-semibold mt-4">{service.title}</h3>
                 </div>
 
-                {/* BACK */}
+                {/* BACK FACE */}
                 <div
                   className="
-                    absolute inset-0 rotate-y-180 rounded-2xl 
+                    absolute inset-0 [transform:rotateY(180deg)] rounded-2xl 
                     flex flex-col justify-center p-6 
                     bg-white/20 backdrop-blur-xl border border-white/20
                     [backface-visibility:hidden]
                   "
                 >
                   <p className="text-gray-200 mb-3">{service.desc}</p>
-                  <p className="text-cyan-300 font-semibold mb-4">{service.price}</p>
-                  <button className="px-4 py-2 bg-cyan-600 rounded-lg hover:bg-cyan-700">
+                  <p className="text-cyan-300 font-semibold mb-4">
+                    {service.price}
+                  </p>
+                  <button className="px-4 py-2 bg-cyan-600 rounded-lg hover:bg-cyan-700 transition-colors">
                     Learn More
                   </button>
                 </div>
-
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
