@@ -1,115 +1,103 @@
 "use client";
 
+import { useState } from "react";
 import {
   Dna,
   BarChart3,
   Layers,
   BrainCircuit,
   UserCheck,
-  Video
+  Video,
 } from "lucide-react";
 
+interface Service {
+  title: string;
+  icon: JSX.Element;
+  desc: string;
+  price: string;
+}
+
+const services: Service[] = [
+  {
+    title: "Single-Cell RNA-seq Analysis",
+    icon: <Dna className="h-10 w-10 text-cyan-300" />,
+    desc: "End-to-end scRNA-seq pipeline including QC, clustering, marker discovery, trajectory analysis, and publication-ready figures.",
+    price: "Starts at $499",
+  },
+  {
+    title: "scATAC-seq & Chromatin Analysis",
+    icon: <BarChart3 className="h-10 w-10 text-purple-300" />,
+    desc: "Peak calling, motif enrichment, chromVAR deviations, gene activity, and enhancer annotation workflows.",
+    price: "Starts at $599",
+  },
+  {
+    title: "Multiome (RNA + ATAC) Integration",
+    icon: <Layers className="h-10 w-10 text-pink-300" />,
+    desc: "WNN + ArchR integration, CCAN identification, enhancer–promoter mapping, and regulatory modeling.",
+    price: "Starts at $799",
+  },
+  {
+    title: "Machine Learning for Biology",
+    icon: <BrainCircuit className="h-10 w-10 text-yellow-300" />,
+    desc: "Custom models for aging clocks, disease prediction, embeddings, and feature engineering.",
+    price: "Coming Soon",
+  },
+  {
+    title: "Scientific Consulting",
+    icon: <UserCheck className="h-10 w-10 text-green-300" />,
+    desc: "1:1 expert support, study design guidance, pipeline setup, manuscript help, and figure creation.",
+    price: "$99/hr",
+  },
+  {
+    title: "Video Tutorials & Courses",
+    icon: <Video className="h-10 w-10 text-orange-300" />,
+    desc: "In-depth single-cell & multiome lessons with code walkthroughs and real datasets.",
+    price: "Coming Soon",
+  },
+];
+
 export default function ServicesSection() {
-  const services = [
-    {
-      title: "Single-Cell RNA-seq Analysis",
-      icon: <Dna className="h-10 w-10 text-cyan-300" />,
-      desc: "End-to-end scRNA-seq processing from FASTQ to biological insights, including QC, clustering, marker discovery, pathway enrichment, and publication-ready figures.",
-      price: "Starts at $499",
-      tag: null
-    },
-    {
-      title: "scATAC-seq & Chromatin Analysis",
-      icon: <BarChart3 className="h-10 w-10 text-purple-300" />,
-      desc: "Chromatin accessibility analysis including peak calling, TF motif enrichment, chromVAR deviations, cis-regulatory annotation, and enhancer activity profiling.",
-      price: "Starts at $599",
-      tag: null
-    },
-    {
-      title: "Multiome (RNA + ATAC) Integration",
-      icon: <Layers className="h-10 w-10 text-pink-300" />,
-      desc: "Integrated RNA–chromatin analysis using Seurat WNN and ArchR. Includes CCAN discovery, gene regulation links, and enhancer–promoter modeling.",
-      price: "Starts at $799",
-      tag: null
-    },
-    {
-      title: "Machine Learning for Biology",
-      icon: <BrainCircuit className="h-10 w-10 text-yellow-300" />,
-      desc: "Custom ML pipelines for aging clocks, disease prediction, TF inference, embeddings, and multiomics feature engineering.",
-      price: "Coming Soon",
-      tag: "COMING SOON"
-    },
-    {
-      title: "Scientific Consulting",
-      icon: <UserCheck className="h-10 w-10 text-green-300" />,
-      desc: "1:1 expert support for study design, analysis pipelines, figure preparation, manuscript guidance, and lab training.",
-      price: "$99/hr",
-      tag: null
-    },
-    {
-      title: "Video Tutorials & Courses",
-      icon: <Video className="h-10 w-10 text-orange-300" />,
-      desc: "Step-by-step single-cell & multiomics training programs with real datasets. Includes coding walkthroughs and analysis notebooks.",
-      price: "Coming Soon",
-      tag: "COMING SOON"
-    }
-  ];
+  const [flipped, setFlipped] = useState<number | null>(null);
+
+  const handleFlip = (index: number) => {
+    setFlipped(flipped === index ? null : index);
+  };
 
   return (
-    <section id="services" className="relative py-28 text-white overflow-hidden">
+    <section className="relative py-24 text-white">
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0f1f] to-black opacity-95" />
 
-      {/* BACKGROUND */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-[#0a0f1f] to-black opacity-95" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,255,255,0.15),transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(255,0,255,0.12),transparent_60%)]" />
-      <div className="absolute inset-0 backdrop-blur-[2px]" />
+      <div className="relative max-w-6xl mx-auto px-6">
+        <h2 className="text-4xl font-semibold text-center mb-16">Services</h2>
 
-      {/* CONTENT */}
-      <div className="relative max-w-7xl mx-auto px-6">
-        
-        {/* TITLE */}
-        <h2 className="text-4xl md:text-5xl font-semibold text-center mb-4">
-          Services
-        </h2>
-        <p className="text-center text-gray-300 max-w-2xl mx-auto mb-16 text-lg">
-          Transforming your data into discovery through advanced single-cell, 
-          multiome, and AI-driven analysis.
-        </p>
-
-        {/* GRID */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {services.map((service, i) => (
             <div
               key={i}
-              className="
-                relative group p-8 rounded-2xl border border-white/10 bg-white/5 
-                backdrop-blur-xl transition-all duration-300 
-                hover:scale-[1.04] hover:-translate-y-1 
-                hover:shadow-[0_0_25px_rgba(0,255,255,0.15)]
-              "
+              className="relative h-64 cursor-pointer perspective"
+              onClick={() => handleFlip(i)}
             >
-              {/* COMING SOON TAG */}
-              {service.tag && (
-                <span className="absolute top-4 right-4 text-xs px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 animate-pulse">
-                  {service.tag}
-                </span>
-              )}
+              {/* Card Flip Container */}
+              <div
+                className={`relative w-full h-full duration-700 transform-style-preserve-3d ${
+                  flipped === i ? "rotate-y-180" : ""
+                }`}
+              >
+                {/* FRONT SIDE */}
+                <div className="absolute inset-0 bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl flex flex-col items-center justify-center gap-4 p-6 transform rotate-y-0 backface-hidden hover:bg-white/10 transition">
+                  {service.icon}
+                  <h3 className="text-xl font-semibold">{service.title}</h3>
+                </div>
 
-              {/* ICON */}
-              <div className="mb-5">{service.icon}</div>
-
-              {/* TITLE */}
-              <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-
-              {/* DESCRIPTION */}
-              <p className="text-gray-300 text-sm leading-relaxed mb-6">
-                {service.desc}
-              </p>
-
-              {/* PRICE */}
-              <p className="font-semibold text-cyan-300 text-sm">
-                {service.price}
-              </p>
+                {/* BACK SIDE */}
+                <div className="absolute inset-0 bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl p-6 flex flex-col justify-center transform rotate-y-180 backface-hidden">
+                  <p className="text-gray-200 mb-4">{service.desc}</p>
+                  <p className="text-cyan-300 font-semibold mb-4">{service.price}</p>
+                  <button className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded-lg text-white w-fit">
+                    Learn More
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -117,4 +105,3 @@ export default function ServicesSection() {
     </section>
   );
 }
-
