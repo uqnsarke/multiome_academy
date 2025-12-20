@@ -14,7 +14,8 @@
     "next": "14.1.0",
     "lucide-react": "latest",
     "@next/third-parties": "latest",
-    "framer-motion": "latest"
+    "framer-motion": "latest",
+    "@tabler/icons-react": "latest"
   },
   "devDependencies": {
     "typescript": "^5",
