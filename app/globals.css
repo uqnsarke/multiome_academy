@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ---------------------------------------
-   Global Base Styles
+   Base Styles
 ---------------------------------------- */
 @layer base {
   html {
@@ -12,6 +12,7 @@
 
   body {
     @apply bg-black text-white antialiased;
+    font-family: sans-serif;
     font-feature-settings: "ss01" on, "cv01" on;
   }
 
@@ -22,10 +23,14 @@
   p {
     @apply leading-relaxed;
   }
+
+  ::selection {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
 }
 
 /* ---------------------------------------
-   Global UI Defaults
+   Components (Reusable Layout + UI)
 ---------------------------------------- */
 @layer components {
   .container-page {
@@ -35,10 +40,22 @@
   .section-padding {
     @apply py-16;
   }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(30px);
+  }
 }
 
 /* ---------------------------------------
-   Utilities (minimal)
+   Utilities
 ---------------------------------------- */
 @layer utilities {
   .text-muted {
@@ -49,7 +66,47 @@
     @apply border-white/10;
   }
 
-  ::selection {
-    background-color: rgba(255, 255, 255, 0.15);
+  /* 3D utilities */
+  .perspective {
+    perspective: 1200px;
   }
+
+  .transform-style-preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  /* Glow */
+  .glow-soft {
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+  }
+
+  /* Animations */
+  .fade-in {
+    animation: fadeIn 0.8s ease-out both;
+  }
+
+  .slide-up {
+    animation: slideUp 0.8s ease-out both;
+  }
+}
+
+/* ---------------------------------------
+   Keyframes
+---------------------------------------- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
