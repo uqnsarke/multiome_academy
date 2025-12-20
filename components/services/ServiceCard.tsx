@@ -1,16 +1,32 @@
-
 'use client';
-export default function ServiceCard({front,back,flipped}){
-return(
-<div className="relative w-full h-72 perspective cursor-pointer">
-  <div className={`relative w-full h-full duration-700 transform-style-preserve-3d ${flipped?'rotate-y-180':''}`}>
-    <div className="absolute inset-0 backface-hidden rounded-2xl bg-white/10 border border-white/20 backdrop-blur-xl flex flex-col items-center justify-center gap-4 p-6">
-      {front}
+
+import React from 'react';
+
+// --- ADD THIS INTERFACE ---
+interface ServiceCardProps {
+  front: React.ReactNode; // Content for the front of the card
+  back: React.ReactNode;  // Content for the back of the card
+  flipped: boolean;       // Is the card currently flipped?
+}
+
+export default function ServiceCard({ front, back, flipped }: ServiceCardProps) {
+  return (
+    <div className="relative w-full h-72 perspective cursor-pointer">
+      <div 
+        className={`relative w-full h-full duration-700 transform-style-preserve-3d ${
+          flipped ? 'rotate-y-180' : ''
+        }`}
+      >
+        {/* Front Side */}
+        <div className="absolute w-full h-full backface-hidden bg-slate-800 rounded-xl shadow-xl overflow-hidden border border-slate-700">
+          {front}
+        </div>
+
+        {/* Back Side */}
+        <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-indigo-900/90 rounded-xl shadow-xl overflow-hidden border border-indigo-500">
+          {back}
+        </div>
+      </div>
     </div>
-    <div className="absolute inset-0 backface-hidden transform rotate-y-180 rounded-2xl bg-white/10 border border-cyan-400/30 shadow-[0_0_40px_5px_rgba(0,255,255,0.25)] backdrop-blur-xl flex flex-col justify-center p-6">
-      {back}
-    </div>
-  </div>
-</div>
-);
+  );
 }
