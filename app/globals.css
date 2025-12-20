@@ -1,47 +1,55 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scrolling */
-html { scroll-behavior: smooth; }
+/* ---------------------------------------
+   Global Base Styles
+---------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-/* Dark base */
-body {
-  background: #000;
-  color: #fff;
-  font-family: sans-serif;
+  body {
+    @apply bg-black text-white antialiased;
+    font-feature-settings: "ss01" on, "cv01" on;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
 }
 
-/* 3D flip utilities */
-.perspective { perspective: 1200px; }
-.transform-style-preserve-3d { transform-style: preserve-3d; }
-.backface-hidden { backface-visibility: hidden; }
-.rotate-y-180 { transform: rotateY(180deg); }
+/* ---------------------------------------
+   Global UI Defaults
+---------------------------------------- */
+@layer components {
+  .container-page {
+    @apply mx-auto max-w-6xl px-6;
+  }
 
-/* Glass effects */
-.glass {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(20px);
-}
-.glass-strong {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.25);
-  backdrop-filter: blur(30px);
+  .section-padding {
+    @apply py-16;
+  }
 }
 
-/* Subtle glow */
-.glow-soft {
-  box-shadow: 0 0 25px rgba(0,255,255,0.25);
+/* ---------------------------------------
+   Utilities (minimal)
+---------------------------------------- */
+@layer utilities {
+  .text-muted {
+    @apply text-white/70;
+  }
+
+  .border-muted {
+    @apply border-white/10;
+  }
+
+  ::selection {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
 }
-
-/* Animations */
-.fade-in { animation: fadeIn 0.8s ease-out both; }
-@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-
-.slide-up { animation: slideUp 0.8s ease-out both; }
-@keyframes slideUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
-
-/* Utility spacing */
-.section-padding { padding-top: 5rem; padding-bottom: 5rem; }
