@@ -13,7 +13,8 @@
     "react-dom": "^18",
     "next": "14.1.0",
     "lucide-react": "latest",
-    "@next/third-parties": "latest"
+    "@next/third-parties": "latest",
+    "framer-motion": "latest"
   },
   "devDependencies": {
     "typescript": "^5",
