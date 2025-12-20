@@ -1,34 +1,83 @@
-
 'use client';
-import {useState} from 'react';
+
+import React, { useState } from 'react';
 import ServiceCard from './ServiceCard';
-import {Dna,BarChart3,Layers,BrainCircuit,UserCheck,Video} from 'lucide-react';
+import { IconChartBar, IconCode, IconDatabase, IconPresentation } from '@tabler/icons-react';
 
-export default function ServicesSection(){
-const [flip,setFlip]=useState(null);
-const services=[
-{icon:<Dna className='h-10 w-10 text-cyan-300'/>,title:'Single-Cell RNA-seq',desc:'QC, clustering, markers, trajectory, enrichment.',price:'$499'},
-{icon:<BarChart3 className='h-10 w-10 text-purple-300'/>,title:'scATAC & Chromatin',desc:'Peaks, motifs, chromVAR, enhancers.',price:'$599'},
-{icon:<Layers className='h-10 w-10 text-pink-300'/>,title:'Multiome Integration',desc:'WNN + ArchR + CCAN mapping.',price:'$799'},
-{icon:<BrainCircuit className='h-10 w-10 text-yellow-300'/>,title:'Machine Learning',desc:'Aging clocks, embeddings, prediction.',price:'Coming Soon'},
-{icon:<UserCheck className='h-10 w-10 text-green-300'/>,title:'Consulting',desc:'Study design, pipelines, manuscript.',price:'$99/hr'},
-{icon:<Video className='h-10 w-10 text-orange-300'/>,title:'Courses',desc:'Real dataset tutorials.',price:'Coming Soon'},
-];
+export default function ServicesSection() {
+  // FIX: We tell TypeScript this state can be a 'number' OR 'null'
+  const [flip, setFlip] = useState<number | null>(null);
 
-return(
-<section className='py-24 text-white'>
-  <h2 className='text-4xl text-center mb-12'>Services</h2>
-  <div className='grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto px-6'>
-    {services.map((s,i)=>(
-      <div key={i} onClick={()=>setFlip(flip===i?null:i)}>
-        <ServiceCard
-          flipped={flip===i}
-          front={<><div>{s.icon}</div><h3 className='text-xl'>{s.title}</h3></>}
-          back={<><p className='text-gray-200 mb-3'>{s.desc}</p><p className='text-cyan-300 font-semibold mb-4'>{s.price}</p></>}
-        />
+  const services = [
+    {
+      title: "Single-Cell Analysis",
+      icon: <IconChartBar size={40} className="text-indigo-400" />,
+      desc: "Full pipeline processing: QC, Clustering, and Marker Identification.",
+      details: "I take raw 10x output and deliver a complete AnnData object with publication-ready UMAPs."
+    },
+    {
+      title: "Multiomics Integration",
+      icon: <IconDatabase size={40} className="text-purple-400" />,
+      desc: "Merging RNA + ATAC seq data for deeper biological insights.",
+      details: "Using Seurat WNN or MultiVI to integrate modalities and find driver regulators."
+    },
+    {
+      title: "Custom Visuals",
+      icon: <IconPresentation size={40} className="text-pink-400" />,
+      desc: "Publication-quality figures that tell your scientific story.",
+      details: "Volcano plots, Dot plots, and complex Heatmaps tailored to your specific gene lists."
+    },
+    {
+      title: "Code Consulting",
+      icon: <IconCode size={40} className="text-cyan-400" />,
+      desc: "Troubleshooting your Seurat/Scanpy scripts.",
+      details: "Stuck on an error? I will debug your notebooks and optimize your workflow."
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-black text-white">
+      <div className="text-center mb-16">
+        <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
+            Expert Services
+          </span>
+        </h2>
+        <p className="text-slate-400 max-w-2xl mx-auto">
+          From raw data to final figure. Click a card to see details.
+        </p>
       </div>
-    ))}
-  </div>
-</section>
-);
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto px-6">
+        {services.map((s, i) => (
+          <div key={i} onClick={() => setFlip(flip === i ? null : i)}>
+            <ServiceCard
+              flipped={flip === i}
+              front={
+                <div className="flex flex-col items-center justify-center h-full space-y-4 p-6 text-center">
+                  <div className="p-4 bg-slate-900/50 rounded-full">{s.icon}</div>
+                  <h3 className="text-2xl font-bold text-slate-100">{s.title}</h3>
+                  <p className="text-slate-400 text-sm">{s.desc}</p>
+                  <span className="text-xs text-indigo-400 mt-4 uppercase tracking-wider font-semibold">
+                    Click for Details
+                  </span>
+                </div>
+              }
+              back={
+                <div className="flex flex-col items-center justify-center h-full space-y-4 p-8 text-center bg-indigo-900/20">
+                  <h3 className="text-xl font-bold text-white mb-2">{s.title}</h3>
+                  <p className="text-slate-200 leading-relaxed">
+                    {s.details}
+                  </p>
+                  <button className="mt-4 px-6 py-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-full text-sm font-semibold transition">
+                    Inquire Now
+                  </button>
+                </div>
+              }
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
