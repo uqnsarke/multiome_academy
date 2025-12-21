@@ -32,7 +32,7 @@ export default function Hero() {
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-tight drop-shadow-lg">
             Single-Cell Multiomics: <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-              From Data to Mechanism.
+              From Data to Mechanism
             </span>
           </h1>
           
