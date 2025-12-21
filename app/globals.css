@@ -112,7 +112,7 @@
   100% { background-position: 200% 50%; }
 }
 
-/* Fade in for badges/images */
+/* Fade in for badges/images/arrows */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
