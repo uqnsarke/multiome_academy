@@ -1,208 +1,227 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Download, CheckCircle, Mail, Terminal, FileCode, ChevronDown, Sparkles, Zap, Youtube, Play } from 'lucide-react';
+import { Download, CheckCircle, Mail, Terminal, BookOpen, Library, Youtube, PlayCircle, Code2, ArrowRight } from 'lucide-react';
 
 export default function FeaturedResource() {
   const [email, setEmail] = useState('');
   const [isDownloaded, setIsDownloaded] = useState(false);
-  const [activeVideo, setActiveVideo] = useState(0);
 
-  // Restored: Dual-video playlist for the terminal interface
-  const videoPlaylist = [
-    { id: 0, title: 'scanpy_pipeline.ipynb', src: '/dna-loop.mp4', label: 'The Workflow' },
-    { id: 1, title: 'scanpy_output.mp4', src: '/scanpy_output.mp4', label: 'Final Output' }
-  ];
-
+  // --- HANDLE DOWNLOAD ---
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(`Capturing email: ${email}`);
+    
+    // Trigger the file download
     const link = document.createElement('a');
     link.href = '/scanpy-cheat-sheet.png'; 
     link.download = 'Nishat_Scanpy_CheatSheet.png';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
     setIsDownloaded(true);
-    setEmail('');
+    setEmail(''); 
   };
 
   return (
-    <div className="bg-black">
-      {/* --- SECTION 1: THE FEATURED RESOURCE --- */}
-      <section id="resources" className="py-24 bg-gradient-to-b from-slate-950 to-black relative overflow-hidden scroll-mt-20">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10 pointer-events-none"></div>
+    <section id="resources" className="py-24 bg-gradient-to-b from-slate-950 to-black relative overflow-hidden">
+      
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
+      
+      <div className="container mx-auto px-6 relative z-10">
         
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="bg-slate-900/40 border border-slate-700/50 rounded-3xl backdrop-blur-md grid md:grid-cols-2 gap-12 p-8 md:p-12 items-center shadow-2xl">
-            
-            {/* --- LEFT: YOUR PREFERRED COPY STYLE --- */}
-            <div className="space-y-8">
-              <div>
-                <span className="inline-flex items-center space-x-2 bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full text-[10px] font-bold border border-emerald-500/30 mb-6 uppercase tracking-wider">
-                  <Sparkles size={12} className="animate-pulse" />
-                  <span>2025 Scientist's Edition</span>
-                </span>
-                
-                <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight tracking-tight">
-                  Stop Googling Syntax. <br/>
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
-                    Start the Discovery.
-                  </span>
-                </h2>
-                
-                <p className="text-slate-300 text-lg leading-relaxed max-w-lg">
-                  The <span className="text-white font-semibold italic">Scanpy Blueprint</span>: A full end-to-end single-cell workflow in <span className="text-yellow-400 font-bold">Python</span>, distilled into a concise, printable reference.
-                </p>
-
-                {/* Restored: The specific value bullets you liked */}
-                <ul className="mt-8 space-y-4">
-                  <li className="flex items-center gap-3 text-slate-400 text-sm">
-                    <Zap size={14} className="text-emerald-500" /> Optimized QC & Normalization thresholds
-                  </li>
-                  <li className="flex items-center gap-3 text-slate-400 text-sm">
-                    <Zap size={14} className="text-emerald-500" /> Marker Identification for 20+ cell types
-                  </li>
-                  <li className="flex items-center gap-3 text-slate-400 text-sm">
-                    <Zap size={14} className="text-emerald-500" /> Publication-ready UMAP & DotPlot parameters
-                  </li>
-                </ul>
-              </div>
-
-              {/* Form Section */}
-              {isDownloaded ? (
-                <div className="p-6 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-300 animate-in fade-in zoom-in duration-300">
-                  <p className="font-bold text-lg flex items-center gap-2"><CheckCircle /> Success! Your guide is ready.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 pt-4 max-w-md">
-                  <div className="relative flex-grow">
-                    <Mail className="absolute left-3 top-3.5 h-5 w-5 text-slate-500" />
-                    <input
-                      type="email"
-                      placeholder="Enter academic email"
-                      className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-700/50 rounded-xl text-white outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <button type="submit" className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl flex items-center justify-center space-x-2 transition shadow-xl shadow-emerald-900/20 active:scale-95">
-                    <Download className="w-5 h-5" />
-                    <span>Get Cheat Sheet</span>
-                  </button>
-                </form>
-              )}
-              <p className="text-[10px] text-slate-500 italic">Spend your time interpreting biology—not rewriting code.</p>
-            </div>
-
-            {/* --- RIGHT: INTERACTIVE TABBED TERMINAL --- */}
-            <div className="relative group perspective-1000 hidden md:block">
-              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/30 to-cyan-500/30 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <div className="relative bg-[#1e1e1e] rounded-xl overflow-hidden border border-slate-700/50 shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]">
-                
-                {/* Tabs for switching between Pipeline and Results */}
-                <div className="h-10 bg-[#2d2d2d] border-b border-white/5 flex items-center px-4 justify-between">
-                  <div className="flex space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                    <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                    <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-                  </div>
+        {/* =========================================================
+            SECTION 1: LEAD MAGNET (Live Video + Cheat Sheet)
+           ========================================================= */}
+        <div className="mb-32">
+            <div className="bg-slate-900/40 border border-slate-700/50 rounded-3xl backdrop-blur-md grid md:grid-cols-2 gap-12 p-8 md:p-12 items-center shadow-2xl">
+              
+              {/* Left: Text & Email Form */}
+              <div className="space-y-8">
+                <div>
+                   {/* BRIGHTER BADGE */}
+                   <span className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30 mb-6 shadow-[0_0_15px_-3px_rgba(6,182,212,0.3)] uppercase tracking-wider">
+                      <Terminal size={12} />
+                      <span>Free Featured Resource</span>
+                   </span>
                   
-                  <div className="flex gap-4">
-                    {videoPlaylist.map((video, index) => (
-                      <button 
-                        key={video.id}
-                        onClick={() => setActiveVideo(index)}
-                        className={`text-[10px] font-mono flex items-center gap-2 transition-all px-3 py-1 rounded-md ${activeVideo === index ? 'text-emerald-400 bg-emerald-400/10 border border-emerald-400/20' : 'text-slate-500 hover:text-slate-300'}`}
-                      >
-                        <FileCode size={12} />
-                        {video.label}
+                  {/* FANCY HEADLINE */}
+                  <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                    Stop Googling Syntax. <br/>
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400">
+                      Get the Ultimate Guide.
+                    </span>
+                  </h2>
+                  
+                  {/* FANCY DESCRIPTION */}
+                  <p className="text-slate-300 text-lg leading-relaxed">
+                    The entire single-cell analysis pipeline in <span className="text-yellow-400 font-bold">Python</span>, 
+                    condensed into one printable reference. <br className="hidden md:block"/>
+                    Focus on the <span className="text-emerald-400 font-bold">biology</span>, not the boilerplate.
+                  </p>
+                </div>
+
+                {/* Email Form Logic */}
+                {isDownloaded ? (
+                    <div className="p-6 bg-green-500/10 border border-green-500/30 rounded-xl text-green-300 animate-in fade-in zoom-in duration-300">
+                        <p className="font-bold text-lg flex items-center gap-2"><CheckCircle /> Download Started!</p>
+                        <p className="text-sm mt-2 opacity-80">Check your downloads folder.</p>
+                        <button onClick={() => setIsDownloaded(false)} className="text-xs underline mt-4 hover:text-white">Reset form</button>
+                    </div>
+                 ) : (
+                    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 pt-2">
+                      <div className="relative flex-grow">
+                        <Mail className="absolute left-3 top-3.5 h-5 w-5 text-slate-400" />
+                        <input
+                          type="email"
+                          placeholder="Enter your email"
+                          className="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-purple-500 text-white outline-none placeholder:text-slate-500 transition-all"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <button type="submit" className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 text-white font-bold rounded-lg flex items-center justify-center space-x-2 transition shadow-lg shadow-purple-900/20 whitespace-nowrap">
+                        <Download className="w-5 h-5" />
+                        <span>Download PDF</span>
                       </button>
-                    ))}
-                  </div>
-                  <div className="w-8"></div> 
-                </div>
+                    </form>
+                 )}
+              </div>
 
-                {/* Video Player */}
-                <div className="relative aspect-[4/3] bg-black">
-                  <video 
-                    key={videoPlaylist[activeVideo].src} 
-                    autoPlay loop muted playsInline preload="auto"
-                    className="w-full h-full object-cover opacity-90"
-                  >
-                    <source src={videoPlaylist[activeVideo].src} type="video/mp4" />
-                  </video>
-                  
-                  <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-2 py-1 rounded border border-white/10 text-[10px] font-mono text-emerald-300">
-                      {videoPlaylist[activeVideo].title}
+              {/* Right: Live Video Preview */}
+              <div className="relative group perspective-1000 hidden md:block">
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                <div className="relative bg-[#1e1e1e] rounded-xl overflow-hidden border border-slate-700/50 shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.01]">
+                  <div className="h-9 bg-[#2d2d2d] border-b border-white/5 flex items-center px-4 justify-between">
+                    <div className="flex space-x-2"><div className="w-3 h-3 rounded-full bg-red-500/80"></div><div className="w-3 h-3 rounded-full bg-yellow-500/80"></div><div className="w-3 h-3 rounded-full bg-green-500/80"></div></div>
+                    <div className="text-[10px] text-slate-400 font-mono">scanpy_preview.mp4</div>
+                    <div className="w-8"></div> 
                   </div>
-
-                  <div className="absolute bottom-6 right-6 bg-slate-900/90 backdrop-blur border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-3 shadow-xl z-20">
-                    <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-xs font-mono text-slate-300">Live Simulation</span>
+                  <div className="relative aspect-[4/3]">
+                    <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-90">
+                      <source src="/dna-loop.mp4" type="video/mp4" />
+                    </video>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="flex flex-col items-center gap-3 mt-16 animate-bounce">
-            <p className="text-[10px] uppercase tracking-[0.4em] text-slate-500 font-bold">Watch Video Courses</p>
-            <ChevronDown size={24} className="text-emerald-500" />
-          </div>
         </div>
-      </section>
 
-      {/* --- SECTION 2: THE LEARNING HUB (YOUTUBE CARDS) --- */}
-      <section id="youtube" className="py-24 bg-black border-t border-white/5 relative overflow-hidden">
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col items-center text-center mb-16">
-            <div className="p-4 bg-red-500/10 rounded-3xl border border-red-500/20 mb-8">
-              <Youtube className="text-red-500" size={48} />
+        {/* =========================================================
+            SECTION 2: KNOWLEDGE HUB (Grid)
+           ========================================================= */}
+        <div className="mb-32">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+                  Knowledge Hub
+                </span>
+              </h2>
+              <p className="text-gray-400">Deep dives, newsletters, and written guides.</p>
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">Learning Hub</h2>
-            <p className="text-slate-400 max-w-xl text-lg">
-              Deep-dive into single-cell multiomics with my free video courses.
-            </p>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <ResourceCard 
+                icon={<BookOpen className="w-8 h-8 text-emerald-400" />}
+                title="The Blog"
+                desc="Deep dives into bioinformatics algorithms and troubleshooting."
+                link="#"
+                cta="Read Articles"
+              />
+              <ResourceCard 
+                icon={<Mail className="w-8 h-8 text-purple-400" />}
+                title="BioAI Newsletter"
+                desc="Weekly insights on Biology and AI delivered to your inbox."
+                link="#"
+                cta="Subscribe Free"
+              />
+              <ResourceCard 
+                icon={<Library className="w-8 h-8 text-pink-400" />}
+                title="My Books"
+                desc="Comprehensive e-books for mastering single-cell analysis."
+                link="#"
+                cta="Browse Library"
+              />
+            </div>
+        </div>
+
+        {/* =========================================================
+            SECTION 3: START LEARNING (Curated Paths)
+           ========================================================= */}
+        <div className="relative">
+          <div className="text-center mb-12">
+             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 flex items-center justify-center gap-3">
+                <Youtube className="w-10 h-10 text-red-600 fill-current" />
+                Start Learning Now
+              </h2>
+              <p className="text-gray-400">Choose your path and start watching for free.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-            {/* YouTube Card 1 */}
-            <a href="https://youtube.com/your-video-link-1" target="_blank" className="group relative block rounded-[2.5rem] overflow-hidden border border-white/10 bg-slate-900/20 hover:border-red-500/40 transition-all duration-500 shadow-2xl">
-              <div className="aspect-video relative overflow-hidden">
-                <img src="/yt-thumb-1.jpg" alt="Tutorial" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60 group-hover:opacity-100" />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-transparent transition-colors">
-                  <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-white shadow-2xl scale-90 group-hover:scale-100 transition-transform duration-500">
-                    <Play fill="currentColor" size={32} className="ml-1" />
-                  </div>
-                </div>
-                <div className="absolute top-6 left-6 px-4 py-1.5 bg-black/60 backdrop-blur rounded-full border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">Tutorial</div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            
+            {/* PATH A: BEGINNER */}
+            <a 
+              href="https://www.youtube.com/@nishat_BioAI" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="group relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 p-8 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1"
+            >
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <Code2 size={120} />
               </div>
-              <div className="p-10">
-                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors">Scanpy for Beginners</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">Master the basics of single-cell RNA-seq analysis from raw data to visualization.</p>
+              <div className="relative z-10">
+                <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-2 block">Track A: Beginner</span>
+                <h3 className="text-2xl font-bold text-white mb-2">Python for Biologists</h3>
+                <p className="text-slate-400 mb-6 text-sm">New to coding? Learn Python syntax, Pandas, and plotting from scratch.</p>
+                <span className="inline-flex items-center text-white font-bold group-hover:text-cyan-400 transition-colors">
+                  <PlayCircle className="mr-2" size={20} /> Watch Playlist
+                </span>
               </div>
             </a>
 
-            {/* YouTube Card 2 */}
-            <a href="https://youtube.com/your-video-link-2" target="_blank" className="group relative block rounded-[2.5rem] overflow-hidden border border-white/10 bg-slate-900/20 hover:border-red-500/40 transition-all duration-500 shadow-2xl">
-              <div className="aspect-video relative overflow-hidden">
-                <img src="/yt-thumb-2.jpg" alt="Tutorial" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60 group-hover:opacity-100" />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-transparent transition-colors">
-                  <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-white shadow-2xl scale-90 group-hover:scale-100 transition-transform duration-500">
-                    <Play fill="currentColor" size={32} className="ml-1" />
-                  </div>
-                </div>
-                <div className="absolute top-6 left-6 px-4 py-1.5 bg-black/60 backdrop-blur rounded-full border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">Advanced</div>
+            {/* PATH B: ADVANCED */}
+            <a 
+              href="https://www.youtube.com/@nishat_BioAI" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="group relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 p-8 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1"
+            >
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <Terminal size={120} />
               </div>
-              <div className="p-10">
-                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors">Multiomics Integration</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">Advanced workflows for merging RNA and ATAC-seq data to uncover regulatory networks.</p>
+              <div className="relative z-10">
+                <span className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2 block">Track B: Advanced</span>
+                <h3 className="text-2xl font-bold text-white mb-2">Single-Cell Multiomics</h3>
+                <p className="text-slate-400 mb-6 text-sm">Deep learning integration, batch correction, and trajectory inference.</p>
+                <span className="inline-flex items-center text-white font-bold group-hover:text-purple-400 transition-colors">
+                  <PlayCircle className="mr-2" size={20} /> Watch Playlist
+                </span>
               </div>
             </a>
+
           </div>
         </div>
-      </section>
-    </div>
+
+      </div>
+    </section>
+  );
+}
+
+// --- HELPER COMPONENT FOR GRID CARDS ---
+function ResourceCard({ icon, title, desc, link, cta }: { icon: any, title: string, desc: string, link: string, cta: string }) {
+  return (
+    <a href={link} target="_blank" rel="noopener noreferrer" className="group block h-full">
+      <div className="h-full p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.08] flex flex-col">
+        <div className="mb-6 p-4 rounded-2xl bg-black/40 w-fit border border-white/10 group-hover:border-emerald-500/50 transition-colors">{icon}</div>
+        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">{title}</h3>
+        <p className="text-gray-400 leading-relaxed mb-8 flex-grow text-sm">{desc}</p>
+        <div className="flex items-center text-sm font-bold text-gray-300 uppercase tracking-wider group-hover:text-white transition-colors">
+          {cta} <ArrowRight size={16} className="ml-2 text-emerald-500 group-hover:translate-x-2 transition-transform" />
+        </div>
+      </div>
+    </a>
   );
 }
