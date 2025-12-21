@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Download, CheckCircle, Mail, Terminal, BookOpen, Library, Youtube, PlayCircle, Code2, ArrowRight } from 'lucide-react';
+import { Download, CheckCircle, Mail, Terminal, BookOpen, Library, Youtube, PlayCircle, Code2, ArrowRight, FileCode } from 'lucide-react';
 
 export default function FeaturedResource() {
   const [email, setEmail] = useState('');
@@ -33,7 +33,7 @@ export default function FeaturedResource() {
       <div className="container mx-auto px-6 relative z-10">
         
         {/* =========================================================
-            SECTION 1: LEAD MAGNET (Live Video + Cheat Sheet)
+            SECTION 1: LEAD MAGNET
            ========================================================= */}
         <div className="mb-32">
             <div className="bg-slate-900/40 border border-slate-700/50 rounded-3xl backdrop-blur-md grid md:grid-cols-2 gap-12 p-8 md:p-12 items-center shadow-2xl">
@@ -41,13 +41,11 @@ export default function FeaturedResource() {
               {/* Left: Text & Email Form */}
               <div className="space-y-8">
                 <div>
-                   {/* BRIGHTER BADGE */}
                    <span className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30 mb-6 shadow-[0_0_15px_-3px_rgba(6,182,212,0.3)] uppercase tracking-wider">
                       <Terminal size={12} />
                       <span>Free Featured Resource</span>
                    </span>
                   
-                  {/* FANCY HEADLINE */}
                   <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
                     Stop Googling Syntax. <br/>
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400">
@@ -55,7 +53,6 @@ export default function FeaturedResource() {
                     </span>
                   </h2>
                   
-                  {/* FANCY DESCRIPTION */}
                   <p className="text-slate-300 text-lg leading-relaxed">
                     The entire single-cell analysis pipeline in <span className="text-yellow-400 font-bold">Python</span>, 
                     condensed into one printable reference. <br className="hidden md:block"/>
@@ -91,27 +88,56 @@ export default function FeaturedResource() {
                  )}
               </div>
 
-              {/* Right: Live Video Preview */}
+              {/* Right: Live Video Preview (DNA Loop) */}
               <div className="relative group perspective-1000 hidden md:block">
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 <div className="relative bg-[#1e1e1e] rounded-xl overflow-hidden border border-slate-700/50 shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.01]">
+                  
+                  {/* Header Bar */}
                   <div className="h-9 bg-[#2d2d2d] border-b border-white/5 flex items-center px-4 justify-between">
                     <div className="flex space-x-2"><div className="w-3 h-3 rounded-full bg-red-500/80"></div><div className="w-3 h-3 rounded-full bg-yellow-500/80"></div><div className="w-3 h-3 rounded-full bg-green-500/80"></div></div>
-                    <div className="text-[10px] text-slate-400 font-mono">scanpy_preview.mp4</div>
+                    <div className="text-[10px] text-slate-400 font-mono flex items-center gap-2">
+                      <FileCode size={12} className="text-blue-400" />
+                      scanpy_pipeline.ipynb
+                    </div>
                     <div className="w-8"></div> 
                   </div>
+
+                  {/* Video Content */}
                   <div className="relative aspect-[4/3]">
                     <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-90">
                       <source src="/dna-loop.mp4" type="video/mp4" />
                     </video>
+                    
+                    {/* Grid Texture Overlay */}
+                    <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20 bg-[length:20px_20px]"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1e1e1e] via-transparent to-transparent"></div>
+
+                    {/* --- CORRECTION PATCH --- */}
+                    {/* This div sits ON TOP of the video to hide the typo */}
+                    <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
+                        <div className="bg-slate-900/90 text-white text-[10px] px-2 py-0.5 rounded border border-white/10 shadow-lg">
+                           Open Chromatin
+                        </div>
+                        <div className="bg-slate-900/90 text-purple-300 font-bold text-[11px] px-2 py-0.5 rounded border border-white/10 shadow-lg mt-0.5">
+                           Transcription Factors
+                        </div>
+                    </div>
+
+                    {/* Live Preview Badge */}
+                    <div className="absolute bottom-6 right-6 bg-slate-900/90 backdrop-blur border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-3 shadow-xl z-20">
+                        <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span className="text-xs font-mono text-slate-300">Live Preview</span>
+                    </div>
                   </div>
+
                 </div>
               </div>
             </div>
         </div>
 
         {/* =========================================================
-            SECTION 2: KNOWLEDGE HUB (Grid)
+            SECTION 2: KNOWLEDGE HUB
            ========================================================= */}
         <div className="mb-32">
             <div className="text-center mb-12">
@@ -157,12 +183,12 @@ export default function FeaturedResource() {
                 <Youtube className="w-10 h-10 text-red-600 fill-current" />
                 Start Learning Now
               </h2>
-              <p className="text-gray-400">Choose your path and start watching for free.</p>
+              <p className="text-gray-400">Watch the intro or choose your learning path.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             
-            {/* PATH A: BEGINNER */}
+            {/* TRACK A: Beginner */}
             <a 
               href="https://www.youtube.com/@nishat_BioAI" 
               target="_blank" 
@@ -182,7 +208,7 @@ export default function FeaturedResource() {
               </div>
             </a>
 
-            {/* PATH B: ADVANCED */}
+            {/* TRACK B: Advanced */}
             <a 
               href="https://www.youtube.com/@nishat_BioAI" 
               target="_blank" 
@@ -194,8 +220,8 @@ export default function FeaturedResource() {
               </div>
               <div className="relative z-10">
                 <span className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2 block">Track B: Advanced</span>
-                <h3 className="text-2xl font-bold text-white mb-2">Single-Cell Multiomics</h3>
-                <p className="text-slate-400 mb-6 text-sm">Deep learning integration, batch correction, and trajectory inference.</p>
+                <h3 className="text-2xl font-bold text-white mb-2">Multiomics Integration</h3>
+                <p className="text-slate-400 mb-6 text-sm">Visualizing scRNA + scATAC integration and trajectory inference.</p>
                 <span className="inline-flex items-center text-white font-bold group-hover:text-purple-400 transition-colors">
                   <PlayCircle className="mr-2" size={20} /> Visit Channel
                 </span>
