@@ -3,17 +3,19 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-900">
       
       {/* 1. BACKGROUND IMAGE */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero-multiome.jpeg"  // <--- UPDATED: Points to root of public folder
+          src="/hero-multiome.jpeg"
           alt="Multiome Cellular Background"
           fill
           className="object-cover object-center opacity-40"
-          priority
+          priority={true} // Forces the image to load immediately
+          quality={100}   // Ensures high quality
         />
+        {/* Gradient Overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black"></div>
       </div>
 
