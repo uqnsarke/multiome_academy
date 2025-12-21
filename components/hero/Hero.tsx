@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-900">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-black">
       
       {/* 1. BACKGROUND IMAGE */}
       <div className="absolute inset-0 z-0">
@@ -11,12 +11,13 @@ export default function Hero() {
           src="/hero-multiome.jpeg"
           alt="Multiome Cellular Background"
           fill
-          className="object-cover object-center opacity-40"
-          priority={true} // Forces the image to load immediately
-          quality={100}   // Ensures high quality
+          className="object-cover object-center opacity-60" // INCREASED opacity so it's brighter
+          priority={true}
         />
-        {/* Gradient Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black"></div>
+        
+        {/* --- THE FIX IS HERE --- */}
+        {/* Changed 'from-black' (solid) to 'from-black/50' (transparent) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/50 to-black"></div>
       </div>
 
       {/* 2. CONTENT */}
