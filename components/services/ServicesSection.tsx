@@ -10,96 +10,114 @@ export default function ServicesSection() {
   const services = [
     {
       title: "Single-Cell Analysis",
-      icon: <IconChartBar size={40} className="text-teal-400" />,
+      icon: <IconChartBar size={32} className="text-teal-400" />,
       desc: "Full pipeline processing: QC, Clustering, and Marker Identification.",
       details: "End-to-end processing of 10x Genomics scRNA-seq and scATAC-seq data using Scanpy, Seurat, or Signac."
     },
     {
       title: "Multiomics Integration",
-      icon: <IconDatabase size={40} className="text-emerald-400" />,
-      desc: "Merging RNA + ATAC seq data for deeper biological insights.",
-      details: "Modalities integrated using Seurat WNN or MultiVI, followed by regulatory network inference."
+      icon: <IconDatabase size={32} className="text-emerald-400" />,
+      desc: "Merging RNA + ATAC seq data for deeper insights.",
+      details: "Modalities integrated using Seurat WNN or MultiVI, with regulatory network inference via SCENIC+."
     },
     {
       title: "Custom Visuals",
-      icon: <IconPresentation size={40} className="text-cyan-400" />,
+      icon: <IconPresentation size={32} className="text-cyan-400" />,
       desc: "Figures grounded in rigorous statistical analysis.",
       details: "Differential expression, pathway enrichment, and publication-ready volcano and dot plots."
     },
     {
       title: "Code Consulting",
-      icon: <IconCode size={40} className="text-teal-300" />,
+      icon: <IconCode size={32} className="text-teal-300" />,
       desc: "Troubleshooting your single cell scripts.",
       details: "Direct debugging of notebooks and optimization for high-performance computing."
     }
   ];
 
   return (
-    /* Changed background to a Deep Teal Gradient */
-    <section id="services" className="py-24 bg-gradient-to-b from-[#020617] via-[#042f2e] to-[#020617] text-white relative overflow-hidden scroll-mt-20">
+    <section id="services" className="py-24 bg-[#020617] text-white relative overflow-hidden scroll-mt-20">
       
-      {/* --- TEAL VISUAL ENHANCEMENTS --- */}
-      
-      {/* 1. Primary Teal Glow - Illuminates the card area */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-      
-      {/* 2. Floating "Cell" Particles */}
-      <div className="absolute top-20 left-10 w-2 h-2 bg-teal-400/30 rounded-full animate-pulse"></div>
-      <div className="absolute bottom-40 right-20 w-3 h-3 bg-cyan-400/20 rounded-full animate-bounce" style={{ animationDuration: '6s' }}></div>
-      <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-emerald-400/40 rounded-full animate-ping"></div>
+      {/* --- TEAL NEBULA BACKGROUND --- */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.05)_0%,transparent_70%)] pointer-events-none"></div>
 
-      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
+      <div className="container mx-auto px-6 relative z-10">
         
-        {/* Header with Teal/Cyan Gradient */}
-        <div className="text-center mb-16">
+        {/* Header Section */}
+        <div className="mb-20 text-center md:text-left">
           <h2 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight slide-up">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-white to-cyan-300 drop-shadow-sm">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-white to-cyan-300">
               Expert Services
             </span>
           </h2>
-          <p className="text-teal-100/60 max-w-2xl mx-auto text-lg slide-up [animation-delay:200ms]">
+          <p className="text-teal-100/50 max-w-2xl text-lg slide-up [animation-delay:200ms]">
             Technical pipelines and analysis support for multiomics research.
           </p>
         </div>
 
-        {/* Grid Container */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl mx-auto mb-20">
-          {services.map((s, i) => (
-            <div key={i} onClick={() => setFlip(flip === i ? null : i)} className="slide-up">
-              <ServiceCard
-                flipped={flip === i}
-                front={
-                  /* Increased transparency to let the Teal glow through */
-                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 bg-teal-950/20 backdrop-blur-xl rounded-2xl border border-teal-500/20 shadow-[0_0_40px_rgba(0,0,0,0.5)] group-hover:border-teal-400/50 transition-all duration-500"> 
-                    <div className="p-4 bg-slate-900/80 rounded-2xl border border-teal-800/50 shadow-xl group-hover:shadow-teal-500/20 group-hover:-translate-y-1 transition-all duration-300">
-                      {s.icon}
-                    </div>
-                    <h3 className="text-2xl font-bold text-white tracking-tight">{s.title}</h3>
-                    <p className="text-teal-100/70 text-sm leading-relaxed">{s.desc}</p>
-                    <span className="text-[10px] text-teal-400 uppercase tracking-[0.2em] font-bold pt-4 opacity-60 group-hover:opacity-100 transition-opacity">
-                      Details
-                    </span>
-                  </div>
-                }
-                back={
-                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 bg-teal-950/90 backdrop-blur-2xl rounded-2xl border border-teal-500/40 shadow-2xl">
-                    <p className="text-teal-50 text-sm leading-relaxed italic">"{s.details}"</p>
-                    <a 
-                      href="mailto:nishat.sarker@uq.net.au" 
-                      className="mt-4 px-8 py-2.5 bg-teal-600 hover:bg-teal-500 text-white rounded-full text-xs font-bold shadow-lg shadow-teal-900/40 transition-all active:scale-95" 
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Inquire Now
-                    </a>
-                  </div>
-                }
-              />
+        <div className="flex flex-col lg:flex-row gap-16 items-start">
+          
+          {/* --- LEFT SIDE: ANIMATED GRAPHIC --- */}
+          <div className="lg:sticky lg:top-32 w-full lg:w-1/3 space-y-8 slide-up [animation-delay:400ms]">
+            <div className="relative group aspect-square rounded-3xl border border-teal-500/20 bg-teal-950/10 backdrop-blur-sm overflow-hidden flex items-center justify-center">
+              
+              {/* DNA / Plexus Placeholder Graphic */}
+              <div className="absolute inset-0 opacity-40">
+                <div className="absolute inset-0 bg-[url('/grid.svg')] bg-[length:30px_30px] opacity-20"></div>
+                {/* Animated Pulsing Orbs representing Cells */}
+                <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-teal-500/20 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+              </div>
+
+              {/* Central Graphic Icon */}
+              <div className="relative flex flex-col items-center text-center p-8">
+                <div className="mb-6 p-6 rounded-full bg-teal-500/10 border border-teal-500/30 animate-bounce-slow">
+                   <IconDatabase size={64} className="text-teal-400" />
+                </div>
+                <h4 className="text-xl font-bold text-white mb-2">Integrated Analysis</h4>
+                <p className="text-sm text-teal-100/60">Cross-modality correlation and trajectory inference.</p>
+              </div>
             </div>
-          ))}
+
+            {/* Sub-badge below graphic */}
+            <div className="p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-md">
+                <div className="flex items-center gap-4">
+                    <div className="h-2 w-2 rounded-full bg-teal-400 animate-ping"></div>
+                    <span className="text-xs font-mono uppercase tracking-widest text-teal-400">Live Processing Engine</span>
+                </div>
+            </div>
+          </div>
+
+          {/* --- RIGHT SIDE: SERVICES GRID --- */}
+          <div className="w-full lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8 min-h-[400px]">
+            {services.map((s, i) => (
+              <div key={i} onClick={() => setFlip(flip === i ? null : i)} className="slide-up" style={{ animationDelay: `${(i+3)*150}ms` }}>
+                <ServiceCard
+                  flipped={flip === i}
+                  front={
+                    <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 bg-teal-950/20 backdrop-blur-xl rounded-3xl border border-teal-500/20 shadow-2xl group-hover:border-teal-400/50 transition-all duration-500"> 
+                      <div className="p-4 bg-slate-900/80 rounded-2xl border border-teal-800/50 shadow-xl group-hover:shadow-teal-500/20 transition-all">
+                        {s.icon}
+                      </div>
+                      <h3 className="text-xl font-bold text-white tracking-tight">{s.title}</h3>
+                      <p className="text-teal-100/50 text-xs leading-relaxed">{s.desc}</p>
+                      <span className="text-[10px] text-teal-400 uppercase tracking-widest font-bold pt-4 opacity-50">Details</span>
+                    </div>
+                  }
+                  back={
+                    <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 bg-teal-950/90 backdrop-blur-2xl rounded-3xl border border-teal-500/40">
+                      <p className="text-teal-50 text-xs leading-relaxed italic">"{s.details}"</p>
+                      <a href="mailto:nishat.sarker@uq.net.au" className="mt-4 px-6 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-full text-[10px] font-bold shadow-lg" onClick={(e) => e.stopPropagation()}>Inquire Now</a>
+                    </div>
+                  }
+                />
+              </div>
+            ))}
+          </div>
+
         </div>
 
-        {/* The Arrow pointing to Knowledge Hub */}
-        <div className="flex flex-col items-center gap-3 slide-up">
+        {/* Navigation Arrow */}
+        <div className="mt-20 flex flex-col items-center gap-3">
           <p className="text-[10px] uppercase tracking-[0.3em] text-teal-500 font-bold">Knowledge Hub</p>
           <a href="#knowledge-hub" className="p-3 rounded-full border border-teal-500/20 bg-teal-500/5 hover:bg-teal-500/20 transition-all animate-bounce">
             <IconChevronDown size={28} className="text-teal-400" />
