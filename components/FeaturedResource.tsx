@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Download, CheckCircle, Mail, Terminal, BookOpen, Library, Youtube, PlayCircle, Code2 } from 'lucide-react';
+// ADDED ArrowRight to this list vvv
+import { Download, CheckCircle, Mail, Terminal, BookOpen, Library, Youtube, PlayCircle, Code2, ArrowRight } from 'lucide-react';
 
 export default function FeaturedResource() {
   const [email, setEmail] = useState('');
