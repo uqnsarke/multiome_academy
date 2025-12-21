@@ -43,7 +43,7 @@ export default function ServicesSection() {
       <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4 slide-up">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400 animate-text-shimmer">
               Expert Services
             </span>
           </h2>
@@ -52,25 +52,31 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        {/* --- THE GRID FIX --- */}
-        {/* Added h-auto and min-h-[400px] to ensure it doesn't collapse */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl mx-auto mb-20 min-h-[400px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl mx-auto mb-20">
           {services.map((s, i) => (
-            <div key={i} onClick={() => setFlip(flip === i ? null : i)} className="slide-up h-full">
+            <div key={i} onClick={() => setFlip(flip === i ? null : i)} className="slide-up">
               <ServiceCard
                 flipped={flip === i}
                 front={
-                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 glass rounded-2xl border border-white/5"> 
-                    <div className="p-4 bg-slate-900 rounded-2xl border border-slate-700">{s.icon}</div>
-                    <h3 className="text-2xl font-bold">{s.title}</h3>
-                    <p className="text-slate-400 text-sm">{s.desc}</p>
+                  /* RESTORED GLASS EFFECT HERE */
+                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 glass backdrop-blur-md rounded-2xl border border-white/10 group-hover:border-indigo-500/50 transition-all shadow-2xl"> 
+                    <div className="p-4 bg-slate-900 rounded-2xl border border-slate-700 shadow-xl shadow-indigo-500/10">{s.icon}</div>
+                    <h3 className="text-2xl font-bold text-white tracking-tight">{s.title}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">{s.desc}</p>
                     <span className="text-[10px] text-indigo-400 uppercase tracking-widest font-bold pt-2">Details</span>
                   </div>
                 }
                 back={
-                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 bg-indigo-950/90 backdrop-blur-md rounded-2xl border border-indigo-500/30">
+                  /* RESTORED INDIGO BACK EFFECT HERE */
+                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 bg-indigo-950/90 backdrop-blur-xl rounded-2xl border border-indigo-500/50 shadow-2xl">
                     <p className="text-indigo-100 text-sm leading-relaxed italic">"{s.details}"</p>
-                    <a href="mailto:nishat.sarker@uq.net.au" className="mt-4 px-6 py-2 bg-indigo-500 text-white rounded-full text-xs font-bold" onClick={(e) => e.stopPropagation()}>Inquire</a>
+                    <a 
+                      href="mailto:nishat.sarker@uq.net.au" 
+                      className="mt-4 px-6 py-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-full text-xs font-bold shadow-lg shadow-indigo-500/20" 
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Inquire Now
+                    </a>
                   </div>
                 }
               />
