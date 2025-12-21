@@ -2,28 +2,28 @@
 
 import React from 'react';
 
-// --- ADD THIS INTERFACE ---
 interface ServiceCardProps {
-  front: React.ReactNode; // Content for the front of the card
-  back: React.ReactNode;  // Content for the back of the card
-  flipped: boolean;       // Is the card currently flipped?
+  front: React.ReactNode; 
+  back: React.ReactNode;  
+  flipped: boolean;       
 }
 
 export default function ServiceCard({ front, back, flipped }: ServiceCardProps) {
   return (
-    <div className="relative w-full h-72 perspective cursor-pointer">
+    /* Increased height to h-80 (320px) to better fit the biological descriptions */
+    <div className="relative w-full h-80 perspective cursor-pointer group">
       <div 
-        className={`relative w-full h-full duration-700 transform-style-preserve-3d ${
+        className={`relative w-full h-full duration-700 transform-style-3d ${
           flipped ? 'rotate-y-180' : ''
         }`}
       >
-        {/* Front Side */}
-        <div className="absolute w-full h-full backface-hidden bg-slate-800 rounded-xl shadow-xl overflow-hidden border border-slate-700">
+        {/* Front Side - Glassmorphism applied */}
+        <div className="absolute w-full h-full backface-hidden glass rounded-2xl shadow-2xl overflow-hidden border border-white/10 group-hover:border-indigo-500/50 transition-colors">
           {front}
         </div>
 
-        {/* Back Side */}
-        <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-indigo-900/90 rounded-xl shadow-xl overflow-hidden border border-indigo-500">
+        {/* Back Side - Indigo theme */}
+        <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-indigo-950/90 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-indigo-500/50">
           {back}
         </div>
       </div>
