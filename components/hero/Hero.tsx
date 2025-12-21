@@ -1,121 +1,102 @@
 'use client';
 
-import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { IconX } from '@tabler/icons-react'; // Need an icon for the close button
+import React, { useState } from 'react';
+import { PlayCircle, FileText, X, ArrowRight } from 'lucide-react';
 
 export default function Hero() {
-  // 1. State to track if the video modal is open
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-black">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 pt-20">
       
-      {/* --- EXISTING STATIC BACKGROUND IMAGE --- */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/hero-multiome.jpeg"  
-          alt="Multiome Cellular Background"
-          fill
-          className="object-cover object-center opacity-80"
-          priority={true}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/90"></div>
+      {/* --- BACKGROUND EFFECTS --- */}
+      {/* 1. Dark Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-black z-0"></div>
+      
+      {/* 2. DNA Background Image (Optional - looks like your screenshot) */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
+         {/* If you have the DNA background image, save it as 'dna-bg.jpg' in public */}
+         <img src="/services-bg.jpg" alt="DNA Background" className="w-full h-full object-cover" />
       </div>
 
-      {/* --- MAIN CONTENT --- */}
-      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+      {/* 3. Teal/Blue Glow (Left) */}
+      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+      
+      {/* 4. Purple Glow (Right) */}
+      <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="container mx-auto px-6 relative z-10 text-center">
         
-        <div className="max-w-6xl space-y-10">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-tight drop-shadow-lg">
-            Single-Cell Multiomics: <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-              From Data to Mechanism
-            </span>
-          </h1>
-          
-          {/* Animated Text Lines */}
-          <div className="text-xl md:text-2xl text-slate-100 font-medium space-y-2 leading-relaxed drop-shadow-md overflow-hidden">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            >
-              Bridge the gap between transcriptomics and chromatin accessibility.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-            >
-              Master the integration pipelines to unlock deeper biological insights.
-            </motion.p>
-          </div>
-          
-          {/* --- BUTTONS --- */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center pt-6"
-          >
-            {/* CHANGED: This is now a <button> that opens the video modal */}
-            <button 
-              onClick={() => setIsVideoOpen(true)}
-              className="px-10 py-4 bg-purple-600 hover:bg-purple-500 text-white text-lg rounded-full font-bold shadow-[0_0_30px_-5px_rgba(168,85,247,0.6)] transition-all hover:scale-105"
-            >
-              Start Learning
-            </button>
+        {/* --- MAIN HEADLINE --- */}
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+          Single-Cell Multiomics: <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+            From Data to Mechanism
+          </span>
+        </h1>
 
-            <Link href="#resources" className="px-10 py-4 bg-slate-800/90 hover:bg-slate-700 text-white text-lg rounded-full font-bold border border-slate-600 backdrop-blur-md transition-all hover:scale-105">
-              Get Resources
-            </Link>
-          </motion.div>
+        {/* --- SUBTITLE --- */}
+        <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+          Bridge the gap between transcriptomics and chromatin accessibility. <br className="hidden md:block" />
+          Master the integration pipelines to unlock deeper biological insights.
+        </p>
+
+        {/* --- BUTTONS --- */}
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+          
+          {/* 1. START LEARNING (Triggers Video) */}
+          <button 
+            onClick={() => setIsVideoOpen(true)}
+            className="px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-full transition-all shadow-lg shadow-purple-600/25 flex items-center gap-2 group"
+          >
+            Start Learning
+            <PlayCircle size={20} className="group-hover:scale-110 transition-transform"/>
+          </button>
+
+          {/* 2. GET RESOURCES (Scrolls to Resource Section) */}
+          <a 
+            href="#resources"
+            className="px-8 py-4 bg-slate-800/50 hover:bg-slate-800 text-slate-200 font-bold rounded-full border border-slate-700 hover:border-slate-600 transition-all flex items-center gap-2"
+          >
+            Get Resources
+            <FileText size={20} />
+          </a>
         </div>
+
       </div>
 
-      {/* --- VIDEO MODAL POPUP --- */}
-      <AnimatePresence>
-        {isVideoOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            // Backdrop styling
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
-            onClick={() => setIsVideoOpen(false)} // Close modal when clicking outside video
-          >
-             {/* Close Button (X) */}
-            <button 
-              onClick={() => setIsVideoOpen(false)} 
-              className="absolute top-6 right-6 text-slate-300 hover:text-white transition z-10 p-2 bg-black/50 rounded-full"
-            >
-              <IconX size={32} />
-            </button>
+      {/* --- VIDEO MODAL (Pop-up) --- */}
+      {isVideoOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-300">
+          
+          {/* Overlay (Click to close) */}
+          <div className="absolute inset-0" onClick={() => setIsVideoOpen(false)}></div>
+          
+          <div className="relative w-full max-w-5xl bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300">
+            
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b border-slate-800">
+              <h3 className="text-white font-semibold flex items-center gap-2">
+                <PlayCircle size={18} className="text-purple-400"/>
+                Integration: Revealing the Inevitable
+              </h3>
+              <button onClick={() => setIsVideoOpen(false)} className="text-slate-400 hover:text-white transition-colors">
+                <X size={24} />
+              </button>
+            </div>
 
-            {/* Video Container */}
-            <motion.div 
-               initial={{ scale: 0.9, opacity: 0 }}
-               animate={{ scale: 1, opacity: 1 }}
-               exit={{ scale: 0.9, opacity: 0 }}
-               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-               className="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_-10px_rgba(168,85,247,0.5)] border border-purple-500/30"
-               onClick={(e) => e.stopPropagation()} // Prevent clicks on video from closing modal
-            >
-              <video
-                src="/dna-loop.mp4"
-                autoPlay
-                controls // Added controls so user can pause/adjust volume
-                className="w-full h-full object-cover"
-              >
+            {/* Video Player */}
+            <div className="relative aspect-video bg-black">
+               {/* Make sure 'integration-intro.mp4' is in your /public folder */}
+              <video controls autoPlay className="w-full h-full">
+                <source src="/integration-intro.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+
+          </div>
+        </div>
+      )}
 
     </section>
   );
