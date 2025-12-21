@@ -8,10 +8,10 @@ export default function Hero() {
       {/* 1. BACKGROUND IMAGE */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero/hero-multiome.jpeg" 
+          src="/hero-multiome.jpeg"  // <--- UPDATED: Points to root of public folder
           alt="Multiome Cellular Background"
           fill
-          className="object-cover object-center opacity-40" // Increased opacity slightly to make it visible
+          className="object-cover object-center opacity-40"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black"></div>
@@ -28,7 +28,6 @@ export default function Hero() {
             </span>
           </h1>
           
-          {/* UPDATED TEXT: Shorter, punchier, 2 lines max */}
           <p className="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Bridge the gap between transcriptomics and chromatin accessibility.<br className="hidden md:block" />
             Master the integration pipelines to unlock deeper biological insights.
