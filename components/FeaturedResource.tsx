@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-// ADDED ArrowRight to this list vvv
 import { Download, CheckCircle, Mail, Terminal, BookOpen, Library, Youtube, PlayCircle, Code2, ArrowRight } from 'lucide-react';
 
 export default function FeaturedResource() {
@@ -157,7 +156,12 @@ export default function FeaturedResource() {
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             
             {/* PATH A: BEGINNER */}
-            <a href="https://www.youtube.com/@nishat_BioAI" target="_blank" rel="noreferrer" className="group relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 p-8 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1">
+            <a 
+              href="https://www.youtube.com/@nishat_BioAI" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="group relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 p-8 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1"
+            >
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Code2 size={120} />
               </div>
@@ -172,7 +176,12 @@ export default function FeaturedResource() {
             </a>
 
             {/* PATH B: ADVANCED */}
-            <a href="https://www.youtube.com/@nishat_BioAI" target="_blank" rel="noreferrer" className="group relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 p-8 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1">
+            <a 
+              href="https://www.youtube.com/@nishat_BioAI" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="group relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 p-8 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1"
+            >
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Terminal size={120} />
               </div>
