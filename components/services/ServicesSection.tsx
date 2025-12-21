@@ -7,6 +7,7 @@ import { IconChartBar, IconCode, IconDatabase, IconPresentation, IconChevronDown
 export default function ServicesSection() {
   const [flip, setFlip] = useState<number | null>(null);
 
+  // These are your 4 core services
   const services = [
     {
       title: "Single-Cell Analysis",
@@ -37,30 +38,31 @@ export default function ServicesSection() {
   return (
     <section id="services" className="py-24 bg-[#020617] text-white relative overflow-hidden scroll-mt-20">
       
-      {/* Background Teal Glow */}
+      {/* Background Glows to fix the "too dark" issue */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.06)_0%,transparent_70%)] pointer-events-none"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         
         {/* Header Section */}
         <div className="mb-20 text-center md:text-left">
-          <h2 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight slide-up">
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-white to-cyan-300">
               Expert Services
             </span>
           </h2>
-          <p className="text-teal-100/50 max-w-2xl text-lg slide-up [animation-delay:200ms]">
+          <p className="text-teal-100/50 max-w-2xl text-lg">
             Technical pipelines and analysis support for multiomics research.
           </p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-16 items-start">
           
-          {/* --- LEFT SIDE: ANIMATED DNA GRAPHIC --- */}
-          <div className="lg:sticky lg:top-32 w-full lg:w-1/3 slide-up [animation-delay:400ms]">
+          {/* --- LEFT SIDE: THE ANIMATED DNA GRAPHIC --- */}
+          {/* This is no longer a card, but a dedicated graphic zone */}
+          <div className="lg:sticky lg:top-32 w-full lg:w-1/3">
             <div className="relative aspect-square rounded-[2.5rem] border border-teal-500/20 bg-teal-950/10 backdrop-blur-md overflow-hidden flex flex-col items-center justify-center p-8">
               
-              {/* Floating DNA Strands Animation */}
+              {/* This div triggers the .animate-helix and .helix-strand classes from your globals.css */}
               <div className="flex gap-2 mb-8 animate-helix">
                 {[...Array(8)].map((_, i) => (
                   <div 
@@ -82,15 +84,14 @@ export default function ServicesSection() {
                 </p>
               </div>
 
-              {/* Decorative Corner Glow */}
               <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-teal-500/20 rounded-full blur-3xl"></div>
             </div>
           </div>
 
-          {/* --- RIGHT SIDE: SERVICES GRID --- */}
+          {/* --- RIGHT SIDE: THE 4 SERVICE CARDS --- */}
           <div className="w-full lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
             {services.map((s, i) => (
-              <div key={i} onClick={() => setFlip(flip === i ? null : i)} className="slide-up" style={{ animationDelay: `${(i+4)*100}ms` }}>
+              <div key={i} onClick={() => setFlip(flip === i ? null : i)}>
                 <ServiceCard
                   flipped={flip === i}
                   front={
@@ -116,7 +117,7 @@ export default function ServicesSection() {
 
         </div>
 
-        {/* Knowledge Hub Arrow */}
+        {/* Arrow to Knowledge Hub */}
         <div className="mt-20 flex flex-col items-center gap-3">
           <p className="text-[10px] uppercase tracking-[0.3em] text-teal-500 font-bold">Knowledge Hub</p>
           <a href="#knowledge-hub" className="p-3 rounded-full border border-teal-500/20 bg-teal-500/5 hover:bg-teal-500/20 transition-all animate-bounce">
