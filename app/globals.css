@@ -55,7 +55,7 @@
 }
 
 /* ---------------------------------------
-   Utilities
+   Utilities & Animations
 ---------------------------------------- */
 @layer utilities {
   .text-muted {
@@ -83,12 +83,18 @@
     transform: rotateY(180deg);
   }
 
-  /* Glow */
+  /* Glow effects for Hero and Cards */
   .glow-soft {
     box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
   }
 
-  /* Animations */
+  /* Custom Text Shimmer Animation */
+  .animate-text-shimmer {
+    background-size: 200% auto;
+    animation: text-shimmer 4s linear infinite;
+  }
+
+  /* Standard Fade/Slide */
   .fade-in {
     animation: fadeIn 0.8s ease-out both;
   }
@@ -101,12 +107,41 @@
 /* ---------------------------------------
    Keyframes
 ---------------------------------------- */
+
+/* Gradient Text Shimmer */
+@keyframes text-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Fade in for badges/images */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
+/* Entrance slide for headlines */
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Pulsing for Live Preview badge */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
