@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <Image
           // Note: ensuring this matches your latest upload (.jpg)
-          src="/hero-multiome.jpg"  
+          src="/hero-multiome.jpeg"  
           alt="Multiome Cellular Background"
           fill
           // Changed opacity-40 to opacity-80 for much higher visibility
