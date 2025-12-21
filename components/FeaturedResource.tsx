@@ -4,23 +4,38 @@ import { useState } from 'react';
 
 export default function FeaturedResource() {
   const [email, setEmail] = useState('');
+  const [isDownloaded, setIsDownloaded] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Email captured: ${email}`);
+    
+    // 1. Log the email (Later you can connect this to a database)
+    console.log(`Capturing email: ${email}`);
+
+    // 2. TRIGGER THE PNG DOWNLOAD
+    const link = document.createElement('a');
+    // MAKE SURE THIS MATCHES YOUR FILE NAME IN 'public' FOLDER
+    link.href = '/scanpy-cheat-sheet.png'; 
+    link.download = 'Nishat_Scanpy_CheatSheet.png'; // Name user sees when saving
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // 3. Show success message
+    setIsDownloaded(true);
+    setEmail(''); 
   };
 
   return (
     <section id="resources" className="py-24 bg-gradient-to-b from-slate-950 to-black relative overflow-hidden">
        
-       {/* Background Decoration: Faint grid & Glows */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="bg-slate-900/40 border border-slate-700/50 rounded-3xl backdrop-blur-md grid md:grid-cols-2 gap-12 p-8 md:p-12 items-center shadow-2xl">
           
-          {/* --- LEFT: TEXT CONTENT --- */}
+          {/* --- LEFT: CONTENT --- */}
           <div className="space-y-8">
             <div>
                <span className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 text-cyan-300 px-3 py-1 rounded-full text-sm font-medium border border-cyan-500/20 mb-4 shadow-[0_0_15px_-3px_rgba(6,182,212,0.3)]">
@@ -52,35 +67,42 @@ export default function FeaturedResource() {
               </li>
             </ul>
 
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 pt-2">
-              <div className="relative flex-grow">
-                <Mail className="absolute left-3 top-3.5 h-5 w-5 text-slate-400" />
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-purple-500 text-white outline-none transition-all placeholder:text-slate-500"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <button type="submit" className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-lg flex items-center justify-center space-x-2 whitespace-nowrap transition shadow-lg shadow-purple-900/20">
-                <Download className="w-5 h-5" />
-                <span>Download PDF</span>
-              </button>
-            </form>
+            {/* DOWNLOAD FORM */}
+            {isDownloaded ? (
+                <div className="p-6 bg-green-500/10 border border-green-500/30 rounded-xl text-green-300 animate-fade-in">
+                    <p className="font-bold text-lg flex items-center gap-2">
+                        <CheckCircle /> Download Started!
+                    </p>
+                    <p className="text-sm mt-2 opacity-80">Check your downloads folder. Thanks for joining!</p>
+                    <button onClick={() => setIsDownloaded(false)} className="text-xs underline mt-4 hover:text-white">Reset form</button>
+                </div>
+             ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 pt-2">
+                  <div className="relative flex-grow">
+                    <Mail className="absolute left-3 top-3.5 h-5 w-5 text-slate-400" />
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      className="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-purple-500 text-white outline-none transition-all placeholder:text-slate-500"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <button type="submit" className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-lg flex items-center justify-center space-x-2 whitespace-nowrap transition shadow-lg shadow-purple-900/20">
+                    <Download className="w-5 h-5" />
+                    <span>Download Cheat Sheet</span>
+                  </button>
+                </form>
+             )}
           </div>
 
-          {/* --- RIGHT: THE VISUAL (Now styled as a Code Editor Window) --- */}
+          {/* --- RIGHT: VIDEO WINDOW --- */}
           <div className="relative group perspective-1000">
-            
-            {/* Animated Glow Behind */}
             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-
-            {/* The "Window" Container */}
             <div className="relative bg-[#1e1e1e] rounded-xl overflow-hidden border border-slate-700/50 shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.01]">
               
-              {/* Window Header (Mac/VS Code Style) */}
+              {/* Header Bar */}
               <div className="h-9 bg-[#2d2d2d] border-b border-white/5 flex items-center px-4 justify-between">
                 <div className="flex space-x-2">
                   <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
@@ -91,10 +113,10 @@ export default function FeaturedResource() {
                   <FileCode size={12} className="text-blue-400" />
                   scanpy_pipeline.ipynb
                 </div>
-                <div className="w-8"></div> {/* Spacer for centering */}
+                <div className="w-8"></div> 
               </div>
 
-              {/* Window Content (Video) */}
+              {/* Video Content */}
               <div className="relative aspect-[4/3] md:aspect-square lg:aspect-[4/3]">
                 <video
                   autoPlay
@@ -105,12 +127,8 @@ export default function FeaturedResource() {
                 >
                   <source src="/dna-loop.mp4" type="video/mp4" />
                 </video>
-                
-                {/* Code Overlay Effect (Grid + Gradient) */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1e1e1e] via-transparent to-transparent"></div>
                 <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20 bg-[length:20px_20px]"></div>
-
-                {/* Floating "Preview" Badge */}
                 <div className="absolute bottom-6 right-6 bg-slate-900/90 backdrop-blur border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-3 shadow-xl">
                     <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
                     <span className="text-xs font-mono text-slate-300">Live Preview</span>
