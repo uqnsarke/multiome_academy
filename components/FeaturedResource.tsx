@@ -8,7 +8,7 @@ export default function FeaturedResource() {
   const [isDownloaded, setIsDownloaded] = useState(false);
   const [activeVideo, setActiveVideo] = useState(0);
 
-  // Both videos are stored here in this array
+  // Both video locations are correctly set here
   const videoPlaylist = [
     { id: 0, title: 'scanpy_pipeline.ipynb', src: '/dna-loop.mp4', label: 'Pipeline' },
     { id: 1, title: 'scanpy_output.mp4', src: '/scanpy_output.mp4', label: 'Results' }
@@ -92,13 +92,13 @@ export default function FeaturedResource() {
                   <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
                 </div>
                 
-                {/* Tabs to switch between videos */}
+                {/* Visual Tab Buttons */}
                 <div className="flex gap-4">
                   {videoPlaylist.map((video, index) => (
                     <button 
                       key={video.id}
                       onClick={() => setActiveVideo(index)}
-                      className={`text-[10px] font-mono flex items-center gap-2 transition-colors ${activeVideo === index ? 'text-blue-400 underline underline-offset-4' : 'text-slate-500 hover:text-slate-300'}`}
+                      className={`text-[10px] font-mono flex items-center gap-2 transition-all px-2 py-1 rounded ${activeVideo === index ? 'text-blue-400 bg-blue-400/10 border border-blue-400/20' : 'text-slate-500 hover:text-slate-300'}`}
                     >
                       <FileCode size={12} />
                       {video.label}
@@ -109,7 +109,7 @@ export default function FeaturedResource() {
               </div>
 
               <div className="relative aspect-[4/3]">
-                {/* The Video key ensures it refreshes when the tab changes */}
+                {/* Key ensures video element reloads for the new source */}
                 <video 
                   key={videoPlaylist[activeVideo].src} 
                   autoPlay 
@@ -121,6 +121,7 @@ export default function FeaturedResource() {
                   <source src={videoPlaylist[activeVideo].src} type="video/mp4" />
                 </video>
                 
+                {/* Dynamic Overlay Title */}
                 <div className="absolute top-6 left-6 bg-black/50 backdrop-blur-md px-3 py-1 rounded border border-white/10 text-[10px] font-mono text-blue-300">
                     {videoPlaylist[activeVideo].title}
                 </div>
