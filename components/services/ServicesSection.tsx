@@ -35,20 +35,18 @@ export default function ServicesSection() {
   ];
 
   return (
-    // CHANGED: Added 'relative overflow-hidden' to contain the background glows
-    <section className="py-24 bg-black text-white relative overflow-hidden">
+    // CHANGED: 'bg-slate-950' is slightly lighter than pure black, allowing glows to show.
+    <section className="py-24 bg-slate-950 text-white relative overflow-hidden">
       
-      {/* --- BACKGROUND GLOW EFFECTS (NEW) --- */}
-      {/* Purple Glow (Top Left) */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-900/20 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+      {/* --- BACKGROUND GLOW EFFECTS (High Visibility) --- */}
       
-      {/* Cyan Glow (Bottom Right) */}
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-900/10 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
+      {/* Purple Glow: Increased opacity and used lighter purple */}
+      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-purple-600/30 rounded-full blur-[120px] -translate-x-1/3 -translate-y-1/3 pointer-events-none z-0 animate-pulse"></div>
       
-      {/* Subtle Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03] pointer-events-none"></div>
-
-
+      {/* Cyan Glow: Increased opacity and used lighter cyan */}
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-cyan-500/20 rounded-full blur-[120px] translate-x-1/3 translate-y-1/3 pointer-events-none z-0 animate-pulse"></div>
+      
+      {/* --- CONTENT (z-10 ensures it sits ON TOP of the glow) --- */}
       <div className="relative z-10 text-center mb-16">
         <h2 className="text-3xl md:text-5xl font-bold mb-4">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
@@ -66,8 +64,9 @@ export default function ServicesSection() {
             <ServiceCard
               flipped={flip === i}
               front={
-                <div className="flex flex-col items-center justify-center h-full space-y-4 p-6 text-center backdrop-blur-sm"> {/* Added backdrop-blur */}
-                  <div className="p-4 bg-slate-900/80 rounded-full border border-slate-800 shadow-lg shadow-indigo-500/10">{s.icon}</div>
+                // Added backdrop-blur to make the card semi-transparent
+                <div className="flex flex-col items-center justify-center h-full space-y-4 p-6 text-center backdrop-blur-sm bg-slate-900/40 rounded-xl border border-white/5"> 
+                  <div className="p-4 bg-slate-900 rounded-full border border-slate-700 shadow-lg shadow-indigo-500/20">{s.icon}</div>
                   <h3 className="text-2xl font-bold text-slate-100">{s.title}</h3>
                   <p className="text-slate-400 text-sm">{s.desc}</p>
                   <span className="text-xs text-indigo-400 mt-4 uppercase tracking-wider font-semibold group-hover:text-indigo-300 transition-colors">
@@ -76,7 +75,7 @@ export default function ServicesSection() {
                 </div>
               }
               back={
-                <div className="flex flex-col items-center justify-center h-full space-y-4 p-8 text-center bg-indigo-950/40 backdrop-blur-md border border-indigo-500/20">
+                <div className="flex flex-col items-center justify-center h-full space-y-4 p-8 text-center bg-indigo-950/80 backdrop-blur-md border border-indigo-500/30 rounded-xl">
                   <h3 className="text-xl font-bold text-white mb-2">{s.title}</h3>
                   <p className="text-slate-200 leading-relaxed text-sm">
                     {s.details}
