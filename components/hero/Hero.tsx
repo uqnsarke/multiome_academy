@@ -7,13 +7,12 @@ export default function Hero() {
       {/* --- BACKGROUND IMAGE --- */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/assets/hero-multiome.jpeg" // <-- UPDATED FILENAME
+          src="/hero/hero-multiome.jpeg"  // <--- UPDATED PATH
           alt="Multiome Cellular Background"
           fill
-          className="object-cover object-center opacity-30" // Increased opacity slightly for better visibility
+          className="object-cover object-center opacity-30"
           priority
         />
-        {/* Stronger Gradient Overlay to ensure text readability against the detailed image */}
         <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black"></div>
       </div>
 
@@ -40,14 +39,14 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Diagram Content (Image 3 from previous turn) */}
-        {/* Make sure image_10.png is saved in /public/assets/ */}
+        {/* Diagram Content */}
+        {/* Make sure 'image_10.png' is ALSO inside the 'public/hero/' folder! */}
         <div className="hidden md:block relative h-[500px] w-full animate-fade-in-up delay-200">
            <Image
-            src="/assets/image_10.png" 
+            src="/hero/image_10.png"   // <--- UPDATED PATH (assuming you moved the diagram here too)
             alt="Multiome Integration Diagram"
             fill
-            className="object-contain drop-shadow-[0_0_25px_rgba(168,85,247,0.4)]" // Added a purple glow
+            className="object-contain drop-shadow-[0_0_25px_rgba(168,85,247,0.4)]"
           />
         </div>
       </div>
