@@ -50,7 +50,8 @@ export default function AboutSection() {
               
               <div>
                 <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-3">
-                  Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-cyan-300 animate-text-shimmer">Nishat.</span>
+                  {/* RESTORED: Purple to Emerald Gradient Animation */}
+                  Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400 animate-text-shimmer">Nishat.</span>
                 </h2>
                 
                 {/* ID Chips */}
