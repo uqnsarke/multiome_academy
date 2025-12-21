@@ -7,19 +7,13 @@ import { IconChartBar, IconCode, IconDatabase, IconPresentation, IconChevronDown
 export default function ServicesSection() {
   const [flip, setFlip] = useState<number | null>(null);
 
-  // These are your 4 core services
+  // REDUCED TO 3 SERVICES: Removing the one used for the left-side graphic
   const services = [
     {
       title: "Single-Cell Analysis",
       icon: <IconChartBar size={32} className="text-teal-400" />,
       desc: "Full pipeline processing: QC, Clustering, and Marker Identification.",
       details: "End-to-end processing of 10x Genomics scRNA-seq and scATAC-seq data using Scanpy, Seurat, or Signac."
-    },
-    {
-      title: "Multiomics Integration",
-      icon: <IconDatabase size={32} className="text-emerald-400" />,
-      desc: "Merging RNA + ATAC seq data for deeper insights.",
-      details: "Modalities integrated using Seurat WNN or MultiVI, with regulatory network inference via SCENIC+."
     },
     {
       title: "Custom Visuals",
@@ -57,12 +51,11 @@ export default function ServicesSection() {
 
         <div className="flex flex-col lg:flex-row gap-16 items-start">
           
-          {/* --- LEFT SIDE: THE ANIMATED DNA GRAPHIC --- */}
-          {/* This is no longer a card, but a dedicated graphic zone */}
+          {/* --- LEFT SIDE: THE ANIMATED DNA GRAPHIC (NON-CLICKABLE) --- */}
           <div className="lg:sticky lg:top-32 w-full lg:w-1/3">
-            <div className="relative aspect-square rounded-[2.5rem] border border-teal-500/20 bg-teal-950/10 backdrop-blur-md overflow-hidden flex flex-col items-center justify-center p-8">
+            <div className="relative aspect-square rounded-[2.5rem] border border-teal-500/20 bg-teal-950/10 backdrop-blur-md overflow-hidden flex flex-col items-center justify-center p-8 shadow-2xl">
               
-              {/* This div triggers the .animate-helix and .helix-strand classes from your globals.css */}
+              {/* DNA Helix Animation */}
               <div className="flex gap-2 mb-8 animate-helix">
                 {[...Array(8)].map((_, i) => (
                   <div 
@@ -78,7 +71,7 @@ export default function ServicesSection() {
                   <span className="h-1.5 w-1.5 rounded-full bg-teal-400 animate-pulse"></span>
                   Bio-Circuitry
                 </div>
-                <h4 className="text-xl font-bold text-white mb-2">Multiome Integration</h4>
+                <h4 className="text-2xl font-bold text-white mb-2">Multiome Integration</h4>
                 <p className="text-sm text-teal-100/60 leading-relaxed">
                   Mapping transcriptomic signatures to chromatin landscapes with high-fidelity pipelines.
                 </p>
@@ -88,7 +81,7 @@ export default function ServicesSection() {
             </div>
           </div>
 
-          {/* --- RIGHT SIDE: THE 4 SERVICE CARDS --- */}
+          {/* --- RIGHT SIDE: THE REMAINING 3 SERVICE CARDS --- */}
           <div className="w-full lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
             {services.map((s, i) => (
               <div key={i} onClick={() => setFlip(flip === i ? null : i)}>
