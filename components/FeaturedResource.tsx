@@ -41,17 +41,25 @@ export default function FeaturedResource() {
               {/* Left: Text & Email Form */}
               <div className="space-y-8">
                 <div>
-                   <span className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 text-cyan-300 px-3 py-1 rounded-full text-sm font-medium border border-cyan-500/20 mb-4 shadow-[0_0_15px_-3px_rgba(6,182,212,0.3)]">
-                      <Terminal size={14} />
+                   {/* BRIGHTER BADGE */}
+                   <span className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30 mb-6 shadow-[0_0_15px_-3px_rgba(6,182,212,0.3)] uppercase tracking-wider">
+                      <Terminal size={12} />
                       <span>Free Featured Resource</span>
                    </span>
-                  <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                  
+                  {/* FANCY HEADLINE */}
+                  <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
                     Stop Googling Syntax. <br/>
-                    <span className="text-slate-400">Get the Ultimate Guide.</span>
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400">
+                      Get the Ultimate Guide.
+                    </span>
                   </h2>
+                  
+                  {/* FANCY DESCRIPTION */}
                   <p className="text-slate-300 text-lg leading-relaxed">
-                    The entire single-cell analysis pipeline in Python, condensed into one printable reference. 
-                    Focus on the biology, not the boilerplate.
+                    The entire single-cell analysis pipeline in <span className="text-yellow-400 font-bold">Python</span>, 
+                    condensed into one printable reference. <br className="hidden md:block"/>
+                    Focus on the <span className="text-emerald-400 font-bold">biology</span>, not the boilerplate.
                   </p>
                 </div>
 
@@ -94,7 +102,6 @@ export default function FeaturedResource() {
                   </div>
                   <div className="relative aspect-[4/3]">
                     <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-90">
-                      {/* Make sure 'dna-loop.mp4' is in your public folder */}
                       <source src="/dna-loop.mp4" type="video/mp4" />
                     </video>
                   </div>
@@ -142,7 +149,7 @@ export default function FeaturedResource() {
         </div>
 
         {/* =========================================================
-            SECTION 3: START LEARNING (Curated Paths)
+            SECTION 3: START LEARNING (YouTube Links)
            ========================================================= */}
         <div className="relative">
           <div className="text-center mb-12">
@@ -170,7 +177,7 @@ export default function FeaturedResource() {
                 <h3 className="text-2xl font-bold text-white mb-2">Python for Biologists</h3>
                 <p className="text-slate-400 mb-6 text-sm">New to coding? Learn Python syntax, Pandas, and plotting from scratch.</p>
                 <span className="inline-flex items-center text-white font-bold group-hover:text-cyan-400 transition-colors">
-                  <PlayCircle className="mr-2" size={20} /> Watch Playlist
+                  <PlayCircle className="mr-2" size={20} /> Visit Channel
                 </span>
               </div>
             </a>
@@ -190,7 +197,7 @@ export default function FeaturedResource() {
                 <h3 className="text-2xl font-bold text-white mb-2">Single-Cell Multiomics</h3>
                 <p className="text-slate-400 mb-6 text-sm">Deep learning integration, batch correction, and trajectory inference.</p>
                 <span className="inline-flex items-center text-white font-bold group-hover:text-purple-400 transition-colors">
-                  <PlayCircle className="mr-2" size={20} /> Watch Playlist
+                  <PlayCircle className="mr-2" size={20} /> Visit Channel
                 </span>
               </div>
             </a>
