@@ -66,23 +66,6 @@
     @apply border-white/10;
   }
 
-  /* 3D utilities */
-  .perspective {
-    perspective: 1200px;
-  }
-
-  .transform-style-preserve-3d {
-    transform-style: preserve-3d;
-  }
-
-  .backface-hidden {
-    backface-visibility: hidden;
-  }
-
-  .rotate-y-180 {
-    transform: rotateY(180deg);
-  }
-
   /* Glow effects for Hero and Cards */
   .glow-soft {
     box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
@@ -102,20 +85,31 @@
   .slide-up {
     animation: slideUp 0.8s ease-out both;
   }
+
+  /* Cinematic Background Zoom */
+  .animate-slow-zoom {
+    animation: slow-zoom 20s ease-in-out infinite;
+  }
 }
 
 /* ---------------------------------------
    Keyframes
 ---------------------------------------- */
 
+/* Background Image Zoom */
+@keyframes slow-zoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
 /* Gradient Text Shimmer */
 @keyframes text-shimmer {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 200% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
 
 /* Fade in for badges/images */
