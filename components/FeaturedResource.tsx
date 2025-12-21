@@ -8,6 +8,7 @@ export default function FeaturedResource() {
   const [isDownloaded, setIsDownloaded] = useState(false);
   const [activeVideo, setActiveVideo] = useState(0);
 
+  // Restored: Dual-video playlist for the terminal interface
   const videoPlaylist = [
     { id: 0, title: 'scanpy_pipeline.ipynb', src: '/dna-loop.mp4', label: 'The Workflow' },
     { id: 1, title: 'scanpy_output.mp4', src: '/scanpy_output.mp4', label: 'Final Output' }
@@ -34,6 +35,7 @@ export default function FeaturedResource() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="bg-slate-900/40 border border-slate-700/50 rounded-3xl backdrop-blur-md grid md:grid-cols-2 gap-12 p-8 md:p-12 items-center shadow-2xl">
             
+            {/* --- LEFT: YOUR PREFERRED COPY STYLE --- */}
             <div className="space-y-8">
               <div>
                 <span className="inline-flex items-center space-x-2 bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full text-[10px] font-bold border border-emerald-500/30 mb-6 uppercase tracking-wider">
@@ -52,19 +54,21 @@ export default function FeaturedResource() {
                   The <span className="text-white font-semibold italic">Scanpy Blueprint</span>: A full end-to-end single-cell workflow in <span className="text-yellow-400 font-bold">Python</span>, distilled into a concise, printable reference.
                 </p>
 
+                {/* Restored: The specific value bullets you liked */}
                 <ul className="mt-8 space-y-4">
-                  {[
-                    "Optimized QC & Normalization thresholds",
-                    "Marker Identification for 20+ cell types",
-                    "Publication-ready UMAP & DotPlot parameters"
-                  ].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-3 text-slate-400 text-sm">
-                      <Zap size={14} className="text-emerald-500" /> {item}
-                    </li>
-                  ))}
+                  <li className="flex items-center gap-3 text-slate-400 text-sm">
+                    <Zap size={14} className="text-emerald-500" /> Optimized QC & Normalization thresholds
+                  </li>
+                  <li className="flex items-center gap-3 text-slate-400 text-sm">
+                    <Zap size={14} className="text-emerald-500" /> Marker Identification for 20+ cell types
+                  </li>
+                  <li className="flex items-center gap-3 text-slate-400 text-sm">
+                    <Zap size={14} className="text-emerald-500" /> Publication-ready UMAP & DotPlot parameters
+                  </li>
                 </ul>
               </div>
 
+              {/* Form Section */}
               {isDownloaded ? (
                 <div className="p-6 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-300 animate-in fade-in zoom-in duration-300">
                   <p className="font-bold text-lg flex items-center gap-2"><CheckCircle /> Success! Your guide is ready.</p>
@@ -88,15 +92,15 @@ export default function FeaturedResource() {
                   </button>
                 </form>
               )}
-              <p className="text-[10px] text-slate-500 italic">Trusted by 500+ researchers globally.</p>
+              <p className="text-[10px] text-slate-500 italic">Spend your time interpreting biology—not rewriting code.</p>
             </div>
 
-            {/* Right Side: Interactive Terminal with Border Glow */}
+            {/* --- RIGHT: INTERACTIVE TABBED TERMINAL --- */}
             <div className="relative group perspective-1000 hidden md:block">
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/30 to-cyan-500/30 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
               <div className="relative bg-[#1e1e1e] rounded-xl overflow-hidden border border-slate-700/50 shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]">
                 
-                {/* MacOS Terminal Header */}
+                {/* Tabs for switching between Pipeline and Results */}
                 <div className="h-10 bg-[#2d2d2d] border-b border-white/5 flex items-center px-4 justify-between">
                   <div className="flex space-x-2">
                     <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
@@ -134,7 +138,7 @@ export default function FeaturedResource() {
                   </div>
 
                   <div className="absolute bottom-6 right-6 bg-slate-900/90 backdrop-blur border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-3 shadow-xl z-20">
-                    <div className="h-2 w-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
                     <span className="text-xs font-mono text-slate-300">Live Simulation</span>
                   </div>
                 </div>
@@ -149,7 +153,7 @@ export default function FeaturedResource() {
         </div>
       </section>
 
-      {/* --- SECTION 2: THE LEARNING HUB (YouTube Cards) --- */}
+      {/* --- SECTION 2: THE LEARNING HUB (YOUTUBE CARDS) --- */}
       <section id="youtube" className="py-24 bg-black border-t border-white/5 relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col items-center text-center mb-16">
@@ -163,7 +167,7 @@ export default function FeaturedResource() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-            {/* Tutorial 1 */}
+            {/* YouTube Card 1 */}
             <a href="https://youtube.com/your-video-link-1" target="_blank" className="group relative block rounded-[2.5rem] overflow-hidden border border-white/10 bg-slate-900/20 hover:border-red-500/40 transition-all duration-500 shadow-2xl">
               <div className="aspect-video relative overflow-hidden">
                 <img src="/yt-thumb-1.jpg" alt="Tutorial" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60 group-hover:opacity-100" />
@@ -180,7 +184,7 @@ export default function FeaturedResource() {
               </div>
             </a>
 
-            {/* Tutorial 2 */}
+            {/* YouTube Card 2 */}
             <a href="https://youtube.com/your-video-link-2" target="_blank" className="group relative block rounded-[2.5rem] overflow-hidden border border-white/10 bg-slate-900/20 hover:border-red-500/40 transition-all duration-500 shadow-2xl">
               <div className="aspect-video relative overflow-hidden">
                 <img src="/yt-thumb-2.jpg" alt="Tutorial" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60 group-hover:opacity-100" />
