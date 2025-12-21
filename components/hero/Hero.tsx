@@ -12,7 +12,7 @@ export default function Hero() {
       {/* --- BACKGROUND IMAGE LAYER --- */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/services-bg.jpg" 
+          src="/hero-multiome.jpeg" 
           alt="DNA Background" 
           className="w-full h-full object-cover opacity-60" // Increased opacity
           onError={(e) => {
