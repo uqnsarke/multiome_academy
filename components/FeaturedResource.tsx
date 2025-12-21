@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { Download, CheckCircle, Mail } from 'lucide-react';
 import { useState } from 'react';
 
@@ -60,16 +59,23 @@ export default function FeaturedResource() {
              <p className="text-sm text-slate-500">Join other bioinformaticians. Unsubscribe anytime.</p>
           </div>
 
-          {/* Right: Image Preview */}
-          {/* Ensure you have an image at /public/assets/image_8.png or update this path! */}
-          <div className="relative h-[400px] md:h-[600px] w-full rounded-xl overflow-hidden border-2 border-slate-700/50 shadow-[0_0_50px_-12px_rgba(168,85,247,0.4)] transform hover:scale-[1.02] transition duration-500">
-            <Image
-              src="/assets/image_8.png"
-              alt="Scanpy Cheat Sheet Preview"
-              fill
-              className="object-cover object-top"
-            />
+          {/* Right: VIDEO PREVIEW (Replacing Image) */}
+          <div className="relative h-[400px] md:h-[500px] w-full rounded-xl overflow-hidden border-2 border-slate-700/50 shadow-[0_0_50px_-12px_rgba(168,85,247,0.4)]">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            >
+              <source src="/dna-loop.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            
+            {/* Optional Overlay to make it look more like a "Preview" */}
+            <div className="absolute inset-0 bg-indigo-500/10 pointer-events-none"></div>
           </div>
+
         </div>
       </div>
     </section>
