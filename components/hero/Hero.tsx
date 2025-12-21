@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { PlayCircle, FileText } from 'lucide-react';
+import { PlayCircle, FileText, ChevronDown } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -12,18 +12,18 @@ export default function Hero() {
         <img 
           src="/hero-multiome.jpeg" 
           alt="Multiomics Hero Figure" 
-          /* Triggers the 20s cinematic zoom from globals.css */
+          /* This triggers the 20s slow-zoom from globals.css */
           className="w-full h-full object-cover opacity-60 animate-slow-zoom"
           onError={(e) => (e.currentTarget.style.display = 'none')}
         />
         
-        {/* Overlays to ensure text contrast and focus */}
+        {/* Fixed Overlays for Contrast (Z-Index 10) */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950 z-10"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-transparent to-slate-950/90 z-10"></div>
       </div>
 
-      {/* --- CONTENT LAYER --- */}
-      <div className="container mx-auto px-6 relative z-20 text-center">
+      {/* --- CONTENT LAYER (Z-Index 20) --- */}
+      <div className="container mx-auto px-6 relative z-20 text-center flex flex-col items-center justify-center min-h-screen">
         
         {/* Academy Badge */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase tracking-widest mb-8 fade-in">
@@ -72,6 +72,16 @@ export default function Hero() {
             Get Resources
           </a>
         </div>
+
+        {/* --- SCROLL DOWN ARROW --- */}
+        <a 
+          href="#resources" 
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 hover:text-cyan-400 transition-colors duration-300 flex flex-col items-center gap-2 fade-in [animation-delay:1500ms]"
+        >
+          <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Scroll</span>
+          <ChevronDown className="animate-bounce" size={24} />
+        </a>
+
       </div>
     </section>
   );
