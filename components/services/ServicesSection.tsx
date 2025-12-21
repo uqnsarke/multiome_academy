@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import ServiceCard from './ServiceCard';
-import { IconChartBar, IconCode, IconDatabase, IconPresentation, IconChevronDown } from '@tabler/icons-react';
+import { IconChartBar, IconCode, IconDatabase, IconPresentation } from '@tabler/icons-react';
 
 export default function ServicesSection() {
   const [flip, setFlip] = useState<number | null>(null);
@@ -10,17 +10,16 @@ export default function ServicesSection() {
   const services = [
     {
       title: "Single-Cell Analysis",
-      icon: <IconChartBar size={40} className="text-teal-400" />,
+      icon: <IconChartBar size={36} className="text-teal-400" />,
       desc: "Full pipeline processing: QC, Clustering, and Marker Identification.",
       details: "End-to-end processing of 10x Genomics scRNA-seq and scATAC-seq data using Scanpy, Seurat, or Signac."
     },
     {
       title: "Multiomics Integration",
-      // Integrated the helix animation directly into the icon slot for this card
       icon: (
-        <div className="flex gap-1 animate-helix h-10 items-center">
+        <div className="flex gap-1 animate-helix h-8 items-center">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="w-1 h-8 bg-teal-400 rounded-full helix-strand" style={{ animationDelay: `${i * 0.15}s` }}></div>
+            <div key={i} className="w-1 h-6 bg-teal-400 rounded-full helix-strand" style={{ animationDelay: `${i * 0.15}s` }}></div>
           ))}
         </div>
       ),
@@ -29,13 +28,13 @@ export default function ServicesSection() {
     },
     {
       title: "Custom Visuals",
-      icon: <IconPresentation size={40} className="text-cyan-400" />,
+      icon: <IconPresentation size={36} className="text-cyan-400" />,
       desc: "Figures grounded in rigorous statistical analysis.",
       details: "Differential expression, pathway enrichment, and publication-ready volcano and dot plots."
     },
     {
       title: "Code Consulting",
-      icon: <IconCode size={40} className="text-teal-300" />,
+      icon: <IconCode size={36} className="text-teal-300" />,
       desc: "Troubleshooting your single cell scripts.",
       details: "Direct debugging of notebooks and optimization for high-performance computing."
     }
@@ -44,7 +43,6 @@ export default function ServicesSection() {
   return (
     <section id="services" className="py-24 bg-[#020617] text-white relative overflow-hidden scroll-mt-20">
       
-      {/* Subtle Teal Glow for depth */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.07)_0%,transparent_70%)] pointer-events-none"></div>
 
       <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
@@ -59,15 +57,14 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        {/* RESTORED: Clean 2x2 symmetrical grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl mx-auto mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl mx-auto">
           {services.map((s, i) => (
             <div key={i} onClick={() => setFlip(flip === i ? null : i)} className="slide-up">
               <ServiceCard
                 flipped={flip === i}
                 front={
-                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 glass backdrop-blur-md rounded-2xl border border-white/10 hover:border-teal-500/50 transition-all duration-500 shadow-2xl"> 
-                    <div className="p-4 bg-slate-900/80 rounded-2xl border border-slate-700/50 shadow-xl">
+                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 glass backdrop-blur-md rounded-2xl border border-white/10 hover:border-teal-500/50 transition-all shadow-2xl"> 
+                    <div className="p-4 bg-slate-900/80 rounded-2xl border border-slate-700/50">
                       {s.icon}
                     </div>
                     <h3 className="text-2xl font-bold tracking-tight">{s.title}</h3>
@@ -76,23 +73,18 @@ export default function ServicesSection() {
                   </div>
                 }
                 back={
-                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 bg-teal-950/90 backdrop-blur-xl rounded-2xl border border-teal-500/40 shadow-2xl">
-                    <p className="text-teal-50 text-sm leading-relaxed italic">"{s.details}"</p>
-                    <a href="mailto:nishat.sarker@uq.net.au" className="mt-4 px-6 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-full text-xs font-bold shadow-lg" onClick={(e) => e.stopPropagation()}>Inquire Now</a>
+                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 bg-teal-950/90 backdrop-blur-xl rounded-2xl border border-teal-500/40">
+                    <p className="text-teal-50 text-sm italic">"{s.details}"</p>
+                    <a href="mailto:nishat.sarker@uq.net.au" className="mt-4 px-6 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-full text-xs font-bold" onClick={(e) => e.stopPropagation()}>Inquire Now</a>
                   </div>
                 }
               />
             </div>
           ))}
         </div>
+        
+        {/* Scroll Arrow removed here */}
 
-        {/* Scroll Arrow */}
-        <div className="flex flex-col items-center gap-3">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-slate-500 font-bold">Knowledge Hub</p>
-          <a href="#knowledge-hub" className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-teal-500/20 transition-all animate-bounce">
-            <IconChevronDown size={28} className="text-teal-400" />
-          </a>
-        </div>
       </div>
     </section>
   );
