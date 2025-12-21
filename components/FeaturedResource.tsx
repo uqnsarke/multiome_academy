@@ -1,145 +1,129 @@
-'use client';
-import { Download, CheckCircle, Mail, FileCode, Terminal } from 'lucide-react';
-import { useState } from 'react';
+import React from 'react';
+import { BookOpen, Mail, Library, Youtube, ArrowRight } from 'lucide-react';
 
-export default function FeaturedResource() {
-  const [email, setEmail] = useState('');
-  const [isDownloaded, setIsDownloaded] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // 1. Log the email (Later you can connect this to a database)
-    console.log(`Capturing email: ${email}`);
-
-    // 2. TRIGGER THE PNG DOWNLOAD
-    const link = document.createElement('a');
-    // MAKE SURE THIS MATCHES YOUR FILE NAME IN 'public' FOLDER
-    link.href = '/scanpy-cheat-sheet.png'; 
-    link.download = 'Nishat_Scanpy_CheatSheet.png'; // Name user sees when saving
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    // 3. Show success message
-    setIsDownloaded(true);
-    setEmail(''); 
-  };
-
+const ResourcesSection = () => {
   return (
-    <section id="resources" className="py-24 bg-gradient-to-b from-slate-950 to-black relative overflow-hidden">
-       
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <section id="resources" className="py-24 bg-black relative overflow-hidden">
+      
+      {/* Background Decorative Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="bg-slate-900/40 border border-slate-700/50 rounded-3xl backdrop-blur-md grid md:grid-cols-2 gap-12 p-8 md:p-12 items-center shadow-2xl">
+        
+        {/* --- SECTION HEADER --- */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+              Knowledge Hub
+            </span>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            Stay updated with the latest in Single-Cell & AI through my written content.
+          </p>
+        </div>
+
+        {/* --- THE 3-GRID: BLOG, NEWSLETTER, BOOKS --- */}
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-24">
           
-          {/* --- LEFT: CONTENT --- */}
-          <div className="space-y-8">
-            <div>
-               <span className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 text-cyan-300 px-3 py-1 rounded-full text-sm font-medium border border-cyan-500/20 mb-4 shadow-[0_0_15px_-3px_rgba(6,182,212,0.3)]">
-                  <Terminal size={14} />
-                  <span>Free Resource</span>
-               </span>
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-                Stop Googling Syntax. <br/>
-                <span className="text-slate-400">Get the Ultimate Guide.</span>
-              </h2>
-              <p className="text-slate-300 text-lg leading-relaxed">
-                The entire single-cell analysis pipeline in Python, condensed into one printable reference. 
-                Focus on the <span className="text-purple-400 font-semibold">biology</span>, not the boilerplate.
+          {/* Card 1: Blog */}
+          <ResourceCard 
+            icon={<BookOpen className="w-8 h-8 text-emerald-400" />}
+            title="The Blog"
+            desc="Deep dives into bioinformatics algorithms, troubleshooting guides, and Python tutorials."
+            link="https://your-blog-url.com"  // <--- UPDATE THIS LINK
+            cta="Read Articles"
+          />
+
+          {/* Card 2: Newsletter */}
+          <ResourceCard 
+            icon={<Mail className="w-8 h-8 text-purple-400" />}
+            title="BioAI Newsletter"
+            desc="Weekly insights on the intersection of Biology and AI, delivered straight to your inbox."
+            link="https://your-newsletter-url.com" // <--- UPDATE THIS LINK
+            cta="Subscribe Free"
+          />
+
+          {/* Card 3: Books */}
+          <ResourceCard 
+            icon={<Library className="w-8 h-8 text-pink-400" />}
+            title="My Books"
+            desc="Comprehensive e-books and guides for mastering single-cell analysis from scratch."
+            link="https://your-book-store-link.com" // <--- UPDATE THIS LINK
+            cta="Browse Library"
+          />
+
+        </div>
+
+        {/* --- START LEARNING (YOUTUBE BANNER) --- */}
+        <div className="relative p-1 rounded-3xl bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 animate-gradient-xy">
+          <div className="bg-gray-950 rounded-[22px] p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 text-center md:text-left relative overflow-hidden">
+            
+            {/* Background Texture for Banner */}
+            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+            
+            <div className="relative z-10 max-w-2xl">
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 flex items-center gap-3 justify-center md:justify-start">
+                <Youtube className="w-10 h-10 text-red-500 fill-current" />
+                Start Learning Now
+              </h3>
+              <p className="text-gray-300 text-lg leading-relaxed">
+                Prefer video? Join thousands of students on my YouTube channel. 
+                Step-by-step coding tutorials on Scanpy, Seurat, and Multiomics integration.
               </p>
             </div>
 
-            <ul className="space-y-4 text-slate-200">
-              <li className="flex items-center space-x-3">
-                <div className="bg-purple-500/20 p-1 rounded-full"><CheckCircle className="w-4 h-4 text-purple-400" /></div>
-                <span>AnnData Object Structure & Manipulation</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="bg-purple-500/20 p-1 rounded-full"><CheckCircle className="w-4 h-4 text-purple-400" /></div>
-                <span>Preprocessing: Filtering, Normalization, PCA</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                 <div className="bg-purple-500/20 p-1 rounded-full"><CheckCircle className="w-4 h-4 text-purple-400" /></div>
-                <span>Visualization: UMAP, DotPlots, Heatmaps</span>
-              </li>
-            </ul>
-
-            {/* DOWNLOAD FORM */}
-            {isDownloaded ? (
-                <div className="p-6 bg-green-500/10 border border-green-500/30 rounded-xl text-green-300 animate-fade-in">
-                    <p className="font-bold text-lg flex items-center gap-2">
-                        <CheckCircle /> Download Started!
-                    </p>
-                    <p className="text-sm mt-2 opacity-80">Check your downloads folder. Thanks for joining!</p>
-                    <button onClick={() => setIsDownloaded(false)} className="text-xs underline mt-4 hover:text-white">Reset form</button>
-                </div>
-             ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <div className="relative flex-grow">
-                    <Mail className="absolute left-3 top-3.5 h-5 w-5 text-slate-400" />
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-purple-500 text-white outline-none transition-all placeholder:text-slate-500"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <button type="submit" className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-lg flex items-center justify-center space-x-2 whitespace-nowrap transition shadow-lg shadow-purple-900/20">
-                    <Download className="w-5 h-5" />
-                    <span>Download Cheat Sheet</span>
-                  </button>
-                </form>
-             )}
-          </div>
-
-          {/* --- RIGHT: VIDEO WINDOW --- */}
-          <div className="relative group perspective-1000">
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-            <div className="relative bg-[#1e1e1e] rounded-xl overflow-hidden border border-slate-700/50 shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.01]">
-              
-              {/* Header Bar */}
-              <div className="h-9 bg-[#2d2d2d] border-b border-white/5 flex items-center px-4 justify-between">
-                <div className="flex space-x-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                </div>
-                <div className="text-[10px] text-slate-400 font-mono flex items-center gap-2">
-                  <FileCode size={12} className="text-blue-400" />
-                  scanpy_pipeline.ipynb
-                </div>
-                <div className="w-8"></div> 
-              </div>
-
-              {/* Video Content */}
-              <div className="relative aspect-[4/3] md:aspect-square lg:aspect-[4/3]">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover opacity-90"
-                >
-                  <source src="/dna-loop.mp4" type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1e1e1e] via-transparent to-transparent"></div>
-                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20 bg-[length:20px_20px]"></div>
-                <div className="absolute bottom-6 right-6 bg-slate-900/90 backdrop-blur border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-3 shadow-xl">
-                    <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-xs font-mono text-slate-300">Live Preview</span>
-                </div>
-              </div>
-
+            <div className="relative z-10">
+              <a 
+                href="https://www.youtube.com/@nishat_BioAI" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-red-600 px-8 font-medium text-white transition-all duration-300 hover:bg-red-700 hover:scale-105 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)]"
+              >
+                <span className="mr-2 text-lg font-bold">Visit Channel</span>
+                <ArrowRight className="transition-transform group-hover:translate-x-1" />
+              </a>
             </div>
-          </div>
 
+          </div>
         </div>
+
       </div>
     </section>
   );
+};
+
+// --- REUSABLE CARD COMPONENT ---
+interface ResourceCardProps {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+  link: string;
+  cta: string;
 }
+
+const ResourceCard = ({ icon, title, desc, link, cta }: ResourceCardProps) => (
+  <a href={link} target="_blank" rel="noopener noreferrer" className="group block h-full">
+    <div className="h-full p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.08] hover:shadow-2xl hover:shadow-emerald-500/10 flex flex-col">
+      
+      <div className="mb-6 p-4 rounded-2xl bg-black/40 w-fit border border-white/10 group-hover:scale-110 group-hover:border-emerald-500/50 transition-all duration-500 shadow-inner">
+        {icon}
+      </div>
+      
+      <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+        {title}
+      </h3>
+      
+      <p className="text-gray-400 leading-relaxed mb-8 flex-grow">
+        {desc}
+      </p>
+      
+      <div className="flex items-center text-sm font-bold text-gray-300 uppercase tracking-wider group-hover:text-white transition-colors">
+        {cta} 
+        <ArrowRight size={16} className="ml-2 text-emerald-500 group-hover:translate-x-2 transition-transform duration-300" />
+      </div>
+
+    </div>
+  </a>
+);
+
+export default ResourcesSection;
