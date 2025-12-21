@@ -5,7 +5,6 @@ import ServiceCard from './ServiceCard';
 import { IconChartBar, IconCode, IconDatabase, IconPresentation } from '@tabler/icons-react';
 
 export default function ServicesSection() {
-  // FIX: We tell TypeScript this state can be a 'number' OR 'null'
   const [flip, setFlip] = useState<number | null>(null);
 
   const services = [
@@ -13,24 +12,24 @@ export default function ServicesSection() {
       title: "Single-Cell Analysis",
       icon: <IconChartBar size={40} className="text-indigo-400" />,
       desc: "Full pipeline processing: QC, Clustering, and Marker Identification.",
-      details: "I take raw 10x output and deliver a complete AnnData object with publication-ready UMAPs."
+      details: "End-to-end processing of 10x Genomics scRNA-seq and scATAC-seq data using Scanpy, Seurat, Signac, ArchR, or SnapATAC2, delivering curated objects and publication-ready figures."
     },
     {
       title: "Multiomics Integration",
       icon: <IconDatabase size={40} className="text-purple-400" />,
       desc: "Merging RNA + ATAC seq data for deeper biological insights.",
-      details: "Using Seurat WNN or MultiVI to integrate modalities and find driver regulators."
+      details: "Modalities are integrated using Seurat WNN or MultiVI, followed by regulatory network inference with SCENIC+ to identify transcription factors, enhancer–gene links, and cell-state drivers."
     },
     {
       title: "Custom Visuals",
       icon: <IconPresentation size={40} className="text-pink-400" />,
-      desc: "Publication-quality figures that tell your scientific story.",
-      details: "Volcano plots, Dot plots, and complex Heatmaps tailored to your specific gene lists."
+      desc: "Figures grounded in rigorous statistical analysis and biological interpretation.",
+      details: "Differential expression and accessibility analyses (DESeq2), pathway enrichment, and publication-ready visualizations including volcano plots, dot plots, and heatmaps."
     },
     {
       title: "Code Consulting",
       icon: <IconCode size={40} className="text-cyan-400" />,
-      desc: "Troubleshooting your Seurat/Scanpy scripts.",
+      desc: "Troubleshooting your single cell scripts.",
       details: "Stuck on an error? I will debug your notebooks and optimize your workflow."
     }
   ];
@@ -66,7 +65,7 @@ export default function ServicesSection() {
               back={
                 <div className="flex flex-col items-center justify-center h-full space-y-4 p-8 text-center bg-indigo-900/20">
                   <h3 className="text-xl font-bold text-white mb-2">{s.title}</h3>
-                  <p className="text-slate-200 leading-relaxed">
+                  <p className="text-slate-200 leading-relaxed text-sm">
                     {s.details}
                   </p>
                   <button className="mt-4 px-6 py-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-full text-sm font-semibold transition">
