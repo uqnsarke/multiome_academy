@@ -30,7 +30,7 @@
 }
 
 /* ---------------------------------------
-   Components (Reusable Layout + UI)
+   Components (Glassmorphism & Layout)
 ---------------------------------------- */
 @layer components {
   .container-page {
@@ -42,15 +42,17 @@
   }
 
   .glass {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .glass-strong {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(30px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
   }
 }
 
@@ -58,26 +60,39 @@
    Utilities & Animations
 ---------------------------------------- */
 @layer utilities {
+  /* 3D Flip Utilities - Restored */
+  .perspective {
+    perspective: 1200px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  /* Text & Glow Utilities */
   .text-muted {
     @apply text-white/70;
   }
 
-  .border-muted {
-    @apply border-white/10;
-  }
-
-  /* Glow effects for Hero and Cards */
   .glow-soft {
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.25);
   }
 
-  /* Custom Text Shimmer Animation */
+  /* Animation Classes */
   .animate-text-shimmer {
     background-size: 200% auto;
     animation: text-shimmer 4s linear infinite;
   }
 
-  /* Standard Fade/Slide */
   .fade-in {
     animation: fadeIn 0.8s ease-out both;
   }
@@ -86,7 +101,6 @@
     animation: slideUp 0.8s ease-out both;
   }
 
-  /* Cinematic Background Zoom */
   .animate-slow-zoom {
     animation: slow-zoom 20s ease-in-out infinite;
   }
@@ -96,7 +110,7 @@
    Keyframes
 ---------------------------------------- */
 
-/* Background Image Zoom */
+/* Background Image Cinematic Zoom */
 @keyframes slow-zoom {
   0%, 100% {
     transform: scale(1);
@@ -106,19 +120,17 @@
   }
 }
 
-/* Gradient Text Shimmer */
+/* Gradient Shimmer for Headlines */
 @keyframes text-shimmer {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
 }
 
-/* Fade in for badges/images/arrows */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-/* Entrance slide for headlines */
 @keyframes slideUp {
   from { 
     opacity: 0; 
@@ -130,7 +142,6 @@
   }
 }
 
-/* Pulsing for Live Preview badge */
 @keyframes pulse-soft {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
