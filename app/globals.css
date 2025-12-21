@@ -78,6 +78,21 @@
     transform: rotateY(180deg);
   }
 
+  /* --- DNA HELIX ANIMATION UTILITIES --- */
+  .animate-helix {
+    display: flex;
+    gap: 4px;
+    perspective: 1000px;
+  }
+
+  .helix-strand {
+    width: 4px;
+    height: 60px;
+    background: linear-gradient(to bottom, #2dd4bf, #3b82f6);
+    animation: helix-spin 3s ease-in-out infinite;
+    border-radius: 99px;
+  }
+
   /* Text & Glow Utilities */
   .text-muted {
     @apply text-white/70;
@@ -104,20 +119,32 @@
   .animate-slow-zoom {
     animation: slow-zoom 20s ease-in-out infinite;
   }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 4s ease-in-out infinite;
+  }
 }
 
 /* ---------------------------------------
    Keyframes
 ---------------------------------------- */
 
-/* Background Image Cinematic Zoom */
-@keyframes slow-zoom {
+/* DNA Helix Rotation */
+@keyframes helix-spin {
   0%, 100% {
-    transform: scale(1);
+    transform: rotateY(0deg) translateY(0px);
+    filter: brightness(1);
   }
   50% {
-    transform: scale(1.1);
+    transform: rotateY(180deg) translateY(-10px);
+    filter: brightness(1.5) drop-shadow(0 0 10px rgba(45, 212, 191, 0.5));
   }
+}
+
+/* Background Image Cinematic Zoom */
+@keyframes slow-zoom {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 /* Gradient Shimmer for Headlines */
@@ -140,6 +167,11 @@
     opacity: 1; 
     transform: translateY(0); 
   }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
 @keyframes pulse-soft {
