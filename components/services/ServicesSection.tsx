@@ -68,9 +68,16 @@ export default function ServicesSection() {
                   <p className="text-slate-200 leading-relaxed text-sm">
                     {s.details}
                   </p>
-                  <button className="mt-4 px-6 py-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-full text-sm font-semibold transition">
+                  
+                  {/* UPDATED BUTTON: Now an Email Link */}
+                  <a 
+                    href={`mailto:nishat.sarker@uq.net.au?subject=Inquiry: ${s.title}`}
+                    className="mt-4 px-6 py-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-full text-sm font-semibold transition inline-block"
+                    onClick={(e) => e.stopPropagation()} // Prevents the card from flipping back when clicked
+                  >
                     Inquire Now
-                  </button>
+                  </a>
+
                 </div>
               }
             />
