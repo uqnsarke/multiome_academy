@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Download, CheckCircle, Mail, Terminal, BookOpen, Library, Youtube, PlayCircle, Code2, ArrowRight } from 'lucide-react';
+import { Download, CheckCircle, Mail, Terminal, BookOpen, Library, Youtube, PlayCircle, Code2, ArrowRight, FileCode } from 'lucide-react';
 
 export default function FeaturedResource() {
   const [email, setEmail] = useState('');
@@ -91,20 +91,39 @@ export default function FeaturedResource() {
                  )}
               </div>
 
-              {/* Right: Live Video Preview */}
+              {/* Right: Live Video Preview (RESTORED) */}
               <div className="relative group perspective-1000 hidden md:block">
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 <div className="relative bg-[#1e1e1e] rounded-xl overflow-hidden border border-slate-700/50 shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.01]">
+                  
+                  {/* Header Bar */}
                   <div className="h-9 bg-[#2d2d2d] border-b border-white/5 flex items-center px-4 justify-between">
                     <div className="flex space-x-2"><div className="w-3 h-3 rounded-full bg-red-500/80"></div><div className="w-3 h-3 rounded-full bg-yellow-500/80"></div><div className="w-3 h-3 rounded-full bg-green-500/80"></div></div>
-                    <div className="text-[10px] text-slate-400 font-mono">scanpy_preview.mp4</div>
+                    {/* RESTORED: Code Icon and Filename */}
+                    <div className="text-[10px] text-slate-400 font-mono flex items-center gap-2">
+                      <FileCode size={12} className="text-blue-400" />
+                      scanpy_pipeline.ipynb
+                    </div>
                     <div className="w-8"></div> 
                   </div>
+
+                  {/* Video Content */}
                   <div className="relative aspect-[4/3]">
                     <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-90">
                       <source src="/dna-loop.mp4" type="video/mp4" />
                     </video>
+                    
+                    {/* RESTORED: Grid Texture Overlay */}
+                    <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20 bg-[length:20px_20px]"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1e1e1e] via-transparent to-transparent"></div>
+
+                    {/* RESTORED: Live Preview Badge */}
+                    <div className="absolute bottom-6 right-6 bg-slate-900/90 backdrop-blur border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-3 shadow-xl z-20">
+                        <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span className="text-xs font-mono text-slate-300">Live Preview</span>
+                    </div>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -149,7 +168,7 @@ export default function FeaturedResource() {
         </div>
 
         {/* =========================================================
-            SECTION 3: START LEARNING (Curated Paths)
+            SECTION 3: START LEARNING (YouTube Links)
            ========================================================= */}
         <div className="relative">
           <div className="text-center mb-12">
@@ -177,7 +196,7 @@ export default function FeaturedResource() {
                 <h3 className="text-2xl font-bold text-white mb-2">Python for Biologists</h3>
                 <p className="text-slate-400 mb-6 text-sm">New to coding? Learn Python syntax, Pandas, and plotting from scratch.</p>
                 <span className="inline-flex items-center text-white font-bold group-hover:text-cyan-400 transition-colors">
-                  <PlayCircle className="mr-2" size={20} /> Watch Playlist
+                  <PlayCircle className="mr-2" size={20} /> Visit Channel
                 </span>
               </div>
             </a>
@@ -197,7 +216,7 @@ export default function FeaturedResource() {
                 <h3 className="text-2xl font-bold text-white mb-2">Single-Cell Multiomics</h3>
                 <p className="text-slate-400 mb-6 text-sm">Deep learning integration, batch correction, and trajectory inference.</p>
                 <span className="inline-flex items-center text-white font-bold group-hover:text-purple-400 transition-colors">
-                  <PlayCircle className="mr-2" size={20} /> Watch Playlist
+                  <PlayCircle className="mr-2" size={20} /> Visit Channel
                 </span>
               </div>
             </a>
