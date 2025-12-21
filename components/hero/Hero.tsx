@@ -7,16 +7,17 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050a10]">
       
-      {/* --- MAIN FIGURE BACKGROUND --- */}
+      {/* --- ANIMATED BACKGROUND IMAGE --- */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
           src="/hero-multiome.jpeg" 
           alt="Multiomics Hero Figure" 
-          className="w-full h-full object-cover opacity-60 scale-105 transition-transform duration-1000"
+          /* Triggers the 20s cinematic zoom from globals.css */
+          className="w-full h-full object-cover opacity-60 animate-slow-zoom"
           onError={(e) => (e.currentTarget.style.display = 'none')}
         />
         
-        {/* The "Black Block" Overlays - Radial and Linear for readability */}
+        {/* Overlays to ensure text contrast and focus */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950 z-10"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-transparent to-slate-950/90 z-10"></div>
       </div>
@@ -25,7 +26,7 @@ export default function Hero() {
       <div className="container mx-auto px-6 relative z-20 text-center">
         
         {/* Academy Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase tracking-widest mb-8 animate-fade-in">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase tracking-widest mb-8 fade-in">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
@@ -41,7 +42,7 @@ export default function Hero() {
           </span>
         </h1>
 
-        {/* --- ANIMATED SUBHEADLINE --- */}
+        {/* Animated Subheadline */}
         <div className="max-w-3xl mx-auto mb-10 overflow-hidden">
           <p className="text-slate-100 text-lg md:text-2xl font-medium leading-relaxed drop-shadow-lg slide-up [animation-delay:400ms]">
             Bridge the gap between <span className="text-cyan-400">transcriptomics</span> and <span className="text-purple-400">chromatin accessibility</span>.
