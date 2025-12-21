@@ -10,8 +10,7 @@ const AboutSection = () => {
         <div className="relative shrink-0">
           <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.3)]">
             <img 
-              // IMPORTANT: Make sure this path is correct for your project
-              src="/path-to-your-image.jpg" 
+              src="/profile.jpg" 
               alt="Nishat" 
               className="w-full h-full object-cover object-top" 
             />
