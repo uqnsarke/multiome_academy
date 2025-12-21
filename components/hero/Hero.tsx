@@ -1,25 +1,32 @@
 'use client';
 
 import React from 'react';
-import { PlayCircle, FileText, ChevronDown } from 'lucide-react';
+import { PlayCircle, FileText, ChevronDown, User, BookOpen, Mail } from 'lucide-react';
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050a10]">
       
-      {/* --- ANIMATED BACKGROUND IMAGE --- */}
+      {/* --- 1. TOP RIGHT NAVIGATION CIRCLES (New Addition) --- */}
+      <div className="absolute top-6 right-6 md:top-10 md:right-10 z-50 flex gap-4 animate-fade-in-down">
+        <NavCircle href="#about" icon={<User size={18} />} label="About Me" />
+        <NavCircle href="#resources" icon={<BookOpen size={18} />} label="Resources" />
+        <NavCircle href="mailto:nishat.sarker@uq.net.au" icon={<Mail size={18} />} label="Contact" />
+      </div>
+
+      {/* --- 2. ANIMATED BACKGROUND IMAGE (Brightness Adjusted) --- */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
           src="/hero-multiome.jpeg" 
           alt="Multiomics Hero Figure" 
-          /* This triggers the 20s slow-zoom from globals.css */
-          className="w-full h-full object-cover opacity-60 animate-slow-zoom"
+          /* CHANGED: Increased opacity from 60 to 80 for more light */
+          className="w-full h-full object-cover opacity-80 animate-slow-zoom"
           onError={(e) => (e.currentTarget.style.display = 'none')}
         />
         
-        {/* Fixed Overlays for Contrast (Z-Index 10) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950 z-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-transparent to-slate-950/90 z-10"></div>
+        {/* Fixed Overlays - CHANGED: Reduced opacity of gradients to let more light through */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-transparent to-slate-950 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/60 via-transparent to-slate-950/60 z-10"></div>
       </div>
 
       {/* --- CONTENT LAYER (Z-Index 20) --- */}
@@ -47,7 +54,7 @@ export default function Hero() {
           <p className="text-slate-100 text-lg md:text-2xl font-medium leading-relaxed drop-shadow-lg slide-up [animation-delay:400ms]">
             Bridge the gap between <span className="text-cyan-400">transcriptomics</span> and <span className="text-purple-400">chromatin accessibility</span>.
           </p>
-          <p className="text-slate-400 text-md md:text-xl mt-2 leading-relaxed slide-up [animation-delay:700ms] opacity-80">
+          <p className="text-slate-300 text-md md:text-xl mt-2 leading-relaxed slide-up [animation-delay:700ms] opacity-90">
             Master the integration pipelines to unlock deeper biological insights.
           </p>
         </div>
@@ -66,7 +73,7 @@ export default function Hero() {
 
           <a 
             href="#resources"
-            className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-full border border-white/10 hover:border-white/20 backdrop-blur-md transition-all flex items-center gap-2"
+            className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-full border border-white/10 hover:border-white/20 backdrop-blur-md transition-all flex items-center gap-2"
           >
             <FileText size={20} />
             Get Resources
@@ -84,5 +91,22 @@ export default function Hero() {
 
       </div>
     </section>
+  );
+}
+
+// --- HELPER COMPONENT FOR THE TOP RIGHT CIRCLES ---
+function NavCircle({ href, icon, label }: { href: string, icon: any, label: string }) {
+  return (
+    <a 
+      href={href}
+      className="group relative flex items-center justify-center w-12 h-12 rounded-full bg-slate-900/40 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-cyan-400/50 hover:text-cyan-400 text-slate-300 transition-all duration-300 shadow-xl"
+      aria-label={label}
+    >
+      {icon}
+      {/* Tooltip on Hover */}
+      <span className="absolute top-14 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-bold uppercase tracking-widest text-white whitespace-nowrap bg-black/50 px-2 py-1 rounded backdrop-blur">
+        {label}
+      </span>
+    </a>
   );
 }
