@@ -1,31 +1,20 @@
-export default function HomePage() {
+import Hero from '@/components/hero/Hero';
+import ServicesSection from '@/components/services/ServicesSection';
+import FeaturedResource from '@/components/FeaturedResource';
+
+export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="border-b border-muted section-padding">
-        <div className="container-page">
-          <h1 className="text-5xl font-semibold tracking-tight">
-            Multiome Academy
-          </h1>
+      
+      {/* 1. Hero Section (Top of page) */}
+      <Hero />
 
-          <p className="mt-6 max-w-2xl text-muted">
-            Advanced education, consulting, and resources for single-cell
-            and multi-omics data analysis.
-          </p>
-        </div>
-      </section>
+      {/* 2. Services Section (Flip cards) */}
+      <ServicesSection />
 
-      {/* Content Section */}
-      <section className="section-padding">
-        <div className="container-page">
-          <div className="glass rounded-xl p-8">
-            <p className="text-muted">
-              This section will contain featured content, services,
-              or calls to action.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* 3. Lead Magnet / Cheat Sheet Section */}
+      <FeaturedResource />
+      
     </main>
   );
 }
