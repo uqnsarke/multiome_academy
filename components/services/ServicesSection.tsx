@@ -35,10 +35,9 @@ export default function ServicesSection() {
   ];
 
   return (
-    /* id="services" allows the Hero arrow to find this section */
     <section id="services" className="py-24 bg-slate-950 text-white relative overflow-hidden scroll-mt-20">
       
-      {/* Visual background glow */}
+      {/* Background Glows */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
       
       <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
@@ -53,10 +52,11 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        {/* The Grid containing your ServiceCards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto mb-20">
+        {/* --- THE GRID FIX --- */}
+        {/* Added h-auto and min-h-[400px] to ensure it doesn't collapse */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl mx-auto mb-20 min-h-[400px]">
           {services.map((s, i) => (
-            <div key={i} onClick={() => setFlip(flip === i ? null : i)} className="slide-up">
+            <div key={i} onClick={() => setFlip(flip === i ? null : i)} className="slide-up h-full">
               <ServiceCard
                 flipped={flip === i}
                 front={
@@ -70,13 +70,7 @@ export default function ServicesSection() {
                 back={
                   <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4 bg-indigo-950/90 backdrop-blur-md rounded-2xl border border-indigo-500/30">
                     <p className="text-indigo-100 text-sm leading-relaxed italic">"{s.details}"</p>
-                    <a 
-                      href="mailto:nishat.sarker@uq.net.au" 
-                      className="mt-4 px-6 py-2 bg-indigo-500 text-white rounded-full text-xs font-bold transition-all" 
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Inquire
-                    </a>
+                    <a href="mailto:nishat.sarker@uq.net.au" className="mt-4 px-6 py-2 bg-indigo-500 text-white rounded-full text-xs font-bold" onClick={(e) => e.stopPropagation()}>Inquire</a>
                   </div>
                 }
               />
@@ -84,8 +78,7 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        {/* --- SEQUENTIAL SCROLL ARROW --- */}
-        {/* href="#knowledge-hub" tells the arrow to land on the next part of the site */}
+        {/* Sequential Scroll Arrow */}
         <div className="flex flex-col items-center gap-3 slide-up">
           <p className="text-[10px] uppercase tracking-[0.3em] text-slate-500 font-bold">Knowledge Hub</p>
           <a href="#knowledge-hub" className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-indigo-500/20 transition-all animate-bounce">
