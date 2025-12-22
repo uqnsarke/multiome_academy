@@ -2,7 +2,13 @@ import React from 'react';
 import { getSortedPostsData, getPostData } from '@/app/lib/posts';
 import { ArrowLeft, Calendar, Hash } from 'lucide-react';
 
-// This generates the URLs (issue-1, issue-2)
+interface Post {
+  title: string;
+  date: string;
+  contentHtml: string;
+  tags?: string[];
+}
+
 export async function generateStaticParams() {
   const posts = getSortedPostsData();
   return posts.map((post) => ({
@@ -10,9 +16,8 @@ export async function generateStaticParams() {
   }));
 }
 
-// This is the Page Component
 export default async function ArticlePage({ params }: { params: { slug: string } }) {
-  const post = await getPostData(params.slug);
+  const post = (await getPostData(params.slug)) as Post;
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-teal-100">
@@ -40,7 +45,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
           </h1>
         </header>
 
-        {/* THIS IS WHERE THE MARKDOWN RENDERS */}
+        {/* Article Body */}
         <article 
           className="prose prose-slate prose-lg max-w-none text-slate-700 leading-relaxed 
                      prose-headings:font-bold prose-headings:text-slate-900 
@@ -51,14 +56,14 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         {/* Tags */}
         <div className="mt-16 pt-8 border-t border-slate-200">
            <h4 className="text-sm font-bold text-slate-400 uppercase mb-4 flex items-center gap-2">
-              <Hash size={14} /> Topics
+             <Hash size={14} /> Topics
            </h4>
            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
+              {post.tags?.map((tag: string) => (
                 <span key={tag} className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium">
                   #{tag}
                 </span>
-              ))}
+              )) || <span className="text-slate-400 text-xs">No tags</span>}
            </div>
         </div>
       </div>
