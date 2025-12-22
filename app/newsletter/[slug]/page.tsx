@@ -54,7 +54,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
              <Hash size={14} /> Topics
            </h4>
            <div className="flex flex-wrap gap-2">
-              {/* FIXED LINE BELOW: Added ': string' */}
+              {/* THE FIX IS HERE: Added ': string' */}
               {post.tags.map((tag: string) => (
                 <span key={tag} className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium">
                   #{tag}
