@@ -4,53 +4,57 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-// FIX: Pointing to 'posts' at the root based on your file tree
-const postsDirectory = path.join(process.cwd(), 'posts');
+const postsDirectory = path.join(process.cwd(), 'content/posts');
 
-export interface PostData {
-  id: string;
-  date: string;
-  title: string;
-  contentHtml?: string;
-  [key: string]: any;
-}
-
-export function getSortedPostsData(): PostData[] {
-  // Check if directory exists to prevent build crashes
-  if (!fs.existsSync(postsDirectory)) {
-    return [];
-  }
-
+export function getSortedPostsData() {
+  // Get file names under /content/posts
   const fileNames = fs.readdirSync(postsDirectory);
+  
   const allPostsData = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.md$/, '');
+    // Remove ".md" from file name to get slug
+    const slug = fileName.replace(/\.md$/, '');
+
+    // Read markdown file as string
     const fullPath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+    // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
 
+    // Combine the data with the slug
     return {
-      id,
-      ...(matterResult.data as { date: string; title: string }),
+      slug,
+      ...(matterResult.data as { date: string; title: string; tags: string[] }),
     };
   });
 
-  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+  // Sort posts by date
+  return allPostsData.sort((a, b) => {
+    if (a.date < b.date) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 }
 
-export async function getPostData(id: string): Promise<PostData> {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
+export async function getPostData(slug: string) {
+  const fullPath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+  // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
 
+  // Use remark to convert markdown into HTML string
   const processedContent = await remark()
     .use(html)
     .process(matterResult.content);
-    
   const contentHtml = processedContent.toString();
 
+  // Combine the data with the slug and contentHtml
   return {
-    id,
+    slug,
     contentHtml,
-    ...(matterResult.data as { date: string; title: string }),
+    ...(matterResult.data as { date: string; title: string; tags: string[] }),
   };
 }
