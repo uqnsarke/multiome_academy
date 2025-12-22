@@ -45,7 +45,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
           className="prose prose-slate prose-lg max-w-none text-slate-700 leading-relaxed 
                      prose-headings:font-bold prose-headings:text-slate-900 
                      prose-a:text-teal-600 prose-blockquote:border-l-4 prose-blockquote:border-teal-500 prose-blockquote:bg-slate-50 prose-blockquote:py-2 prose-blockquote:pr-4"
-          dangerouslySetInnerHTML={{ __html: post.contentHtml }} 
+          dangerouslySetInnerHTML={{ __html: post.contentHtml || '' }}
         />
 
         {/* Tags */}
