@@ -158,13 +158,16 @@ export default function FeaturedResource() {
                 link="#"
                 cta="Read Articles"
               />
+              
+              {/* --- THIS IS THE FIXED CARD --- */}
               <ResourceCard 
                 icon={<Mail className="w-8 h-8 text-purple-400" />}
                 title="BioAI Newsletter"
                 desc="Weekly insights on Biology and AI delivered to your inbox."
-                link="#"
-                cta="Subscribe Free"
+                link="/newsletter"  /* LINKED TO THE NEW PAGE */
+                cta="Read Issues"
               />
+              
               <ResourceCard 
                 icon={<Library className="w-8 h-8 text-pink-400" />}
                 title="My Books"
@@ -240,7 +243,7 @@ export default function FeaturedResource() {
 // --- HELPER COMPONENT FOR GRID CARDS ---
 function ResourceCard({ icon, title, desc, link, cta }: { icon: any, title: string, desc: string, link: string, cta: string }) {
   return (
-    <a href={link} target="_blank" rel="noopener noreferrer" className="group block h-full">
+    <a href={link} target={link.startsWith('http') ? "_blank" : "_self"} rel={link.startsWith('http') ? "noopener noreferrer" : ""} className="group block h-full">
       <div className="h-full p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.08] flex flex-col">
         <div className="mb-6 p-4 rounded-2xl bg-black/40 w-fit border border-white/10 group-hover:border-emerald-500/50 transition-colors">{icon}</div>
         <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">{title}</h3>
