@@ -51,10 +51,11 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         {/* Tags */}
         <div className="mt-16 pt-8 border-t border-slate-200">
            <h4 className="text-sm font-bold text-slate-400 uppercase mb-4 flex items-center gap-2">
-              <Hash size={14} /> Topics
+             <Hash size={14} /> Topics
            </h4>
            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
+              {/* FIXED LINE BELOW: Added ': string' */}
+              {post.tags.map((tag: string) => (
                 <span key={tag} className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium">
                   #{tag}
                 </span>
