@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
-import { posts } from './data'; // We import your content here
+// Make sure this path points to where you created data.tsx
+import { posts } from './data'; 
 import { ArrowLeft, Calendar, ArrowRight } from 'lucide-react';
 
 export default function NewsletterList() {
