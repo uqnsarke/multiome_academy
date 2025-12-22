@@ -4,28 +4,18 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-// Define the path to your content directory
+// ---------------------------------------------------------
+// THE FIX IS HERE: We added 'content' to the path
+// ---------------------------------------------------------
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
-export interface PostData {
-  id: string;
-  date: string;
-  title: string;
-  contentHtml?: string;
-  [key: string]: any; // For other frontmatter fields like tags, description, etc.
-}
-
-/**
- * Gets metadata for all posts, sorted by date.
- * Useful for index pages / lists.
- */
-export function getSortedPostsData(): PostData[] {
-  // Get file names under /posts
+export function getSortedPostsData() {
+  // Get file names under /content/posts
   const fileNames = fs.readdirSync(postsDirectory);
-
+  
   const allPostsData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, '');
+    // Remove ".md" from file name to get slug
+    const slug = fileName.replace(/\.md$/, '');
 
     // Read markdown file as string
     const fullPath = path.join(postsDirectory, fileName);
@@ -34,10 +24,10 @@ export function getSortedPostsData(): PostData[] {
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
 
-    // Combine the data with the id
+    // Combine the data with the slug
     return {
-      id,
-      ...(matterResult.data as { date: string; title: string }),
+      slug,
+      ...(matterResult.data as { date: string; title: string; tags: string[] }),
     };
   });
 
@@ -51,12 +41,8 @@ export function getSortedPostsData(): PostData[] {
   });
 }
 
-/**
- * Gets the content of a specific post by ID (filename).
- * useful for dynamic routes (e.g., app/blog/[slug]/page.tsx)
- */
-export async function getPostData(id: string): Promise<PostData> {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
+export async function getPostData(slug: string) {
+  const fullPath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   // Use gray-matter to parse the post metadata section
@@ -66,13 +52,12 @@ export async function getPostData(id: string): Promise<PostData> {
   const processedContent = await remark()
     .use(html)
     .process(matterResult.content);
-    
   const contentHtml = processedContent.toString();
 
-  // Combine the data with the id and contentHtml
+  // Combine the data with the slug and contentHtml
   return {
-    id,
+    slug,
     contentHtml,
-    ...(matterResult.data as { date: string; title: string }),
+    ...(matterResult.data as { date: string; title: string; tags: string[] }),
   };
 }
