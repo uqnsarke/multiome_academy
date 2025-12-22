@@ -1,27 +1,23 @@
 import React from 'react';
-import { posts } from '../data'; // Import your content
+import { getSortedPostsData, getPostData } from '@/app/lib/posts';
 import { ArrowLeft, Calendar, Hash } from 'lucide-react';
-import { notFound } from 'next/navigation';
 
-// This tells Next.js which pages to build (issue-1, issue-2, etc.)
-export function generateStaticParams() {
+// This generates the URLs (issue-1, issue-2)
+export async function generateStaticParams() {
+  const posts = getSortedPostsData();
   return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  // Find the post that matches the URL
-  const post = posts.find((p) => p.slug === params.slug);
-
-  if (!post) {
-    notFound();
-  }
+// This is the Page Component
+export default async function ArticlePage({ params }: { params: { slug: string } }) {
+  const post = await getPostData(params.slug);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-teal-100">
       
-      {/* Sticky Top Bar */}
+      {/* Navbar */}
       <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
         <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
           <a href="/newsletter" className="inline-flex items-center gap-2 text-slate-500 hover:text-teal-600 transition-colors font-medium text-sm">
@@ -31,29 +27,28 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
         </div>
       </div>
 
-      {/* Article Content */}
+      {/* Content */}
       <div className="max-w-3xl mx-auto px-6 py-12 md:py-20">
         <header className="mb-12 border-b border-slate-200 pb-8">
           <div className="flex items-center gap-3 text-teal-600 mb-4">
-            <span className="bg-teal-50 text-teal-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-teal-100">
-              Article
-            </span>
             <span className="flex items-center gap-1 text-xs font-medium text-slate-400">
               <Calendar size={12} /> {post.date}
             </span>
           </div>
-
           <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
             {post.title}
           </h1>
         </header>
 
-        {/* This displays the content you wrote in data.tsx */}
-        <article className="prose prose-slate prose-lg max-w-none text-slate-700 leading-relaxed">
-          {post.content}
-        </article>
+        {/* THIS IS WHERE THE MARKDOWN RENDERS */}
+        <article 
+          className="prose prose-slate prose-lg max-w-none text-slate-700 leading-relaxed 
+                     prose-headings:font-bold prose-headings:text-slate-900 
+                     prose-a:text-teal-600 prose-blockquote:border-l-4 prose-blockquote:border-teal-500 prose-blockquote:bg-slate-50 prose-blockquote:py-2 prose-blockquote:pr-4"
+          dangerouslySetInnerHTML={{ __html: post.contentHtml }} 
+        />
 
-        {/* Footer Tags */}
+        {/* Tags */}
         <div className="mt-16 pt-8 border-t border-slate-200">
            <h4 className="text-sm font-bold text-slate-400 uppercase mb-4 flex items-center gap-2">
               <Hash size={14} /> Topics
