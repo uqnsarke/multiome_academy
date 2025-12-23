@@ -1,4 +1,3 @@
-cat <<EOF > content/posts/gsea-vs-enrichr.md
 ---
 title: "GSEA vs Enrichr: Same Goal, Completely Different Biological Mindsets"
 date: "December 23, 2025"
@@ -13,7 +12,6 @@ In fact, GSEA and Enrichr answer two completely different biological questions�
 
 Here’s the truth 👇
 
-![GSEA vs Enrichr Concepts](/downloads/enrichR.jpeg)
 
 ## ⚡ GSEA asks: "Does the entire distribution of my genes shift toward a pathway?"
 
