@@ -2,7 +2,8 @@ cat <<EOF > content/posts/issue-1.md
 ---
 title: "The Single-Cell Blindspot: Why scRNA-seq Alone Isn't Enough"
 date: "December 21, 2025"
-tags: ["SingleCell", "Multiomics", "scATACseq", "scRNAseq"]
+tags: ["SingleCell", "Multiomics", "scATACseq"]
+image: "/downloads/RNA_ATAC.png"
 slug: "issue-1"
 ---
 
@@ -11,10 +12,6 @@ Are you still relying solely on **single-cell RNA sequencing (scRNA-seq)** to de
 It's the default approach for a reason—it's powerful, and it's not "wrong." **But it is incomplete.**
 
 If you only look at gene expression, you're watching the biological movie after the major plot points have already been set.
-
-![RNA vs ATAC Comparison](/public/downloads/RNA_ATAC.png)
-
-Here's the reality of using these modalities in isolation, and why integration is no longer optional—especially in aging and disease research.
 
 ## 🔬 The scRNA-seq "Snapshot"
 
@@ -52,5 +49,5 @@ Regulatory priming (chromatin opening, transcription factor repositioning) can p
 
 In the era of multi-omics, sticking to one modality is like navigating with half a map. For deeper insights into cellular dynamics, especially in complex processes like aging and disease, integration isn't just beneficial—it's essential.
 
-**What's your take? Have you integrated scRNA and scATAC in your work?**
+#Bioinformatics #SingleCell #Multiomics #scRNAseq #scATACseq #ComputationalBiology
 EOF
