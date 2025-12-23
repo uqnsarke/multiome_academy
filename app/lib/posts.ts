@@ -6,6 +6,16 @@ import html from 'remark-html';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
+// Define what a Post looks like (Now includes 'image')
+export interface PostData {
+  slug: string;
+  date: string;
+  title: string;
+  tags: string[];
+  image?: string; // New optional image field
+  contentHtml?: string;
+}
+
 export function getSortedPostsData() {
   // Get file names under /content/posts
   const fileNames = fs.readdirSync(postsDirectory);
@@ -24,7 +34,7 @@ export function getSortedPostsData() {
     // Combine the data with the slug
     return {
       slug,
-      ...(matterResult.data as { date: string; title: string; tags: string[] }),
+      ...(matterResult.data as { date: string; title: string; tags: string[]; image?: string }),
     };
   });
 
@@ -55,6 +65,6 @@ export async function getPostData(slug: string) {
   return {
     slug,
     contentHtml,
-    ...(matterResult.data as { date: string; title: string; tags: string[] }),
+    ...(matterResult.data as { date: string; title: string; tags: string[]; image?: string }),
   };
 }
