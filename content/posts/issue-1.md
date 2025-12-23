@@ -1,7 +1,7 @@
 ---
 title: "The Single-Cell Blindspot: Why scRNA-seq Alone Isn't Enough"
 date: "December 21, 2025"
-tags: ["SingleCell", "Multiomics", "scATACseq"]
+tags: ["SingleCell", "Multiomics", "#ComputationalBiology"]
 image: "/downloads/RNA_ATAC.png"
 slug: "issue-1"
 ---
