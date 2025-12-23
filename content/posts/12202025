@@ -1,0 +1,116 @@
+cat <<EOF > content/posts/12202025.md
+---
+title: "The Ultimate Scanpy Cheat Sheet for Single-Cell Analysis"
+date: "December 22, 2025"
+tags: ["Scanpy", "Python", "SingleCell", "Bioinformatics"]
+image: "/downloads/scanpy-cheat-sheet.png"
+slug: "scanpy-cheat-sheet"
+---
+
+If you’re switching to **Python** for single-cell analysis—or just need a clean refresher—**Scanpy** is likely at the top of your toolkit list. It’s the Python counterpart to Seurat, built for scalable and flexible analysis of large single-cell datasets.
+
+This post distills the core Scanpy workflow into a structured, easy-to-follow reference. It’s not a tutorial, but a concise roadmap covering each major step: from importing data to discovering cell-type markers.
+
+Whether you’re processing your first **10x dataset** or revisiting best practices for large multi-sample integration, this guide gives you a quick conceptual refresher to stay focused while coding.
+
+![Scanpy Workflow Overview](/downloads/scanpy-cheat-sheet.png)
+
+## 1. Setup: Data Loading and AnnData Structure
+
+The foundation of any Scanpy workflow is the **AnnData** object (\`anndata.AnnData\`). It’s roughly analogous to a Seurat object but built natively for Python’s numerical stack (NumPy, pandas, and sparse matrices).
+
+**Key characteristics:**
+* **.X**: The main expression matrix (cells × genes)
+* **.obs**: Cell-level metadata (e.g., QC metrics, cluster IDs)
+* **.var**: Gene-level metadata (e.g., gene names, means)
+* **.obsm**: Reduced dimensions (PCA, UMAP)
+* **.uns**: Unstructured data (e.g., color maps, cluster info)
+
+**Typical loading path:**
+\`\`\`python
+adata = sc.read_10x_mtx('path/to/matrix/')
+\`\`\`
+
+You can also import from HDF5 (\`.h5ad\`), Cell Ranger outputs, or other formats, making it easy to integrate across multiome or spatial workflows.
+
+## 2. Quality Control: Filtering Low-Quality Cells
+
+QC ensures that your analysis focuses on biologically meaningful cells rather than technical noise.
+
+**Common QC metrics:**
+* **n_genes_by_counts**: Number of detected genes per cell
+* **total_counts**: Total UMIs per cell
+* **pct_counts_mt**: Percentage of reads mapping to mitochondrial genes
+
+**Typical filtering strategy:**
+\`\`\`python
+sc.pp.calculate_qc_metrics(adata, qc_vars=['MT'], inplace=True)
+adata = adata[adata.obs.n_genes_by_counts < 2500, :]
+adata = adata[adata.obs.pct_counts_mt < 5, :]
+\`\`\`
+*These thresholds vary by tissue type and platform, so it’s best to visualize first before filtering blindly.*
+
+## 3. Preprocessing: Normalization, Log Transform, and Scaling
+
+Once low-quality cells are removed, normalize the sequencing depth across cells.
+
+**Steps often used in practice:**
+* **Normalization:** Scale each cell’s counts to a common library size (e.g., 10,000 counts).
+* **Log1p transformation:** Stabilize variance across the expression range.
+* **Variable gene selection:** Retain only genes with the highest biological variability.
+* **Scaling:** Center and scale genes for use in PCA.
+
+**Example:**
+\`\`\`python
+sc.pp.normalize_total(adata, target_sum=1e4)
+sc.pp.log1p(adata)
+sc.pp.highly_variable_genes(adata, n_top_genes=2000)
+adata = adata[:, adata.var.highly_variable]
+sc.pp.scale(adata, max_value=10)
+\`\`\`
+Highly variable genes capture most of the meaningful structure, improving downstream dimensionality reduction.
+
+## 4. Analysis: PCA, Neighbors, UMAP, and Clustering
+
+With preprocessed data, the core analysis pipeline unfolds almost identically across most projects.
+
+**Principal Component Analysis (PCA):**
+Reduces gene space to a few informative axes.
+\`\`\`python
+sc.tl.pca(adata, svd_solver='arpack')
+sc.pl.pca_variance_ratio(adata, log=True)
+\`\`\`
+
+**Neighbor Graph and UMAP:**
+Constructs a graph representation and visualizes it in 2D.
+\`\`\`python
+sc.pp.neighbors(adata, n_neighbors=10, n_pcs=40)
+sc.tl.umap(adata)
+sc.pl.umap(adata)
+\`\`\`
+
+**Clustering (Leiden/Louvain):**
+\`\`\`python
+sc.tl.leiden(adata, resolution=0.5)
+sc.pl.umap(adata, color='leiden')
+\`\`\`
+This sequence defines most single-cell “maps” showing distinct cellular subpopulations.
+
+## 5. Marker Discovery and Annotation
+
+Once clusters are defined, you can identify their marker genes.
+
+\`\`\`python
+sc.tl.rank_genes_groups(adata, 'leiden', method='t-test')
+sc.pl.rank_genes_groups(adata, n_genes=20, sharey=False)
+\`\`\`
+This produces ranked gene lists for each cluster, guiding manual or automated cell-type annotation using public reference data or known markers.
+
+## Final Thoughts
+
+The beauty of Scanpy lies in its transparency: every step is explicit, Pythonic, and customizable. The cheat sheet isn’t meant to replace full tutorials—it’s a ready reference distilled from practical workflows.
+
+So whether you’re debugging a large dataset, teaching newcomers, or refreshing your memory, keep this guide handy.
+
+#Scanpy #Python #SingleCell #Bioinformatics #Coding #DataScience
+EOF
