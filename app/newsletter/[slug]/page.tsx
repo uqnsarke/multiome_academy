@@ -1,13 +1,6 @@
-import React from 'react';
-import { getSortedPostsData, getPostData } from '@/app/lib/posts';
-import { ArrowLeft, Calendar, Hash } from 'lucide-react';
-
-interface Post {
-  title: string;
-  date: string;
-  contentHtml: string;
-  tags?: string[];
-}
+import { getPostData, getSortedPostsData } from '@/app/lib/posts';
+import Link from 'next/link';
+import { ArrowLeft, Calendar, MessageSquare } from 'lucide-react';
 
 export async function generateStaticParams() {
   const posts = getSortedPostsData();
@@ -16,57 +9,61 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ArticlePage({ params }: { params: { slug: string } }) {
-  const post = (await getPostData(params.slug)) as Post;
+export default async function Post({ params }: { params: { slug: string } }) {
+  const postData = await getPostData(params.slug);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-teal-100">
       
-      {/* Navbar */}
-      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
-        <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="/newsletter" className="inline-flex items-center gap-2 text-slate-500 hover:text-teal-600 transition-colors font-medium text-sm">
-            <ArrowLeft size={16} /> Back to Feed
-          </a>
-          <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Multiome Academy</span>
-        </div>
+      {/* Navigation */}
+      <div className="max-w-3xl mx-auto px-6 pt-12">
+        <Link href="/newsletter" className="inline-flex items-center text-sm font-bold text-slate-500 hover:text-teal-600 transition-colors">
+          <ArrowLeft size={16} className="mr-2" /> Back to Academy
+        </Link>
       </div>
 
-      {/* Content */}
-      <div className="max-w-3xl mx-auto px-6 py-12 md:py-20">
-        <header className="mb-12 border-b border-slate-200 pb-8">
-          <div className="flex items-center gap-3 text-teal-600 mb-4">
-            <span className="flex items-center gap-1 text-xs font-medium text-slate-400">
-              <Calendar size={12} /> {post.date}
-            </span>
+      <article className="max-w-3xl mx-auto px-6 py-12">
+        
+        {/* Article Header */}
+        <header className="mb-12 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold uppercase tracking-widest mb-6">
+            <Calendar size={12} /> {postData.date}
           </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
-            {post.title}
+          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-8">
+            {postData.title}
           </h1>
+          
+          {/* Main Image */}
+          {postData.image && (
+            <div className="rounded-2xl overflow-hidden shadow-lg mb-8">
+              <img src={postData.image} alt={postData.title} className="w-full" />
+            </div>
+          )}
         </header>
 
-        {/* Article Body */}
-        <article 
-          className="prose prose-slate prose-lg max-w-none text-slate-700 leading-relaxed 
-                     prose-headings:font-bold prose-headings:text-slate-900 
-                     prose-a:text-teal-600 prose-blockquote:border-l-4 prose-blockquote:border-teal-500 prose-blockquote:bg-slate-50 prose-blockquote:py-2 prose-blockquote:pr-4"
-          dangerouslySetInnerHTML={{ __html: post.contentHtml || '' }}
+        {/* Article Content */}
+        <div 
+          className="prose prose-lg prose-slate prose-headings:font-bold prose-a:text-teal-600 hover:prose-a:text-teal-500"
+          dangerouslySetInnerHTML={{ __html: postData.contentHtml || '' }} 
         />
 
-        {/* Tags */}
-        <div className="mt-16 pt-8 border-t border-slate-200">
-           <h4 className="text-sm font-bold text-slate-400 uppercase mb-4 flex items-center gap-2">
-             <Hash size={14} /> Topics
-           </h4>
-           <div className="flex flex-wrap gap-2">
-              {post.tags?.map((tag: string) => (
-                <span key={tag} className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium">
-                  #{tag}
-                </span>
-              )) || <span className="text-slate-400 text-xs">No tags</span>}
-           </div>
+        {/* COMMENT SECTION / CALL TO ACTION */}
+        <div className="mt-16 p-8 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+          <h3 className="text-xl font-bold text-slate-900 mb-2">Thoughts? Disagreements?</h3>
+          <p className="text-slate-600 mb-6">
+            I'd love to hear your perspective on this. Let's discuss it on LinkedIn.
+          </p>
+          <a 
+            href="https://www.linkedin.com/in/nishat-sarker/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#0077b5] text-white font-bold rounded-full hover:bg-[#006396] transition-colors"
+          >
+            <MessageSquare size={18} /> Discuss on LinkedIn
+          </a>
         </div>
-      </div>
+
+      </article>
     </div>
   );
 }
