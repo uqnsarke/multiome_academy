@@ -1,52 +1,69 @@
 import React from 'react';
-import Link from 'next/link'; // FIX 1: Use Next.js Link for faster navigation
-import { getSortedPostsData } from '@/lib/posts'; // FIX 2: Correct path (removed 'app/')
-import { Calendar, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+// FIX: We changed '@/lib/posts' to '@/app/lib/posts'
+import { getSortedPostsData } from '@/app/lib/posts'; 
+import { Calendar, ArrowRight, Hash } from 'lucide-react';
 
-export default function NewsletterList() {
-  const posts = getSortedPostsData(); 
+export default function Newsletter() {
+  const posts = getSortedPostsData();
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-teal-100 relative">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-teal-100">
       
-      {/* --- HERO SECTION --- */}
-      <div className="relative border-b border-slate-100 bg-slate-50/50 pt-20 pb-16 px-6 text-center">
-         <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-            Multiome <span className="text-teal-600">Insights</span>
-         </h1>
-         <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Deep dives into single-cell multiomics, spatial transcriptomics, and computational workflows.
-         </p>
+      {/* Header */}
+      <div className="bg-white border-b border-slate-200">
+        <div className="max-w-5xl mx-auto px-6 py-16 md:py-24 text-center">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
+            Multiome <span className="text-teal-600">Academy</span>
+          </h1>
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            Bridging the gap between single-cell data and biological insight. 
+            Tutorials, deep dives, and practical workflows.
+          </p>
+        </div>
       </div>
 
-      {/* --- POSTS LIST --- */}
-      <div className="container mx-auto px-6 max-w-3xl py-16">
-        <div className="space-y-16">
+      {/* Post Grid */}
+      <div className="max-w-5xl mx-auto px-6 py-16">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            // FIX 3: Use 'post.id' instead of 'post.slug' (our utility returns 'id')
-            <article key={post.id} className="group relative">
+            <Link key={post.slug} href={`/newsletter/${post.slug}`} className="group relative block h-full">
               
-              <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">
-                <Calendar size={12} />
-                {post.date}
-              </div>
+              <article className="h-full flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-teal-900/5 hover:-translate-y-1 transition-all duration-300">
+                
+                {/* Card Content */}
+                <div className="p-6 flex flex-col flex-grow">
+                  
+                  {/* Date & Meta */}
+                  <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
+                    <span className="flex items-center gap-1">
+                      <Calendar size={12} /> {post.date}
+                    </span>
+                  </div>
 
-              <Link href={`/newsletter/${post.id}`} className="block">
-                <h2 className="text-3xl font-bold text-slate-900 mb-4 group-hover:text-teal-700 transition-colors">
-                  {post.title}
-                </h2>
-                
-                {/* Note: Ensure your markdown files have a 'summary' field at the top! 
-                    If not, this part will be empty. */}
-                <p className="text-lg text-slate-500 leading-relaxed mb-6">
-                  {post.summary || "Click to read the full article..."}
-                </p>
-                
-                <div className="inline-flex items-center text-sm font-bold text-slate-900 border-b-2 border-teal-100 group-hover:border-teal-500 transition-all pb-1 gap-2">
-                   Read Insight <ArrowRight size={16} className="text-teal-500 group-hover:translate-x-1 transition-transform" />
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-teal-600 transition-colors">
+                    {post.title}
+                  </h3>
+
+                  {/* Tags */}
+                  <div className="mt-auto pt-6 flex flex-wrap gap-2">
+                    {post.tags.slice(0, 3).map((tag) => (
+                      <span key={tag} className="px-2 py-1 bg-slate-50 text-slate-500 rounded-md text-[10px] font-semibold uppercase tracking-wide">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </Link>
-            </article>
+
+                {/* 'Read Article' Footer */}
+                <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-sm font-medium text-teal-700 group-hover:text-teal-800">
+                  Read Issue
+                  <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform" />
+                </div>
+
+              </article>
+            </Link>
           ))}
         </div>
       </div>
