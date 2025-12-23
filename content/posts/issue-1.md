@@ -12,7 +12,7 @@ It's the default approach for a reason—it's powerful, and it's not "wrong." **
 
 If you only look at gene expression, you're watching the biological movie after the major plot points have already been set.
 
-![RNA vs ATAC Comparison](/downloads/RNA_ATAC.png)
+![RNA vs ATAC Comparison](/public/downloads/RNA_ATAC.png)
 
 Here's the reality of using these modalities in isolation, and why integration is no longer optional—especially in aging and disease research.
 
