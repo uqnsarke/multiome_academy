@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-// FIX: We changed '@/lib/posts' to '@/app/lib/posts'
 import { getSortedPostsData } from '@/app/lib/posts'; 
-import { Calendar, ArrowRight, Hash } from 'lucide-react';
+import { Calendar, ArrowRight } from 'lucide-react';
 
 export default function Newsletter() {
   const posts = getSortedPostsData();
@@ -46,9 +45,9 @@ export default function Newsletter() {
                     {post.title}
                   </h3>
 
-                  {/* Tags */}
+                  {/* Tags - FIXED: Added fallback (|| []) to prevent crash */}
                   <div className="mt-auto pt-6 flex flex-wrap gap-2">
-                    {post.tags.slice(0, 3).map((tag) => (
+                    {(post.tags || []).slice(0, 3).map((tag) => (
                       <span key={tag} className="px-2 py-1 bg-slate-50 text-slate-500 rounded-md text-[10px] font-semibold uppercase tracking-wide">
                         #{tag}
                       </span>
