@@ -1,4 +1,3 @@
-cat <<EOF > content/posts/issue-1.md
 ---
 title: "The Single-Cell Blindspot: Why scRNA-seq Alone Isn't Enough"
 date: "December 21, 2025"
@@ -50,4 +49,3 @@ Regulatory priming (chromatin opening, transcription factor repositioning) can p
 In the era of multi-omics, sticking to one modality is like navigating with half a map. For deeper insights into cellular dynamics, especially in complex processes like aging and disease, integration isn't just beneficial—it's essential.
 
 #Bioinformatics #SingleCell #Multiomics #scRNAseq #scATACseq #ComputationalBiology
-EOF
