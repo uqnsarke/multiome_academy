@@ -1,4 +1,3 @@
-cat <<EOF > content/posts/issue-3.md
 ---
 title: "When Integration Fails: How Batch Effects Can Distort Biology"
 date: "December 23, 2025"
@@ -13,7 +12,6 @@ We've all been there: merging scRNA-seq datasets across species, technologies, o
 
 A new **BMC Genomics** paper dissects why this happens—and offers a genuinely better solution.
 
-![Batch Effect Correction Methods](/downloads/paper_01.png)
 
 ## The Core Problem
 
