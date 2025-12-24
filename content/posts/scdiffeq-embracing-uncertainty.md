@@ -93,7 +93,7 @@ scDiffEq represents an important conceptual shift in single-cell analysis.
 
 As single-cell and multiomic datasets continue to expand in scale and complexity, approaches that explicitly balance deterministic programs with stochastic behavior will be essential. scDiffEq provides a foundation for this next generation of biologically informed neural differential equation models.
 
-
+Reference: https://www.nature.com/articles/s42256-025-01150-3#Sec6
 
 #SingleCell #Bioinformatics #MachineLearning #SDEs #SystemsBiology #Multiomics
 
